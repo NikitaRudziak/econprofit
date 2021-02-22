@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 
-export const PageMapContainer = () => {}
+export const PageMapContainer = () => {
+
+
+}
 
 const mapStateToProps = state => ({
   page: state.pageReducer.page,
