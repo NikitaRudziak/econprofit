@@ -17,7 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Route exact path="/" component={App} />
-    </Router>,
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

@@ -1,0 +1,28 @@
+.gmapContainer {
+  height: 100vh;
+  /* The height is 400 pixels */
+  width: calc(100% - 280px);
+  /* The width is the width of the web page */
+}
+
+.marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background-color: #12e03f;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.marker:hover {
+  z-index: 1;
+}
+/*# sourceMappingURL=GMap.module.css.map */

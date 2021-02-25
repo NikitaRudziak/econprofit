@@ -8,9 +8,6 @@ import style from './Navigation.module.css';
 
 export const Navigation = () => {
 
-
-
-
   return (
     <div className={style.navigationContainer}>
       <div className={style.logoSection}>
@@ -25,8 +22,8 @@ export const Navigation = () => {
           <i class="las la-map-marked-alt" />
           <div className={style.menuName}>Карта</div>
         </div>
-        <div></div>
-        <div></div>
+        {/* <div></div>
+        <div></div> */}
       </div>
       <div></div>
     </div>
