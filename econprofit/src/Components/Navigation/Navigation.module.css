@@ -1,0 +1,75 @@
+@charset "UTF-8";
+@font-face {
+  font-family: RobotoLight;
+  /* Имя шрифта */
+  src: url(../../fonts/RobotoLight.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+.navigationContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 280px;
+  height: 100vh;
+  background-color: #1b1d28;
+}
+
+.logoSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 80px;
+}
+
+img {
+  width: 240px;
+  height: auto;
+}
+
+.menuSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 22px;
+  margin-top: 50px;
+}
+
+.menuSection .menuPoint {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #b7b7b9;
+  margin-bottom: 35px;
+}
+
+.menuSection .menuPoint i {
+  font-size: 30px;
+}
+
+.menuSection .menuPoint .menuName {
+  font-size: 18px;
+  font-family: RobotoLight;
+  font-weight: 600;
+  line-height: 32px;
+  margin: 0 7px;
+}
+
+.menuSection .menuPoint:hover {
+  color: aliceblue;
+}
+/*# sourceMappingURL=Navigation.module.css.map */

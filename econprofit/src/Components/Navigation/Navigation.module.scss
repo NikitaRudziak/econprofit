@@ -1,0 +1,53 @@
+@font-face {
+  font-family: RobotoLight; /* Имя шрифта */
+  src: url(../../fonts/RobotoLight.ttf); /* Путь к файлу со шрифтом */
+ }
+
+.navigationContainer {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 100vh;
+    background-color: rgb(27,29,40);
+}
+
+.logoSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+}
+
+img {
+    width: 240px;
+    height: auto;
+}
+
+.menuSection {
+  display: flex;
+  flex-direction: column;
+  margin-left: 22px;
+  margin-top: 50px;
+
+  .menuPoint {
+    display: flex;
+    color: rgb(183,183,185);
+    margin-bottom: 35px;
+    i {
+      font-size: 30px;
+    }
+
+    .menuName {
+      font-size: 18px;
+      font-family: RobotoLight;
+      font-weight: 600;
+      line-height: 32px;
+      margin: 0 7px;
+    }
+    
+  }
+
+  .menuPoint:hover  {
+    color: aliceblue;
+  }
+}

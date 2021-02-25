@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Navigation } from '../../Components/Navigation/Navigation';
 import logo from './logo.svg';
-import './App.css';
+import style from './App.module.css';
 
 export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        
-      </header>
+    <div className={style.appContainer}>
+      <Navigation />
     </div>
   );
 }
