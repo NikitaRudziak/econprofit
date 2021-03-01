@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "PageMapContainer.module.scss"
+        "PageDBContainer.module.scss"
     ],
     "names": [],
-    "file": "PageMapContainer.module.css"
+    "file": "PageDBContainer.module.css"
 }

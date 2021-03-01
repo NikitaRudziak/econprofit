@@ -10,7 +10,7 @@ export const App = () => {
   return (
     <div className={style.appContainer}>
       <Navigation />
-      <GMap />
+      {/* <GMap /> */}
     </div>
   );
 }

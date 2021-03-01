@@ -21,10 +21,10 @@ export const GMap = () => {
         // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
         <AnyReactComponent
-            lat={54.9004368}
-            lng={26.5580622}
-            text="My Marker"
-          />
+          lat={54.9004368}
+          lng={26.5580622}
+          text="My Marker"
+        />
       </GoogleMapReact>
     </div>
   )
