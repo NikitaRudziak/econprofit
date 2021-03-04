@@ -16,19 +16,19 @@ export const Navigation = () => {
       <div className={style.menuSection}>
         <Link to='/main'>
           <div className={style.menuPoint}>
-            <i class="las la-chart-bar" />
+            <i className="las la-chart-bar" />
             <div className={style.menuName}>Статистика</div>
           </div>
         </Link>
         <Link to='/map'>
           <div className={style.menuPoint}>
-            <i class="las la-map-marked-alt" />    
+            <i className="las la-map-marked-alt" />    
             <div className={style.menuName}>Карта</div>
           </div>
         </Link>
         <Link to='/db'>
           <div className={style.menuPoint}>
-            <i class="las la-database" />
+            <i className="las la-database" />
             <div className={style.menuName}>Работа с БД</div>
           </div>
         </Link>
