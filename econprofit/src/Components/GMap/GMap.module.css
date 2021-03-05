@@ -30,8 +30,13 @@
   display: none;
   margin-left: -125px;
   padding: 7px;
-  background: #f1f1d5;
+  background-color: lightgray;
   height: 80px;
+  border-radius: 8px;
+}
+
+.marker .modal .stationName {
+  font-size: 20px;
 }
 
 .marker:hover .modal {

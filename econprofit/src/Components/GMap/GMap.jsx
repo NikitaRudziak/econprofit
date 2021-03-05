@@ -11,10 +11,10 @@ import style from './GMap.module.css';
 const AnyReactComponent = ({name, address}) => 
   <div className={style.marker} >
     <div className={style.modal}>
-      <div>
+      <div className={style.stationName}>
         {name}
       </div>
-      <div>
+      <div className={style.stationAddress}>
         {address}
       </div>
     </div>

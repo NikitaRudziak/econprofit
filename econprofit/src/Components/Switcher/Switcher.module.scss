@@ -1,0 +1,44 @@
+.switcherContainer {
+  display: flex;
+  flex-direction: column;
+  width: 82vw;
+  height: 94vh;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid lightslategray;
+  .switcherHeader {
+    display: flex;
+    .switcherPoint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 33.33%;
+      height: 100px;
+      font-size: 24px;
+      i {
+        font-size: 32px;
+      }
+    }
+  }
+  .switcherMain {
+    background-color: lightgray;
+    height: 100%;
+  }
+}
+
+.switcherPoint:nth-child(1) {
+  background-color: lightgray;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightslategray;
+}
+
+.switcherPoint:nth-child(2) {
+  border-bottom: 1px solid lightslategray;
+  border-right: 1px solid lightslategray;
+}
+
+.switcherPoint:nth-child(3) {
+  border-bottom: 1px solid lightslategray;
+  // border-right: 1px solid lightslategray;
+}

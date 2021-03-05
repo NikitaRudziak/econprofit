@@ -9,7 +9,7 @@
   height: 25%;
   z-index: 1000;
   text-align: center;
-  background-color: wheat;
+  background-color: lightgray;
 }
 
 .modalContainer .modalHeader {
