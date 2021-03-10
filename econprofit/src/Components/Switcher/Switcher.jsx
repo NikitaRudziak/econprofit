@@ -14,7 +14,16 @@ export const Switcher = ({}) => {
   return (
     <div className={style.switcherContainer}>
       <div className={style.switcherHeader}>
-        {activeCell ?
+        <div className={style.switcherPoint}>
+          Локации
+        </div>
+        <div className={style.switcherPoint}>
+          Станции
+        </div>
+        <div className={style.switcherPoint}>
+          Крепость
+        </div>
+        {/* {activeCell ?
           <div className={style.switcherPoint}>
             <i className="las la-map-marked-alt" />
             Локации
@@ -28,11 +37,26 @@ export const Switcher = ({}) => {
         <div className={style.switcherPoint}>
           <i className="lab la-fort-awesome" />
           Крепость
-        </div>
+      </div>*/}
       </div>
       <div className={style.switcherMain}>
-
-        {/* dd */}
+        <div className={style.switcherAction}>
+          {/* d */}
+        </div>
+        <div className={style.switcherActionNav}>
+          <div className={style.switcherPoint}>
+            Список
+          </div>
+          <div className={style.switcherPoint}>
+            Добавить
+          </div>
+          <div className={style.switcherPoint}>
+            Изменить
+          </div>
+          <div className={style.switcherPoint}>
+            Удалить
+          </div>
+        </div>
       </div>
     </div>
   )

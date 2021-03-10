@@ -1,44 +1,65 @@
 .switcherContainer {
   display: flex;
   flex-direction: column;
-  width: 82vw;
-  height: 94vh;
+  width: calc(100vw - 280px);
+  height: 100vh;
   background-color: white;
   border-radius: 8px;
-  border: 1px solid lightslategray;
   .switcherHeader {
     display: flex;
-    .switcherPoint {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 33.33%;
-      height: 100px;
-      font-size: 24px;
-      i {
-        font-size: 32px;
-      }
-    }
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 22%;
+    margin: 20px;
+    height: 50px;
   }
   .switcherMain {
-    background-color: lightgray;
+    display: flex;
+    justify-content: space-between;
     height: 100%;
+    margin: 0 20px 20px;
+    .switcherAction {
+      width: 92%;
+      height: 100%;
+      border-radius: 4px;
+      background-color: #eee;
+    }
+    .switcherActionNav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      // text-align: center;
+      width: 8%;
+      height: 25%;
+      // background-color: brown;
+    }
   }
 }
 
-.switcherPoint:nth-child(1) {
-  background-color: lightgray;
-  border-bottom: 1px solid lightgray;
-  border-right: 1px solid lightslategray;
+.switcherPoint {
+  padding: 7px 0;
+  width: 110px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.5;
+  border-radius: 4px;
+  background-color: #eee;
 }
 
-.switcherPoint:nth-child(2) {
-  border-bottom: 1px solid lightslategray;
-  border-right: 1px solid lightslategray;
-}
+// .switcherPoint:nth-child(1) {
+//   background-color: lightgray;
+//   border-bottom: 1px solid lightgray;
+//   border-right: 1px solid lightslategray;
+// }
 
-.switcherPoint:nth-child(3) {
-  border-bottom: 1px solid lightslategray;
-  // border-right: 1px solid lightslategray;
-}
+// .switcherPoint:nth-child(2) {
+//   border-bottom: 1px solid lightslategray;
+//   border-right: 1px solid lightslategray;
+// }
+
+// .switcherPoint:nth-child(3) {
+//   border-bottom: 1px solid lightslategray;
+//   // border-right: 1px solid lightslategray;
+// }
