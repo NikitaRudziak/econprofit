@@ -1,8 +1,6 @@
 .gmapContainer {
   height: 100vh;
-  /* The height is 400 pixels */
   width: calc(100% - 280px);
-  /* The width is the width of the web page */
 }
 
 .marker {
@@ -28,9 +26,9 @@
 
 .marker .modal {
   display: none;
-  margin-left: -125px;
+  margin-left: -100px;
   padding: 7px;
-  background-color: lightgray;
+  background-color: #eee;
   height: 80px;
   border-radius: 8px;
 }

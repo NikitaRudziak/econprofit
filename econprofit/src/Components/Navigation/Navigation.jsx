@@ -33,7 +33,6 @@ export const Navigation = () => {
           </div>
         </Link>
       </div>
-      {/* <div></div> */}
     </div>
   )
 

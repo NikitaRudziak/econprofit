@@ -1,10 +1,10 @@
 .pageDBContainer {
   display: flex;
-  height: 100%;
-  .rightContainer{
+  height: 100vh;
+  .rightContainer {
     display: flex;
     align-items: center;
     margin: 0 auto;
-    // justify-content:
+    overflow: scroll;
   }
 }   

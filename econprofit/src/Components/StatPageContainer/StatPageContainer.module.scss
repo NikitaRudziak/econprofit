@@ -1,0 +1,35 @@
+.statPageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  .statPageCardCont {
+    display: flex;
+    justify-content: space-between;
+    width: 1580px;
+    // width: 100%;
+    // height: 50px;
+    margin: 30px;
+    .statPageCard {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 250px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+      border-radius: 8px;
+      // padding-right: 10px;
+      padding: 16px 0 16px 16px;
+      .statPageCardLeft {
+        display: flex;
+        flex-direction: column;
+        font-size: 22px;
+        margin-right: 16px;
+      }
+      .statPageCardRight {
+        font-size: 56px;
+        color: gray;
+        padding-right: 6px;
+      }
+    }
+    
+  }
+}

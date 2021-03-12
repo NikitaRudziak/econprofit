@@ -42,6 +42,24 @@
   margin: 0 20px 20px;
 }
 
+.switcherContainer .switcherMain table {
+  width: 100%;
+  border: 1px solid lightgrey;
+}
+
+.switcherContainer .switcherMain table tr th {
+  text-align: center;
+  height: 40px;
+  background-color: #eee;
+}
+
+.switcherContainer .switcherMain table tr td {
+  text-align: center;
+  height: 30px;
+  padding: 8px;
+  background-color: #eee;
+}
+
 .switcherContainer .switcherMain .switcherAction {
   width: 92%;
   height: 100%;
@@ -64,7 +82,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 8%;
-  height: 25%;
+  height: 16%;
 }
 
 .switcherPoint {
@@ -75,5 +93,100 @@
   line-height: 1.5;
   border-radius: 4px;
   background-color: #eee;
+  cursor: url(middle-finger-little.png), pointer;
+}
+
+.tableHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 40px;
+  font-weight: 600;
+  border-bottom: 1px solid lightgrey;
+}
+
+.tableHeader div {
+  text-align: center;
+  width: 16%;
+}
+
+.tableHeader :first-child {
+  text-align: center;
+  width: 4%;
+}
+
+.tableHeader :nth-child(2) {
+  text-align: center;
+  width: 25%;
+}
+
+.tableHeader :nth-child(3) {
+  text-align: center;
+  width: 25%;
+}
+
+.tableHeader :last-child {
+  text-align: center;
+  width: 7%;
+}
+
+.tableHeader :nth-child(6) {
+  text-align: center;
+  width: 7%;
+}
+
+.tableRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: #eee;
+  border-bottom: 1px solid lightgrey;
+}
+
+.tableRow div {
+  text-align: center;
+  width: 16%;
+}
+
+.tableRow :first-child {
+  text-align: center;
+  width: 4%;
+}
+
+.tableRow :nth-child(2) {
+  text-align: center;
+  width: 25%;
+}
+
+.tableRow :nth-child(3) {
+  text-align: center;
+  width: 25%;
+}
+
+.tableRow :last-child {
+  text-align: center;
+  width: 7%;
+}
+
+.tableRow :nth-child(6) {
+  text-align: center;
+  width: 7%;
 }
 /*# sourceMappingURL=Switcher.module.css.map */
