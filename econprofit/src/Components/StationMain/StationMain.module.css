@@ -1,0 +1,126 @@
+.stationMainContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: calc(100% - 60px);
+}
+
+.stationMainContainer .addressRegion {
+  margin: 30px;
+  height: 50px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  line-height: 45px;
+  padding-left: 10px;
+  font-size: 24px;
+}
+
+.stationMainContainer .mainRegion {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0 30px 30px 30px;
+}
+
+.stationMainContainer .mainRegion .stationInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 360px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.stationMainContainer .mainRegion .stationInfo .stationInfoHeader {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 0px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.stationMainContainer .mainRegion .stationInfo .stationInfoMain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 150px;
+  padding: 10px 10px 0px 10px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 30px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 250px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 16px 0 16px 16px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard .statPageCardLeft {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: 22px;
+  font-weight: 500;
+  margin-right: 16px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard .statPageCardLeft :last-child {
+  font-weight: 400;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard .statPageCardRight {
+  font-size: 56px;
+  color: gray;
+  padding-right: 6px;
+}
+/*# sourceMappingURL=StationMain.module.css.map */

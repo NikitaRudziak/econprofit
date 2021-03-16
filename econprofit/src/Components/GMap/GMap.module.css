@@ -33,8 +33,22 @@
   border-radius: 8px;
 }
 
+.marker .modal .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
 .marker .modal .stationName {
-  font-size: 20px;
+  font-size: 12px;
+}
+
+.marker .modal .iconContainer {
+  font-size: 26px;
 }
 
 .marker:hover .modal {

@@ -8,14 +8,25 @@ import route from '../../back_route';
 
 import style from './GMap.module.css';
 
-const AnyReactComponent = ({name, address}) => 
+const AnyReactComponent = ({id, name, address}) => 
   <div className={style.marker} >
     <div className={style.modal}>
-      <div className={style.stationName}>
-        {name}
-      </div>
-      <div className={style.stationAddress}>
-        {address}
+      <div className={style.modalContainer}>
+        <div className={style.textContainer}>
+          <div className={style.stationName}>
+            {name}
+          </div>
+          <div className={style.stationAddress}>
+            {address}
+          </div>
+        </div>
+        <div className={style.iconContainer}>
+        <Link to={{pathname: `/stationinfo/${id}`}}>
+          <div>
+            <i class="las la-chart-pie"></i>
+          </div>
+        </Link>
+        </div>
       </div>
     </div>
   </div>
@@ -50,6 +61,7 @@ export const GMap = () => {
       >
       {locationList.map(item => (
         <AnyReactComponent
+          id={item.id}
           lat={item.latitude}
           lng={item.longitude}
           name={item.name}

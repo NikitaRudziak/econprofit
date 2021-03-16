@@ -47,12 +47,28 @@
       -ms-flex-direction: column;
           flex-direction: column;
   font-size: 22px;
+  font-weight: 500;
   margin-right: 16px;
+}
+
+.statPageContainer .statPageCardCont .statPageCard .statPageCardLeft :last-child {
+  padding-top: 5px;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .statPageContainer .statPageCardCont .statPageCard .statPageCardRight {
   font-size: 56px;
   color: gray;
   padding-right: 6px;
+}
+
+.statPageContainer .chartRegion {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=StatPageContainer.module.css.map */

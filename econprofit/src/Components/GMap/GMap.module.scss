@@ -23,14 +23,23 @@
   .modal {
     display:none;
     margin-left: -100px;
-    padding: 7px;
-    // margin-top: 20px; 
+    padding: 7px; 
     background-color: #eee;
-    // background:#f1f1d5;
     height:80px;
     border-radius: 8px;
+    .modalContainer {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+    }
+    // .textContainer {
+
+    // }
     .stationName {
-      font-size: 20px;
+      font-size: 12px;
+    }
+    .iconContainer {
+      font-size: 26px;
     }
   }
 }

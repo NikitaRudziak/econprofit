@@ -10,6 +10,7 @@ import './index.css';
 import App from './module/App/App';
 import PageMapContainer from './module/PageMapContainer/PageMapContainer';
 import PageDBContainer from './module/PageDBContainer/PageDBContainer';
+import StationContainer from './module/StationContainer/StationContainer';
 import { createStore } from "redux";
 
 const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -20,6 +21,7 @@ ReactDOM.render(
       <Route exact path="/main" component={App} />
       <Route exact path="/map" component={PageMapContainer} />
       <Route exact path="/db" component={PageDBContainer} />
+      <Route exact path="/stationinfo/:id" component={StationContainer} />
     </Router>
   </Provider>,
   document.getElementById('root')

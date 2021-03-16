@@ -1,0 +1,74 @@
+.stationMainContainer {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 60px);
+  .addressRegion {
+    margin: 30px;
+    height: 50px;
+    background-color: #eee; 
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    line-height: 45px;
+    padding-left: 10px;
+    font-size: 24px;
+  }
+  .mainRegion {
+    display: flex;
+    flex-direction: column;
+    margin: 0 30px 30px 30px;
+    .stationInfo {
+      display: flex;
+      flex-direction: column;
+      width: 360px;
+      background-color: #eee; 
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+      border-radius: 8px;
+      .stationInfoHeader {
+        font-weight: 500;
+        font-size: 20px;
+        text-align: center;
+        padding: 10px 0px;
+        border-bottom: 1px solid lightgrey;
+      }
+      .stationInfoMain {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 150px;
+        padding: 10px 10px 0px 10px;
+      }
+    }
+    .stationInfoStat {
+      display: flex;
+      margin-top: 30px;
+      justify-content: space-between;
+      .statPageCard {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 250px;
+        background-color: #eee;
+        box-shadow: 0 0 12px rgba(0,0,0,0.5);
+        border-radius: 8px;
+        padding: 16px 0 16px 16px;
+        .statPageCardLeft {
+          display: flex;
+          flex-direction: column;
+          font-size: 22px;
+          font-weight: 500;
+          margin-right: 16px;
+          :last-child {
+            font-weight: 400;
+            padding-top: 5px;
+            font-size: 20px;
+          }
+        }
+        .statPageCardRight {
+          font-size: 56px;
+          color: gray;
+          padding-right: 6px;
+        }
+      }
+    }
+  }
+}
