@@ -1,7 +1,8 @@
 .stationMainContainer {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 60px);
+  width: calc(100% - 280px);
+  // width: calc(100% - 60px);
   .addressRegion {
     margin: 30px;
     height: 50px;
@@ -14,7 +15,7 @@
   }
   .mainRegion {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin: 0 30px 30px 30px;
     .stationInfo {
       display: flex;
@@ -23,6 +24,7 @@
       background-color: #eee; 
       box-shadow: 0 0 12px rgba(0,0,0,0.5);
       border-radius: 8px;
+      margin-bottom: 30px;
       .stationInfoHeader {
         font-weight: 500;
         font-size: 20px;
@@ -38,15 +40,44 @@
         padding: 10px 10px 0px 10px;
       }
     }
+    .stationInfo2 {
+      display: flex;
+      flex-direction: column;
+      width: 360px;
+      background-color: #eee; 
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+      border-radius: 8px;
+      margin-bottom: 30px;
+      .stationInfoHeader {
+        font-weight: 500;
+        font-size: 20px;
+        text-align: center;
+        padding: 10px 0px;
+        border-bottom: 1px solid lightgrey;
+      }
+      .stationInfoMain {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px 10px 10px 10px;
+      }
+    }
+    .topLine {
+      display: flex;
+      flex-direction: column;
+      margin-left: 30px;
+      width: calc(100% - 60px);
+    }
     .stationInfoStat {
       display: flex;
-      margin-top: 30px;
+      margin-bottom: 30px;
       justify-content: space-between;
       .statPageCard {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         width: 250px;
+        height: 70px;
         background-color: #eee;
         box-shadow: 0 0 12px rgba(0,0,0,0.5);
         border-radius: 8px;
@@ -64,11 +95,35 @@
           }
         }
         .statPageCardRight {
-          font-size: 56px;
+          font-size: 44px;
           color: gray;
           padding-right: 6px;
         }
       }
     }
   }
+}
+.leftLine {
+  display: flex;
+  flex-direction: column;
+}
+
+table {
+  border: 1px solid lightgrey;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+  height: 30px;
+  padding: 8px;
+  background-color: #eee;
+}
+
+.chartsLine {
+  display: flex;
+  justify-content: space-between;
 }

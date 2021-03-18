@@ -29,7 +29,8 @@
   margin-left: -100px;
   padding: 7px;
   background-color: #eee;
-  height: 80px;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
 }
 
@@ -44,7 +45,8 @@
 }
 
 .marker .modal .stationName {
-  font-size: 12px;
+  padding-top: 5px;
+  font-size: 14px;
 }
 
 .marker .modal .iconContainer {

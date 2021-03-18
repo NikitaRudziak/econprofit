@@ -25,18 +25,17 @@
     margin-left: -100px;
     padding: 7px; 
     background-color: #eee;
-    height:80px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    // height: 80px;
     border-radius: 8px;
     .modalContainer {
       display: flex;
       justify-content: space-between;
       padding: 5px;
     }
-    // .textContainer {
-
-    // }
     .stationName {
-      font-size: 12px;
+      padding-top: 5px;
+      font-size: 14px;
     }
     .iconContainer {
       font-size: 26px;
@@ -51,3 +50,7 @@
   z-index: 1001;
   width: 250px;
 }
+
+// i {
+//   color: rgb(204, 201, 201);
+// }

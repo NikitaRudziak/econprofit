@@ -6,7 +6,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: calc(100% - 60px);
+  width: calc(100% - 280px);
 }
 
 .stationMainContainer .addressRegion {
@@ -25,10 +25,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   margin: 0 30px 30px 30px;
 }
 
@@ -45,6 +45,7 @@
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
+  margin-bottom: 30px;
 }
 
 .stationMainContainer .mainRegion .stationInfo .stationInfoHeader {
@@ -70,11 +71,61 @@
   padding: 10px 10px 0px 10px;
 }
 
+.stationMainContainer .mainRegion .stationInfo2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 360px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.stationMainContainer .mainRegion .stationInfo2 .stationInfoHeader {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 0px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.stationMainContainer .mainRegion .stationInfo2 .stationInfoMain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px 10px 10px 10px;
+}
+
+.stationMainContainer .mainRegion .topLine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 30px;
+  width: calc(100% - 60px);
+}
+
 .stationMainContainer .mainRegion .stationInfoStat {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 30px;
+  margin-bottom: 30px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -92,6 +143,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 250px;
+  height: 70px;
   background-color: #eee;
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
@@ -119,8 +171,42 @@
 }
 
 .stationMainContainer .mainRegion .stationInfoStat .statPageCard .statPageCardRight {
-  font-size: 56px;
+  font-size: 44px;
   color: gray;
   padding-right: 6px;
+}
+
+.leftLine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+table {
+  border: 1px solid lightgrey;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+  height: 30px;
+  padding: 8px;
+  background-color: #eee;
+}
+
+.chartsLine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=StationMain.module.css.map */

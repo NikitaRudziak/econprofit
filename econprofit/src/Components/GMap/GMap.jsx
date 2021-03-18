@@ -23,7 +23,7 @@ const AnyReactComponent = ({id, name, address}) =>
         <div className={style.iconContainer}>
         <Link to={{pathname: `/stationinfo/${id}`}}>
           <div>
-            <i class="las la-chart-pie"></i>
+            <i class="lar la-chart-bar"></i>
           </div>
         </Link>
         </div>
