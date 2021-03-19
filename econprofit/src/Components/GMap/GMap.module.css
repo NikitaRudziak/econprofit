@@ -1,6 +1,46 @@
 .gmapContainer {
-  height: 100vh;
+  height: calc(100vh - 60px);
   width: calc(100% - 280px);
+}
+
+.gmapFilters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 50px;
+  padding: 5px;
+}
+
+.gmapFilters .addressField {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: 20px;
+}
+
+.gmapFilters .addressField div {
+  padding: 0px 20px;
+}
+
+.gmapFilters .addressField .input {
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+span {
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .marker {

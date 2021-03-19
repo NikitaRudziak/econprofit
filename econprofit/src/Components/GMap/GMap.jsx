@@ -36,6 +36,7 @@ export const GMap = () => {
   const [zoom, setZoom] = useState(11);
   const [locationList, setLocationList] = useState([]);
   const [isVisible, setIsVisible] = useState(false)
+  const [dot, setDot] = useState();
 
   useEffect(() => {
     fetch(`${route}/location`)
@@ -47,18 +48,59 @@ export const GMap = () => {
       });
   }, [])
 
-  // const changeVisibility = () => {
-  //   setIsVisible(true)
-  // }
+  const generateLocationDatalist = () => {
+    return (
+      locationList.map(item => (
+        <>
+          <option key={item} fortest={item.id} value={item.name}>{item.region}</option>
+        </>
+      ))
+    )
+  }
+
+  const changeDot = (arg) => {
+    let lat = 0;
+    let lng = 0;
+    locationList.map(item => {
+      if(item.name == arg) {
+        lat = item.latitude;
+        lng = item.longitude;
+      }
+    })
+    if (lat != 0) {
+      setCenter({lat: Number(lat), lng: Number(lng) })
+      setZoom(17)
+      console.log(lat, lng)
+    }
+  }
+
+  const clearInput = () => {
+    document.getElementById("station").value = "";
+  }
 
   return (
     <div className={style.gmapContainer}>
+      <div className={style.gmapFilters}>
+        <div className={style.addressField}>
+          <div>
+            Адрес станции: 
+          </div>
+          <input placeholder="Поиск..." id="station" className={style.input} type="text" list="stationList" onChange={(e) => changeDot(e.target.value)}/>
+            <datalist id="stationList" >
+              {generateLocationDatalist()}
+            </datalist>
+            <span onClick={clearInput}>
+              <i class="las la-skull-crossbones"></i>
+            </span>
+        </div>
+      </div>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyBoUSex8GgH0dsuHOCfz7yX4CvRCWzCKck" }}
-        defaultCenter={center}
-        defaultZoom={zoom}
+        center={center}
+        zoom={zoom}
         // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
+      
       {locationList.map(item => (
         <AnyReactComponent
           id={item.id}

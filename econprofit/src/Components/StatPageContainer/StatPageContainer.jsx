@@ -174,22 +174,36 @@ export const StatPageContainer = () => {
       <div className={style.statPageCardCont}>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div
-              onClick={view}
-            >Отпущено</div>
-            <div>{sum ? (parseInt(sum[0].sumkw * 100)) / 100 : null} кВт*ч</div>
+            <div>План на 2021</div>
+            <div>4068907 кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-charging-station"></i>
+            <i class="las la-certificate"></i>
           </div>
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div>Заработано</div>
-            <div>{sum ? (parseInt(sum[0].sumtotal * 100)) / 100 : null} руб.</div>
+            <div
+              onClick={view}
+            >Реализовано</div>
+            <div>
+              {sum ?  (parseInt((sum[0].sumkw / 4068907 * 100) * 100)) / 100 : null}
+              {/* {sum ? (parseInt(sum[0].sumkw * 100)) / 100 : null}  */}
+              %</div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-coins"></i>
+            <i class="las la-battery-half"></i>
+          </div>
+        </div>
+        <div className={style.statPageCard}>
+          <div className={style.statPageCardLeft}>
+            <div
+              onClick={view}
+            >Отпущено в 2021</div>
+            <div>{sum ? (parseInt(sum[0].sumkw * 100)) / 100 : null} кВт*ч</div>
+          </div>
+          <div className={style.statPageCardRight}>
+            <i class="las la-charging-station"></i>
           </div>
         </div>
         <div className={style.statPageCard} onClick={shareData}>
@@ -201,9 +215,40 @@ export const StatPageContainer = () => {
             <i class="las la-user-clock"></i>
           </div>
         </div>
-        <div className={style.statPageCard} 
+      </div>
+
+      <div className={style.statPageCardCont}>
+        <div className={style.statPageCard}>
+          <div className={style.statPageCardLeft}>
+            <div>План до 2027</div>
+            <div>199380813 кВт*ч</div>
+          </div>
+          <div className={style.statPageCardRight}>
+            <i class="las la-certificate"></i>
+          </div>
+        </div>
+        <div className={style.statPageCard}>
+          <div className={style.statPageCardLeft}>
+            <div
+              onClick={view}
+            >Реализовано</div>
+            <div>{sum ?  (parseInt((sum[0].sumkw / 199380813 * 100) * 100)) / 100 : null}%</div>
+          </div>
+          <div className={style.statPageCardRight}>
+            <i class="las la-battery-half"></i>
+          </div>
+        </div>
+        <div className={style.statPageCard}>
+          <div className={style.statPageCardLeft}>
+            <div>Выручка</div>
+            <div>{sum ? (parseInt(sum[0].sumtotal * 100)) / 100 : null} руб.</div>
+          </div>
+          <div className={style.statPageCardRight}>
+            <i class="las la-coins"></i>
+          </div>
+        </div>
         
-        >
+        <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
             <div 
             // onClick={sendNewDay}
@@ -220,8 +265,8 @@ export const StatPageContainer = () => {
             <i class="las la-check-double"></i>
           </div>
         </div>
-        
-      </div>
+      </div>          
+
       <div className={style.chartRegion}>
         <Chart
           width={'370px'}
@@ -238,6 +283,9 @@ export const StatPageContainer = () => {
           options={{
             title: 'Отпущено по типу коннектора',
             is3D: true,
+            titleTextStyle: {
+              fontSize: 14,
+            }
           }}
           rootProps={{ 'data-testid': '2' }}
         />
@@ -254,8 +302,11 @@ export const StatPageContainer = () => {
             ['Розеткка Type2', type2plugkwh ? Number(type2plugkwh[0].type2plugtotal) : null],
           ]}
           options={{
-            title: 'Заработано по типу коннектора',
+            title: 'Выручка по типу коннектора',
             is3D: true,
+            titleTextStyle: {
+              fontSize: 14
+            }
           }}
           
           rootProps={{ 'data-testid': '2' }}
@@ -273,8 +324,11 @@ export const StatPageContainer = () => {
             ['Розеткка Type2', type2plugkwh ? Number(type2plugkwh[0].sessioncount) : null],
           ]}
           options={{
-            title: 'Количество по типу коннектора',
+            title: 'Количество сессий по типу коннектора',
             is3D: true,
+            titleTextStyle: {
+              fontSize: 14
+            }
           }}
           rootProps={{ 'data-testid': '2' }}
         />
@@ -295,7 +349,7 @@ export const StatPageContainer = () => {
           rootProps={{ 'data-testid': '2' }}
         /> */}
         <Chart
-          width={'375px'}
+          width={'400px'}
           height={'280px'}
           chartType="PieChart"
           loader={<div>Загрузка</div>}
@@ -309,6 +363,9 @@ export const StatPageContainer = () => {
           options={{
             title: 'Среднее время зарядки (мин.)',
             is3D: true,
+            titleTextStyle: {
+              fontSize: 14
+            }
           }}
           rootProps={{ 'data-testid': '2' }}
         />
@@ -332,6 +389,9 @@ export const StatPageContainer = () => {
           options={{
             title: 'Отпущено по предприятиям',
             is3D: true,
+            titleTextStyle: {
+              fontSize: 14
+            }
           }}
           rootProps={{ 'data-testid': '2' }}
         />
@@ -351,8 +411,11 @@ export const StatPageContainer = () => {
             [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].sumtotal) : null],
           ]}
           options={{
-            title: 'Заработано по предприятиям',
+            title: 'Выручка по предприятиям',
             is3D: true,
+            titleTextStyle: {
+              fontSize: 14
+            }
           }}
           
           rootProps={{ 'data-testid': '2' }}
@@ -373,8 +436,11 @@ export const StatPageContainer = () => {
             [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].count) : null],
           ]}
           options={{
-            title: 'Количество по предприятиям',
+            title: 'Количество сессий по предприятиям',
             is3D: true,
+            titleTextStyle: {
+              fontSize: 14
+            }
           }}
           rootProps={{ 'data-testid': '2' }}
         />
@@ -391,6 +457,9 @@ export const StatPageContainer = () => {
           options={{
             title: 'Сессии',
             is3D: true,
+            titleTextStyle: {
+              fontSize: 14
+            }
           }}
           rootProps={{ 'data-testid': '2' }}
         />

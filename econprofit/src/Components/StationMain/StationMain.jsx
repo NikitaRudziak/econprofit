@@ -194,22 +194,55 @@ export const StationMain = () => {
           <div className={style.stationInfoStat}>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div onClick={view2}>Отпущено</div>
+                <div>Целевой показатель по отпуску э/э на 2021</div>
+                <div>
+                  {test ?
+                    test.length * 9311
+                  : null} кВт*ч</div>
+              </div>
+              <div className={style.statPageCardRight}>
+                <i class="las la-certificate"></i>
+              </div>
+              </div>
+            <div className={style.statPageCard}>
+              <div className={style.statPageCardLeft}>
+                <div onClick={view2}>Отпущено с 01.01.2021</div>
                   <div>{sessions ? (parseInt(totalkwh * 100)) / 100 : null} кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
-               <i class="las la-charging-station"></i>
+                <i class="las la-charging-station"></i>
               </div>
             </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div>Заработано</div>
-                  <div>{sessions ? (parseInt(totalcost * 100)) / 100 : null} руб.</div>
+                <div>Выполнение плана по отпуску э/э на 2021 г.</div>
+                <div>
+                  {test ?
+                    (parseInt((totalkwh / (test.length * 9311) * 100) * 100)) / 100
+                  : null}%</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-coins"></i>
+                <i class="las la-battery-half"></i>
               </div>
             </div>
+            <div className={style.statPageCard}>
+              <div className={style.statPageCardLeft}>
+                <div>В среднем за одну сессию</div>
+                <div>
+                  {sessions ? 
+                    perSession ?
+                      perSession 
+                    : 'Нет данных'
+                  : null} кВт*ч</div>
+              </div>
+              <div className={style.statPageCardRight}>
+                <i class="las la-car"></i>
+              </div>
+            </div>
+          </div>
+
+
+          <div className={style.stationInfoStat}>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
                 <div>Кол-во сессий</div>
@@ -232,46 +265,6 @@ export const StationMain = () => {
                 <i class="las la-check-double"></i>
               </div>
             </div>
-          </div>
-          <div className={style.stationInfoStat}>
-            <div className={style.statPageCard}>
-              <div className={style.statPageCardLeft}>
-                <div>За сессию</div>
-                <div>
-                  {sessions ? 
-                    perSession ?
-                      perSession 
-                    : 'Нет данных'
-                  : null} кВт*ч</div>
-              </div>
-              <div className={style.statPageCardRight}>
-                <i class="las la-car"></i>
-              </div>
-            </div>
-            <div className={style.statPageCard}>
-              <div className={style.statPageCardLeft}>
-                <div>Необходимо</div>
-                <div>
-                  {test ?
-                    test.length * 456249 
-                  : null} кВт*ч</div>
-              </div>
-              <div className={style.statPageCardRight}>
-                <i class="las la-certificate"></i>
-              </div>
-            </div>
-            <div className={style.statPageCard}>
-              <div className={style.statPageCardLeft}>
-                <div>Реализовано</div>
-                <div>
-                  {test ?
-                    (parseInt((totalcost / (test.length * 456249) * 100) * 100)) / 100
-                  : null}%</div>
-              </div>
-              <div className={style.statPageCardRight}>
-                <i class="las la-battery-half"></i>
-              </div>
-            </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
                 <div>Время зарядки</div>
@@ -286,11 +279,20 @@ export const StationMain = () => {
                 <i class="las la-hourglass-end"></i>
               </div>
             </div>
+            <div className={style.statPageCard}>
+              <div className={style.statPageCardLeft}>
+                <div>Выручка</div>
+                  <div>{sessions ? (parseInt(totalcost * 100)) / 100 : null} руб.</div>
+              </div>
+              <div className={style.statPageCardRight}>
+                <i class="las la-coins"></i>
+              </div>
+            </div>
           </div>
           <div className={style.chartsLine}>
             <Chart
-              width={'370px'}
-              height={'280px'}
+              width={'400px'}
+              height={'340px'}
               chartType="PieChart"
               loader={<div>Загрузка</div>}
               data={[
@@ -303,12 +305,15 @@ export const StationMain = () => {
               options={{
                 title: 'Отпущено кВт',
                 is3D: true,
+                titleTextStyle: {
+                  fontSize: 14,
+                }
               }}
               rootProps={{ 'data-testid': '2' }}
             />
             <Chart
-              width={'370px'}
-              height={'280px'}
+              width={'400px'}
+              height={'340px'}
               chartType="PieChart"
               loader={<div>Загрузка</div>}
               data={[
@@ -321,12 +326,15 @@ export const StationMain = () => {
               options={{
                 title: 'Заработано',
                 is3D: true,
+                titleTextStyle: {
+                  fontSize: 14,
+                }
               }}
               rootProps={{ 'data-testid': '2' }}
             />
             <Chart
-              width={'370px'}
-              height={'280px'}
+              width={'400px'}
+              height={'340px'}
               chartType="PieChart"
               loader={<div>Загрузка</div>}
               data={[
@@ -339,6 +347,9 @@ export const StationMain = () => {
               options={{
                 title: 'Количество сессий',
                 is3D: true,
+                titleTextStyle: {
+                  fontSize: 14,
+                }
               }}
               rootProps={{ 'data-testid': '2' }}
             />
