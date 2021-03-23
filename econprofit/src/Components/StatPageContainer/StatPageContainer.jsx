@@ -17,6 +17,7 @@ export const StatPageContainer = () => {
   const [type2plugkwh, setType2plugkwh] = useState();
   const [byRegion, setByRegion] = useState();
   const [byConnector, setByConnector] = useState();
+  // let timerId = setInterval(() => alert('tick'), 2000);
 
   useEffect(() => {
     fetch(`${route}/summaryValues`) 
@@ -114,9 +115,9 @@ export const StatPageContainer = () => {
     var d = new Date(),
     to = '',
     from = '';
-    from = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
-    d.setDate(d.getDate() + 1) 
-    to = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + (d.getDate())
+    to = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
+    d.setDate(d.getDate() - 1) 
+    from = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + (d.getDate())
 
     fetch(`${route}/test/${from}/${to}`)
       .then(response => {
@@ -174,8 +175,8 @@ export const StatPageContainer = () => {
       <div className={style.statPageCardCont}>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div>План на 2021</div>
-            <div>4068907 кВт*ч</div>
+            <div>Целевой показатель по отпуску э/э на 2021 г.</div>
+            <div>{(4068907).toLocaleString('ru')} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
             <i class="las la-certificate"></i>
@@ -185,9 +186,9 @@ export const StatPageContainer = () => {
           <div className={style.statPageCardLeft}>
             <div
               onClick={view}
-            >Реализовано</div>
+            >Выполнение плана по отпуску э/э на 2021 г.</div>
             <div>
-              {sum ?  (parseInt((sum[0].sumkw / 4068907 * 100) * 100)) / 100 : null}
+              {sum ? ((parseInt((sum[0].sumkw / 4068907 * 100) * 100)) / 100).toLocaleString('ru') : null}
               {/* {sum ? (parseInt(sum[0].sumkw * 100)) / 100 : null}  */}
               %</div>
           </div>
@@ -199,8 +200,8 @@ export const StatPageContainer = () => {
           <div className={style.statPageCardLeft}>
             <div
               onClick={view}
-            >Отпущено в 2021</div>
-            <div>{sum ? (parseInt(sum[0].sumkw * 100)) / 100 : null} кВт*ч</div>
+            >Отпущено э/э с 01.01.2021</div>
+            <div>{sum ? ((parseInt(sum[0].sumkw * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
             <i class="las la-charging-station"></i>
@@ -208,8 +209,9 @@ export const StatPageContainer = () => {
         </div>
         <div className={style.statPageCard} onClick={shareData}>
           <div className={style.statPageCardLeft}>
-            <div>Кол-во сессий</div>
-            <div>{sum ? sum[0].sessioncount : null}</div>
+            <div>Кол-во зарядных сессий с 01.01.2021</div>
+            <div>{sum ? (Number(sum[0].sessioncount)).toLocaleString('ru') : null} ед.</div>
+            {/* sum[0].sessioncount */}
           </div>
           <div className={style.statPageCardRight}>
             <i class="las la-user-clock"></i>
@@ -220,8 +222,8 @@ export const StatPageContainer = () => {
       <div className={style.statPageCardCont}>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div>План до 2027</div>
-            <div>199380813 кВт*ч</div>
+            <div>Целевой показатель по отпуску э/э для обеспечения окупаемости</div>
+            <div>{(199380813).toLocaleString('ru')} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
             <i class="las la-certificate"></i>
@@ -231,8 +233,8 @@ export const StatPageContainer = () => {
           <div className={style.statPageCardLeft}>
             <div
               onClick={view}
-            >Реализовано</div>
-            <div>{sum ?  (parseInt((sum[0].sumkw / 199380813 * 100) * 100)) / 100 : null}%</div>
+            >Общее выполнение плана по отпуску э/э</div>
+            <div>{sum ?  ((parseInt((sum[0].sumkw / 199380813 * 100) * 100)) / 100).toLocaleString('ru') : null}%</div>
           </div>
           <div className={style.statPageCardRight}>
             <i class="las la-battery-half"></i>
@@ -240,8 +242,8 @@ export const StatPageContainer = () => {
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div>Выручка</div>
-            <div>{sum ? (parseInt(sum[0].sumtotal * 100)) / 100 : null} руб.</div>
+            <div>Выручка с 01.01.2021</div>
+            <div>{sum ? ((parseInt(sum[0].sumtotal * 100)) / 100).toLocaleString('ru') : null} руб.</div>
           </div>
           <div className={style.statPageCardRight}>
             <i class="las la-coins"></i>
@@ -251,12 +253,12 @@ export const StatPageContainer = () => {
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
             <div 
-            // onClick={sendNewDay}
-            >Успешные</div>
+            onClick={sendNewDay}
+            >Успешные зарядные сессии</div>
             <div>
               {(failed && sum) ? 
                 (failed[0].failedsessioncount && sum[0].sessioncount) ?
-                (parseInt((100 - (failed[0].failedsessioncount / sum[0].sessioncount * 100)) * 100)) / 100 
+                ((parseInt((100 - (failed[0].failedsessioncount / sum[0].sessioncount * 100)) * 100)) / 100).toLocaleString('ru') 
                 : '-'
                 : null}%
               </div>
@@ -281,10 +283,13 @@ export const StatPageContainer = () => {
             ['Розеткка Type2', type2plugkwh ? Number(type2plugkwh[0].type2plugkwh) : null],
           ]}
           options={{
-            title: 'Отпущено по типу коннектора',
+            title: 'Отпущено по типу коннектора, кВт*ч',
             is3D: true,
             titleTextStyle: {
               fontSize: 14,
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -302,10 +307,13 @@ export const StatPageContainer = () => {
             ['Розеткка Type2', type2plugkwh ? Number(type2plugkwh[0].type2plugtotal) : null],
           ]}
           options={{
-            title: 'Выручка по типу коннектора',
+            title: 'Выручка по типу коннектора, руб.',
             is3D: true,
             titleTextStyle: {
               fontSize: 14
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
             }
           }}
           
@@ -324,10 +332,13 @@ export const StatPageContainer = () => {
             ['Розеткка Type2', type2plugkwh ? Number(type2plugkwh[0].sessioncount) : null],
           ]}
           options={{
-            title: 'Количество сессий по типу коннектора',
+            title: 'Количество сессий по типу коннектора, ед.',
             is3D: true,
             titleTextStyle: {
               fontSize: 14
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -361,10 +372,13 @@ export const StatPageContainer = () => {
             ['Пистолет CCS', (ccsKwh && byConnector) ? Number(byConnector[3].sumkwh) / Number(ccsKwh[0].sessioncount) : null],
           ]}
           options={{
-            title: 'Среднее время зарядки (мин.)',
+            title: 'Среднее время зарядной сессии, мин.',
             is3D: true,
             titleTextStyle: {
               fontSize: 14
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -381,16 +395,19 @@ export const StatPageContainer = () => {
             [byRegion ? byRegion[0].company : null, byRegion ? Number(byRegion[0].sumkwh) : null],
             [byRegion ? byRegion[1].company : null, byRegion ? Number(byRegion[1].sumkwh) : null],
             [byRegion ? byRegion[2].company : null, byRegion ? Number(byRegion[2].sumkwh) : null],
-            [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].sumkwh) : null],
+            [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].sumkwh) : null],
             [byRegion ? byRegion[4].company : null, byRegion ? Number(byRegion[4].sumkwh) : null],
             [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].sumkwh) + Number(byRegion[7].sumkwh) : null],
-            [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].sumkwh) : null],
+            [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].sumkwh) : null],
           ]}
           options={{
-            title: 'Отпущено по предприятиям',
+            title: 'Отпущено по предприятиям и г.Минск, кВт*ч',
             is3D: true,
             titleTextStyle: {
               fontSize: 14
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -405,19 +422,21 @@ export const StatPageContainer = () => {
             [byRegion ? byRegion[0].company : null, byRegion ? Number(byRegion[0].sumtotal) : null],
             [byRegion ? byRegion[1].company : null, byRegion ? Number(byRegion[1].sumtotal) : null],
             [byRegion ? byRegion[2].company : null, byRegion ? Number(byRegion[2].sumtotal) : null],
-            [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].sumtotal) : null],
+            [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].sumtotal) : null],
             [byRegion ? byRegion[4].company : null, byRegion ? Number(byRegion[4].sumtotal) : null],
             [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].sumtotal) + Number(byRegion[7].sumtotal) : null],
-            [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].sumtotal) : null],
+            [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].sumtotal) : null],
           ]}
           options={{
-            title: 'Выручка по предприятиям',
+            title: 'Выручка по предприятиям и г.Минск, руб.',
             is3D: true,
             titleTextStyle: {
               fontSize: 14
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
             }
           }}
-          
           rootProps={{ 'data-testid': '2' }}
         />
         <Chart
@@ -430,16 +449,19 @@ export const StatPageContainer = () => {
             [byRegion ? byRegion[0].company : null, byRegion ? Number(byRegion[0].count) : null],
             [byRegion ? byRegion[1].company : null, byRegion ? Number(byRegion[1].count) : null],
             [byRegion ? byRegion[2].company : null, byRegion ? Number(byRegion[2].count) : null],
-            [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].count) : null],
+            [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].count) : null],
             [byRegion ? byRegion[4].company : null, byRegion ? Number(byRegion[4].count) : null],
             [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].count) + Number(byRegion[7].count) : null],
-            [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].count) : null],
+            [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].count) : null],
           ]}
           options={{
-            title: 'Количество сессий по предприятиям',
+            title: 'Количество сессий по предприятиям и г.Минск, ед.',
             is3D: true,
             titleTextStyle: {
               fontSize: 14
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -455,12 +477,16 @@ export const StatPageContainer = () => {
             ['Неуспешные', failed ? Number(failed[0].failedsessioncount) : null],
           ]}
           options={{
-            title: 'Сессии',
+            title: 'Успешные зарядные сессии, ед.',
             is3D: true,
             titleTextStyle: {
               fontSize: 14
-            }
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
+            },
           }}
+          
           rootProps={{ 'data-testid': '2' }}
         />
       </div>

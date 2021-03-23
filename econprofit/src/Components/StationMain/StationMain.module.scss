@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   width: calc(100% - 280px);
+  overflow: scroll;
+  // height: 100%;
   // width: calc(100% - 60px);
   .addressRegion {
     margin: 30px;
@@ -77,7 +79,7 @@
         flex-direction: row;
         justify-content: space-between;
         width: 250px;
-        height: 234px;
+        height: 170px;
         background-color: #eee;
         box-shadow: 0 0 12px rgba(0,0,0,0.5);
         border-radius: 8px;
@@ -85,6 +87,7 @@
         .statPageCardLeft {
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
           font-size: 18px;
           font-weight: 500;
           margin-right: 16px;

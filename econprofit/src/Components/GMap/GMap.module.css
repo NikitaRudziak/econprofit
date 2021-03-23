@@ -15,6 +15,7 @@
       -ms-flex-align: center;
           align-items: center;
   height: 50px;
+  background-color: #1b1d28;
   padding: 5px;
 }
 
@@ -30,6 +31,7 @@
 }
 
 .gmapFilters .addressField div {
+  color: #b7b7b9;
   padding: 0px 20px;
 }
 
@@ -41,27 +43,79 @@
 span {
   margin-left: 10px;
   cursor: pointer;
+  color: #b7b7b9;
 }
 
 .marker {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 18px;
+  width: 30px;
   height: 18px;
-  background-color: #12e03f;
+  background-color: #8ee7a1;
   border: 2px solid #fff;
-  border-radius: 100%;
+  border-radius: 5px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+.marker .percent {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 30px;
+  height: 18px;
+  background-color: lightgray;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .marker:hover {
   z-index: 1;
+}
+
+.marker .modal2 {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  text-align: start;
+  border-radius: 8px;
+}
+
+.marker .modal2 .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker .modal2 .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker .modal2 .iconContainer {
+  font-size: 26px;
 }
 
 .marker .modal {
@@ -93,10 +147,18 @@ span {
   font-size: 26px;
 }
 
-.marker:hover .modal {
+.marker:hover .modal2 {
   display: block;
   position: absolute;
   top: 20px;
+  z-index: 1001;
+  width: 250px;
+}
+
+.marker:hover .modal {
+  display: block;
+  position: absolute;
+  top: -60px;
   z-index: 1001;
   width: 250px;
 }

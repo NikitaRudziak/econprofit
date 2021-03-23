@@ -87,7 +87,7 @@ export const Switcher = ({}) => {
           Станции
         </div>
         <div className={style.switcherPoint}>
-          Крепости
+          Сессии
         </div>
       </div>
       <div className={style.switcherMain}>

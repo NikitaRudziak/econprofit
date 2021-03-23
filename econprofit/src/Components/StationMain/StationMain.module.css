@@ -7,6 +7,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: calc(100% - 280px);
+  overflow: scroll;
 }
 
 .stationMainContainer .addressRegion {
@@ -143,7 +144,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 250px;
-  height: 234px;
+  height: 170px;
   background-color: #eee;
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
@@ -159,6 +160,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   font-size: 18px;
   font-weight: 500;
   margin-right: 16px;

@@ -14,19 +14,19 @@ export const Navigation = () => {
         <img src={logo} alt=""/>
       </div>
       <div className={style.menuSection}>
-        <Link to='/main'>
+        <Link to='/maff/main'>
           <div className={style.menuPoint}>
             <i className="las la-chart-bar" />
             <div className={style.menuName}>Статистика</div>
           </div>
         </Link>
-        <Link to='/map'>
+        <Link to='/maff/map'>
           <div className={style.menuPoint}>
             <i className="las la-map-marked-alt" />    
             <div className={style.menuName}>Карта</div>
           </div>
         </Link>
-        <Link to='/db'>
+        <Link to='/maff/db'>
           <div className={style.menuPoint}>
             <i className="las la-database" />
             <div className={style.menuName}>Работа с БД</div>
@@ -35,7 +35,6 @@ export const Navigation = () => {
       </div>
     </div>
   )
-
 }
 
 const mapStateToProps = state => ({

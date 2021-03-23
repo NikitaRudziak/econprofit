@@ -166,9 +166,11 @@ export const StationMain = () => {
                 <b>Область:</b> {test ? test[0].region : null}
               </div>
               <div>
-                <b>Кол-во станций:</b> {test ? test.length  : null} 
+                <b>Кол-во станций:</b> {test ? test.length : null} 
               </div>
-              <div></div>
+              <div>
+                <b>Целевой показатель:</b> {test ? (test.length * 456249).toLocaleString('ru') : null} кВт*ч
+              </div>
               <div></div>
             </div>
           </div>
@@ -197,7 +199,7 @@ export const StationMain = () => {
                 <div>Целевой показатель по отпуску э/э на 2021</div>
                 <div>
                   {test ?
-                    test.length * 9311
+                    (test.length * 9311).toLocaleString('ru')
                   : null} кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
@@ -206,8 +208,8 @@ export const StationMain = () => {
               </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div onClick={view2}>Отпущено с 01.01.2021</div>
-                  <div>{sessions ? (parseInt(totalkwh * 100)) / 100 : null} кВт*ч</div>
+                <div onClick={view2}>Отпущено э/э с 01.01.2021</div>
+                  <div>{sessions ? ((parseInt(totalkwh * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
                 <i class="las la-charging-station"></i>
@@ -218,7 +220,7 @@ export const StationMain = () => {
                 <div>Выполнение плана по отпуску э/э на 2021 г.</div>
                 <div>
                   {test ?
-                    (parseInt((totalkwh / (test.length * 9311) * 100) * 100)) / 100
+                    ((parseInt((totalkwh / (test.length * 9311) * 100) * 100)) / 100).toLocaleString('ru')
                   : null}%</div>
               </div>
               <div className={style.statPageCardRight}>
@@ -227,11 +229,11 @@ export const StationMain = () => {
             </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div>В среднем за одну сессию</div>
+                <div>В среднем за одну зарядную сессию</div>
                 <div>
                   {sessions ? 
                     perSession ?
-                      perSession 
+                      (perSession).toLocaleString('ru')
                     : 'Нет данных'
                   : null} кВт*ч</div>
               </div>
@@ -245,8 +247,8 @@ export const StationMain = () => {
           <div className={style.stationInfoStat}>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div>Кол-во сессий</div>
-                <div>{sessions ? (parseInt(totalsessions * 100)) / 100 : null}</div>
+                <div>Кол-во зарядных сессий с 01.01.2021</div>
+                <div>{sessions ? ((parseInt(totalsessions * 100)) / 100).toLocaleString('ru') : null}</div>
               </div>
               <div className={style.statPageCardRight}>
                 <i class="las la-user-clock"></i>
@@ -254,10 +256,10 @@ export const StationMain = () => {
             </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div>Успешные</div>
+                <div>Успешные зарядные сессии</div>
                 <div>{sessions ? 
                   (failed && totalsessions) ?
-                  (parseInt((100 - (failed / totalsessions * 100)) * 100)) / 100 
+                  ((parseInt((100 - (failed / totalsessions * 100)) * 100)) / 100).toLocaleString('ru')
                   : 'Нет данных'
                   : null}%</div>
               </div>
@@ -267,7 +269,7 @@ export const StationMain = () => {
             </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div>Время зарядки</div>
+                <div>Средняя продолжительность одной зарядной сессии</div>
                 <div>
                   {test ?
                     perSession ?
@@ -281,99 +283,93 @@ export const StationMain = () => {
             </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div>Выручка</div>
-                  <div>{sessions ? (parseInt(totalcost * 100)) / 100 : null} руб.</div>
+                <div>Выручка с 01.01.2021</div>
+                  <div>{sessions ? ((parseInt(totalcost * 100)) / 100).toLocaleString('ru') : null} руб.</div>
               </div>
               <div className={style.statPageCardRight}>
                 <i class="las la-coins"></i>
               </div>
             </div>
           </div>
-          <div className={style.chartsLine}>
-            <Chart
-              width={'400px'}
-              height={'340px'}
-              chartType="PieChart"
-              loader={<div>Загрузка</div>}
-              data={[
-                ['Task', 'Hours per Day'],
-                ['Пистолет Chademo', byType ? Number(byType[2]) : null],
-                ['Пистолет CCS', byType ? Number(byType[1]) : null],
-                ['Вилка Type2', byType ? Number(byType[0]) : null],
-                ['Розеткка Type2', byType ? Number(byType[3]) : null],
-              ]}
-              options={{
-                title: 'Отпущено кВт',
-                is3D: true,
-                titleTextStyle: {
-                  fontSize: 14,
-                }
-              }}
-              rootProps={{ 'data-testid': '2' }}
-            />
-            <Chart
-              width={'400px'}
-              height={'340px'}
-              chartType="PieChart"
-              loader={<div>Загрузка</div>}
-              data={[
-                ['Task', 'Hours per Day'],
-                ['Пистолет Chademo', byTypecash ? Number(byTypecash[2]) : null],
-                ['Пистолет CCS', byTypecash ? Number(byTypecash[1]) : null],
-                ['Вилка Type2', byTypecash ? Number(byTypecash[0]) : null],
-                ['Розеткка Type2', byTypecash ? Number(byTypecash[3]) : null],
-              ]}
-              options={{
-                title: 'Заработано',
-                is3D: true,
-                titleTextStyle: {
-                  fontSize: 14,
-                }
-              }}
-              rootProps={{ 'data-testid': '2' }}
-            />
-            <Chart
-              width={'400px'}
-              height={'340px'}
-              chartType="PieChart"
-              loader={<div>Загрузка</div>}
-              data={[
-                ['Task', 'Hours per Day'],
-                ['Пистолет Chademo', count ? Number(count[2]) : null],
-                ['Пистолет CCS', count ? Number(count[1]) : null],
-                ['Вилка Type2', count ? Number(count[0]) : null],
-                ['Розеткка Type2', count ? Number(count[3]) : null],
-              ]}
-              options={{
-                title: 'Количество сессий',
-                is3D: true,
-                titleTextStyle: {
-                  fontSize: 14,
-                }
-              }}
-              rootProps={{ 'data-testid': '2' }}
-            />
-            {/* <Chart
-              width={'370px'}
-              height={'280px'}
-              chartType="PieChart"
-              loader={<div>Загрузка</div>}
-              data={[
-                ['Task', 'Hours per Day'],
-                ['Пистолет Chademo', (count && byType) ? Number(byType[2]) / Number(count[2]) : null],
-                ['Пистолет CCS', (count && byType) ? Number(byType[1]) / Number(count[1]) : null],
-                ['Вилка Type2', (count && byType) ? Number(byType[0]) / Number(count[0]) : null],
-                ['Розеткка Type2', (count && byType) ? Number(byType[3]) / Number(count[3]) : null],
-              ]}
-              options={{
-                title: 'Количество сессий',
-                is3D: true,
-              }}
-              rootProps={{ 'data-testid': '2' }}
-            /> */}
-          </div>
         </div>
       </div>  
+      <div className={style.chartsLine}>
+        <Chart
+          width={'500px'}
+          height={'400px'}
+          chartType="PieChart"
+          loader={<div>Загрузка</div>}
+          data={[
+            ['Task', 'Hours per Day'],
+            ['Пистолет Chademo', byType ? Number(byType[2]) : null],
+            ['Пистолет CCS', byType ? Number(byType[1]) : null],
+            ['Вилка Type2', byType ? Number(byType[0]) : null],
+            ['Розеткка Type2', byType ? Number(byType[3]) : null],
+          ]}
+          options={{
+            title: 'Отпущено по коннекторам, кВт*ч',
+            is3D: true,
+            titleTextStyle: {
+              fontSize: 16,
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
+            }
+            // textStyle: {
+            //   fontSize: 40,
+            // }
+          }}
+          rootProps={{ 'data-testid': '2' }}
+        />
+        <Chart
+          width={'500px'}
+          height={'400px'}
+          chartType="PieChart"
+          loader={<div>Загрузка</div>}
+          data={[
+            ['Task', 'Hours per Day'],
+            ['Пистолет Chademo', byTypecash ? Number(byTypecash[2]) : null],
+            ['Пистолет CCS', byTypecash ? Number(byTypecash[1]) : null],
+            ['Вилка Type2', byTypecash ? Number(byTypecash[0]) : null],
+            ['Розеткка Type2', byTypecash ? Number(byTypecash[3]) : null],
+          ]}
+          options={{
+            title: 'Распределение выручки по коннекторам, руб.',
+            is3D: true,
+            titleTextStyle: {
+              fontSize: 16,
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
+            }
+          }}
+          rootProps={{ 'data-testid': '2' }}
+        />
+        <Chart
+          width={'500px'}
+          height={'400px'}
+          chartType="PieChart"
+          loader={<div>Загрузка</div>}
+          data={[
+            ['Task', 'Hours per Day'],
+            ['Пистолет Chademo', count ? Number(count[2]) : null],
+            ['Пистолет CCS', count ? Number(count[1]) : null],
+            ['Вилка Type2', count ? Number(count[0]) : null],
+            ['Розеткка Type2', count ? Number(count[3]) : null],
+          ]}
+          options={{
+            title: 'Количество зарядных сессий, ед.',
+            is3D: true,
+            titleTextStyle: {
+              fontSize: 16,
+            },
+            pieSliceTextStyle: {
+              fontSize: 13
+            }
+          }}
+          rootProps={{ 'data-testid': '2' }}
+        />
+      </div>
     </div>
   )
 }

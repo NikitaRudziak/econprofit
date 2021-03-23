@@ -10,7 +10,10 @@ export const StationContainer = () => {
   return (
     <div className={style.stationContainer}>
       <Navigation />
-      <StationMain />
+      {/* <div className={style.stat}> */}
+        <StationMain />
+      {/* </div> */}
+      
     </div>
   )
 }
