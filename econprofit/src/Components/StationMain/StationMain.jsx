@@ -309,11 +309,13 @@ export const StationMain = () => {
           options={{
             title: 'Отпущено по коннекторам, кВт*ч',
             is3D: true,
+            colors: ['rgb(164,203,158)', 'rgb(180,210,172)', 'rgb(245,228,50)','rgb(248,237,129)'],
             titleTextStyle: {
               fontSize: 16,
             },
             pieSliceTextStyle: {
-              fontSize: 13
+              fontSize: 13,
+              color: 'black'
             }
             // textStyle: {
             //   fontSize: 40,
@@ -336,11 +338,13 @@ export const StationMain = () => {
           options={{
             title: 'Распределение выручки по коннекторам, руб.',
             is3D: true,
+            colors: ['rgb(164,203,158)', 'rgb(180,210,172)', 'rgb(245,228,50)','rgb(248,237,129)'],
             titleTextStyle: {
               fontSize: 16,
             },
             pieSliceTextStyle: {
-              fontSize: 13
+              fontSize: 13,
+              color: 'black'
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -360,11 +364,13 @@ export const StationMain = () => {
           options={{
             title: 'Количество зарядных сессий, ед.',
             is3D: true,
+            colors: ['rgb(164,203,158)', 'rgb(180,210,172)', 'rgb(245,228,50)','rgb(248,237,129)'],
             titleTextStyle: {
               fontSize: 16,
             },
             pieSliceTextStyle: {
-              fontSize: 13
+              fontSize: 13,
+              color: 'black'
             }
           }}
           rootProps={{ 'data-testid': '2' }}

@@ -17,6 +17,7 @@ export const StatPageContainer = () => {
   const [type2plugkwh, setType2plugkwh] = useState();
   const [byRegion, setByRegion] = useState();
   const [byConnector, setByConnector] = useState();
+  const [lastDate, setLastDate] = useState();
   // let timerId = setInterval(() => alert('tick'), 2000);
 
   useEffect(() => {
@@ -109,16 +110,30 @@ export const StatPageContainer = () => {
       .catch(function (error) {
         console.log(error);
       });
+    fetch(`${route}/lastdate`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setLastDate(data)
+        console.log(data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, [])
 
   const shareData = () => {
-    var d = new Date(),
+    var d = new Date()
+    var od = new Date(lastDate[0].chargingfrom),
     to = '',
     from = '';
     to = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
-    d.setDate(d.getDate() - 1) 
-    from = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + (d.getDate())
-
+    // d.setDate(lastDate[0].chargingfrom)
+    // console.log(od)
+    // d.setDate(d.getDate() - 1) 
+     from = od.getFullYear() + '-' + (od.getMonth()+1) + '-' + (od.getDate()+1)
+    //  console.log(from)
     fetch(`${route}/test/${from}/${to}`)
       .then(response => {
         return response.json();
@@ -285,11 +300,14 @@ export const StatPageContainer = () => {
           options={{
             title: 'Отпущено по типу коннектора, кВт*ч',
             is3D: true,
+            colors: ['rgb(164,203,158)', 'rgb(180,210,172)', 'rgb(245,228,50)','rgb(248,237,129)'],
             titleTextStyle: {
               fontSize: 14,
             },
             pieSliceTextStyle: {
-              fontSize: 13
+              fontSize: 13,
+              color: 'black'
+              // color: 'grey'
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -309,11 +327,13 @@ export const StatPageContainer = () => {
           options={{
             title: 'Выручка по типу коннектора, руб.',
             is3D: true,
+            colors: ['rgb(164,203,158)', 'rgb(180,210,172)', 'rgb(245,228,50)','rgb(248,237,129)'],
             titleTextStyle: {
               fontSize: 14
             },
             pieSliceTextStyle: {
-              fontSize: 13
+              fontSize: 13,
+              color: 'black'
             }
           }}
           
@@ -334,11 +354,13 @@ export const StatPageContainer = () => {
           options={{
             title: 'Количество сессий по типу коннектора, ед.',
             is3D: true,
+            colors: ['rgb(164,203,158)', 'rgb(180,210,172)', 'rgb(245,228,50)','rgb(248,237,129)'],
             titleTextStyle: {
               fontSize: 14
             },
             pieSliceTextStyle: {
-              fontSize: 13
+              fontSize: 13,
+              color: 'black'
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -366,19 +388,21 @@ export const StatPageContainer = () => {
           loader={<div>Загрузка</div>}
           data={[
             ['Task', 'Hours per Day'],
-            ['Розетка Type 2', (type2plugkwh && byConnector) ? Number(byConnector[0].sumkwh) / Number(type2plugkwh[0].sessioncount) : null],
             ['Пистолет CHAdeMO', (chademoKwh && byConnector) ? Number(byConnector[1].sumkwh) / Number(chademoKwh[0].sessioncount) : null],
-            ['Вилка Type 2', (type2Kwh && byConnector) ? Number(byConnector[2].sumkwh) / Number(type2Kwh[0].sessioncount) : null],
             ['Пистолет CCS', (ccsKwh && byConnector) ? Number(byConnector[3].sumkwh) / Number(ccsKwh[0].sessioncount) : null],
+            ['Вилка Type 2', (type2Kwh && byConnector) ? Number(byConnector[2].sumkwh) / Number(type2Kwh[0].sessioncount) : null],
+            ['Розетка Type 2', (type2plugkwh && byConnector) ? Number(byConnector[0].sumkwh) / Number(type2plugkwh[0].sessioncount) : null],
           ]}
           options={{
             title: 'Среднее время зарядной сессии, мин.',
             is3D: true,
+            colors: ['rgb(164,203,158)', 'rgb(180,210,172)', 'rgb(245,228,50)','rgb(248,237,129)'],
             titleTextStyle: {
               fontSize: 14
             },
             pieSliceTextStyle: {
-              fontSize: 13
+              fontSize: 13,
+              color: 'black'
             }
           }}
           rootProps={{ 'data-testid': '2' }}

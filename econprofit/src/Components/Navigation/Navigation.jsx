@@ -26,12 +26,12 @@ export const Navigation = () => {
             <div className={style.menuName}>Карта</div>
           </div>
         </Link>
-        <Link to='/maff/db'>
+        {/* <Link to='/maff/db'>
           <div className={style.menuPoint}>
             <i className="las la-database" />
             <div className={style.menuName}>Работа с БД</div>
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   )
