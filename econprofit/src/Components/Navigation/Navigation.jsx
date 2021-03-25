@@ -16,13 +16,16 @@ export const Navigation = () => {
       <div className={style.menuSection}>
         <Link to='/maff/main'>
           <div className={style.menuPoint}>
-            <i className="las la-chart-bar" />
+          <span className="material-icons darkground">insert_chart_outlined</span>
+            {/* <i className="las la-chart-bar" /> */}
             <div className={style.menuName}>Статистика</div>
           </div>
         </Link>
         <Link to='/maff/map'>
           <div className={style.menuPoint}>
-            <i className="las la-map-marked-alt" />    
+          
+            <span className="material-icons darkground">map</span>
+            {/* <i className="las la-map-marked-alt" />     */}
             <div className={style.menuName}>Карта</div>
           </div>
         </Link>

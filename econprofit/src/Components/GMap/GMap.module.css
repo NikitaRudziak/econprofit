@@ -40,10 +40,17 @@
   border-radius: 4px;
 }
 
+.gmapFilters span {
+  background-color: #8ee7a1;
+  margin-left: 20px;
+  padding: 3px 10px;
+}
+
 span {
-  margin-left: 10px;
   cursor: pointer;
-  color: #b7b7b9;
+  color: black;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 .marker {
@@ -99,7 +106,11 @@ span {
   border-radius: 8px;
 }
 
-.marker .modal2 .modalContainer {
+.marker .modal2 a {
+  color: black;
+}
+
+.marker .modal2 a .modalContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -109,12 +120,12 @@ span {
   padding: 5px;
 }
 
-.marker .modal2 .stationName {
+.marker .modal2 a .stationName {
   padding-top: 5px;
   font-size: 14px;
 }
 
-.marker .modal2 .iconContainer {
+.marker .modal2 a .iconContainer {
   font-size: 26px;
 }
 

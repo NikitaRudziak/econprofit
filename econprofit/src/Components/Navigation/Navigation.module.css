@@ -45,7 +45,7 @@ img {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-left: 22px;
+  margin-left: 14px;
   margin-top: 50px;
 }
 
@@ -59,6 +59,10 @@ img {
 
 .menuSection .menuPoint i {
   font-size: 30px;
+}
+
+.menuSection .menuPoint span {
+  margin-left: 0px;
 }
 
 .menuSection .menuPoint .menuName {

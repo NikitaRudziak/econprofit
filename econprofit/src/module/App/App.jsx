@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Navigation } from '../../Components/Navigation/Navigation';
 import { StatPageContainer } from '../../Components/StatPageContainer/StatPageContainer';
-import logo from './logo.svg';
 import style from './App.module.css';
 
 export const App = () => {
@@ -11,7 +10,6 @@ export const App = () => {
     <div className={style.appContainer}>
       <Navigation />
       <StatPageContainer />
-      {/* <GMap /> */}
     </div>
   );
 }

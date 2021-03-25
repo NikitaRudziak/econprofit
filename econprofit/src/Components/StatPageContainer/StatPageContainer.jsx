@@ -190,25 +190,28 @@ export const StatPageContainer = () => {
       <div className={style.statPageCardCont}>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div>Целевой показатель по отпуску э/э на 2021 г.</div>
-            <div>{(4068907).toLocaleString('ru')} кВт*ч</div>
+            <div>Целевой показатель по отпуску э/э на 2021</div>
+            <div>{(2215153).toLocaleString('ru')} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-certificate"></i>
+            <span className="material-icons greyground">star_rate</span>
+            {/* <i class="las la-certificate"></i> */}
           </div>
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
             <div
               onClick={view}
-            >Выполнение плана по отпуску э/э на 2021 г.</div>
+            >Выполнение плана по отпуску э/э на 2021</div>
             <div>
-              {sum ? ((parseInt((sum[0].sumkw / 4068907 * 100) * 100)) / 100).toLocaleString('ru') : null}
+              {sum ? ((parseInt((sum[0].sumkw / 2215153 * 100) * 100)) / 100).toLocaleString('ru') : null}
               {/* {sum ? (parseInt(sum[0].sumkw * 100)) / 100 : null}  */}
               %</div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-battery-half"></i>
+          
+            {/* <i class="las la-battery-half"></i> */}
+            <span className="material-icons greyground">battery_charging_full</span>
           </div>
         </div>
         <div className={style.statPageCard}>
@@ -219,7 +222,8 @@ export const StatPageContainer = () => {
             <div>{sum ? ((parseInt(sum[0].sumkw * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-charging-station"></i>
+            <span className="material-icons greyground">ev_station</span>
+            {/* <i class="las la-charging-station"></i> */}
           </div>
         </div>
         <div className={style.statPageCard} onClick={shareData}>
@@ -229,7 +233,8 @@ export const StatPageContainer = () => {
             {/* sum[0].sessioncount */}
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-user-clock"></i>
+            <span className="material-icons greyground">account_box</span>
+            {/* <i class="las la-user-clock"></i> */}
           </div>
         </div>
       </div>
@@ -238,10 +243,11 @@ export const StatPageContainer = () => {
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
             <div>Целевой показатель по отпуску э/э для обеспечения окупаемости</div>
-            <div>{(199380813).toLocaleString('ru')} кВт*ч</div>
+            <div>{(268056674).toLocaleString('ru')} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-certificate"></i>
+            {/* <i class="las la-certificate"></i> */}
+            <span className="material-icons greyground">star_rate</span>
           </div>
         </div>
         <div className={style.statPageCard}>
@@ -249,10 +255,11 @@ export const StatPageContainer = () => {
             <div
               onClick={view}
             >Общее выполнение плана по отпуску э/э</div>
-            <div>{sum ?  ((parseInt((sum[0].sumkw / 199380813 * 100) * 100)) / 100).toLocaleString('ru') : null}%</div>
+            <div>{sum ?  ((parseInt((sum[0].sumkw / 268056674 * 100) * 100)) / 100).toLocaleString('ru') : null}%</div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-battery-half"></i>
+            <span className="material-icons greyground">battery_charging_full</span>
+            {/* <i class="las la-battery-half"></i> */}
           </div>
         </div>
         <div className={style.statPageCard}>
@@ -261,7 +268,8 @@ export const StatPageContainer = () => {
             <div>{sum ? ((parseInt(sum[0].sumtotal * 100)) / 100).toLocaleString('ru') : null} руб.</div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-coins"></i>
+            {/* <i class="las la-coins"></i> */}
+            <span className="material-icons greyground">monetization_on</span>
           </div>
         </div>
         
@@ -279,7 +287,8 @@ export const StatPageContainer = () => {
               </div>
           </div>
           <div className={style.statPageCardRight}>
-            <i class="las la-check-double"></i>
+            <span className="material-icons greyground">done_outline</span>
+            {/* <i class="las la-check-double"></i> */}
           </div>
         </div>
       </div>          
@@ -427,6 +436,7 @@ export const StatPageContainer = () => {
           options={{
             title: 'Отпущено по предприятиям и г.Минск, кВт*ч',
             is3D: true,
+            colors: ['#B9E3C6', 'rgb(154, 155, 161)', '#D81E5B','#59C9A5', '#FFFD98', '#AFCBFF', '#004F2D'],
             titleTextStyle: {
               fontSize: 14
             },
@@ -454,6 +464,7 @@ export const StatPageContainer = () => {
           options={{
             title: 'Выручка по предприятиям и г.Минск, руб.',
             is3D: true,
+            colors: ['#B9E3C6', 'rgb(154, 155, 161)', '#D81E5B','#59C9A5', '#FFFD98', '#AFCBFF', '#004F2D'],
             titleTextStyle: {
               fontSize: 14
             },
@@ -481,6 +492,7 @@ export const StatPageContainer = () => {
           options={{
             title: 'Количество сессий по предприятиям и г.Минск, ед.',
             is3D: true,
+            colors: ['#B9E3C6', 'rgb(154, 155, 161)', '#D81E5B','#59C9A5', '#FFFD98', '#AFCBFF', '#004F2D'],
             titleTextStyle: {
               fontSize: 14
             },
@@ -498,16 +510,18 @@ export const StatPageContainer = () => {
           data={[
             ['Task', 'Hours per Day'],
             ['Успешные', (sum && failed) ? Number(sum[0].sessioncount) - Number(failed[0].failedsessioncount) : null],
-            ['Неуспешные', failed ? Number(failed[0].failedsessioncount) : null],
+            ['С ошибкой', failed ? Number(failed[0].failedsessioncount) : null],
           ]}
           options={{
-            title: 'Успешные зарядные сессии, ед.',
+            title: 'Зарядные сессии, ед.',
             is3D: true,
+            colors: ['#C2F261', '#EF798A'],
             titleTextStyle: {
-              fontSize: 14
+              fontSize: 14,
             },
             pieSliceTextStyle: {
-              fontSize: 13
+              fontSize: 13,
+              color: 'black'
             },
           }}
           

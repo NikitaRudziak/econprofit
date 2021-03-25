@@ -11,7 +11,7 @@ import style from './GMap.module.css';
 const AnyReactComponent = ({id, name, address, sum, count}) => 
   <div className={style.marker} >
     {/* <div className={style.percent}> */}
-      {(parseInt((Number(sum) / ( 9311 * Number(count))) * 100)) * 100 / 100}%
+      {(parseInt((Number(sum) / ( 5069 * Number(count))) * 100)) * 100 / 100}%
     {/* </div> */}
     {/* <div className={style.modal}>
       <div className={style.modalContainer}> */}
@@ -36,6 +36,7 @@ const AnyReactComponent = ({id, name, address, sum, count}) =>
       {/* </div>
     </div> */}
     <div className={style.modal2}>
+    <Link to={{pathname: `/maff/stationinfo/${id}`}}>
       <div className={style.modalContainer}>
         <div className={style.textContainer}>
           <div className={style.stationName}>
@@ -45,14 +46,13 @@ const AnyReactComponent = ({id, name, address, sum, count}) =>
             {address}
           </div>
         </div>
-        <div className={style.iconContainer}>
-        <Link to={{pathname: `/maff/stationinfo/${id}`}}>
+        {/* <div className={style.iconContainer}>
           <div>
             <i class="lar la-chart-bar"></i>
           </div>
-        </Link>
-        </div>
+        </div> */}
       </div>
+      </Link>
     </div>
   </div>
 
@@ -84,7 +84,6 @@ export const GMap = () => {
 
   useEffect(() => {
     let arr = []
-    // console.log('l')
     if(locationList && percent) {
       locationList.map(item => {
         percent.map(item2 => {
@@ -103,7 +102,6 @@ export const GMap = () => {
         })
       })
     }
-    // console.log(arr)
     setTest(arr);
   }, [locationList, percent])
 
@@ -140,17 +138,6 @@ export const GMap = () => {
   }
 
   const view = () => {
-    // let arr = [];
-    // locationList.map(item => {
-    //   percent.map(item2 => {
-    //     let count = 0
-    //     if(item.name == item2.name) {
-    //       count++
-    //     }
-    //     arr.push(count)
-    //     count = 0;
-    //   })
-    // }) 
     console.log(percent)
   }
 
@@ -166,8 +153,8 @@ export const GMap = () => {
               {generateLocationDatalist()}
             </datalist>
             <span onClick={clearInput}>
-              <i class="las la-times"></i>
-              {/* <i class="las la-skull-crossbones"></i> */}
+               Очистить
+              {/* <i class="las la-times"></i> */}
             </span>
         </div>
       </div>
@@ -177,7 +164,6 @@ export const GMap = () => {
         zoom={zoom}
         // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
-      
       {test.map(item => (
         <AnyReactComponent
           id={item.id}

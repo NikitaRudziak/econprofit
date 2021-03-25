@@ -26,7 +26,7 @@ img {
 .menuSection {
   display: flex;
   flex-direction: column;
-  margin-left: 22px;
+  margin-left: 14px;
   margin-top: 50px;
 
   .menuPoint {
@@ -36,7 +36,9 @@ img {
     i {
       font-size: 30px;
     }
-
+    span {
+      margin-left: 0px;
+    }
     .menuName {
       font-size: 18px;
       font-family: RobotoLight;
@@ -50,4 +52,7 @@ img {
   .menuPoint:hover  {
     color: aliceblue;
   }
+  
 }
+
+

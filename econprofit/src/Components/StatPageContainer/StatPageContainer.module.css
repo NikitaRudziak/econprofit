@@ -68,6 +68,11 @@
   padding-right: 6px;
 }
 
+.statPageContainer .statPageCardCont .statPageCard .statPageCardRight span {
+  margin-left: 0px;
+  padding: 0;
+}
+
 .statPageContainer .chartRegion {
   display: -webkit-box;
   display: -ms-flexbox;

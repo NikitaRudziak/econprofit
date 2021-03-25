@@ -18,20 +18,18 @@ export const StationMain = () => {
   const [perSession, setPerSession] = useState();
   const [byType, setByType] = useState([]);
   const [byTypecash, setByTypecash] = useState();
-  const [count, setCount] = useState()
-  // const [perSession, setPerSession] = useState();
-  // const [perSession, setPerSession] = useState();
+  const [count, setCount] = useState();
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
-    fetch(`${route}/locationinfo/${id}`)
+    fetch(`../${route}/locationinfo/${id}`)
       .then(response => {
         return response.json();
       })
       .then(data => {
         setTest(data);
-        // console.log(data)
       });
-    fetch(`${route}/sessioninfo/${id}`)
+    fetch(`../${route}/sessioninfo/${id}`)
       .then(response => {
         return response.json();
       })
@@ -40,21 +38,6 @@ export const StationMain = () => {
         console.log(data)
       });
   }, [])
-
-  // useEffect(() => {
-  //   if(test) {
-  //     test.map((item) => {
-  //       fetch(`${route}/sessioninfo/${item.friendlycode}`)
-  //         .then(response => {
-  //           return response.json();
-  //         })
-  //         .then(data => {
-  //           setSessions(data);
-            
-  //         });
-  //     })
-  //   }
-  // }, [test])
 
   useEffect(() => {
     let totalkwh=0;
@@ -120,11 +103,9 @@ export const StationMain = () => {
     setByType(kwharr)
     setByTypecash(casharr)
     setCount(arrcount);
-    // console.log(sessions)
   }, [sessions])
 
   const view = () => {
-    // const date2 = new Date()
     var d = new Date(),
     datestring = '';
     datestring = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
@@ -147,10 +128,20 @@ export const StationMain = () => {
     )
   }
 
+  const openModal = () => {
+    setModalShow(!modalShow)
+  }
+
   return (
+    <>
     <div className={style.stationMainContainer}>
       <div className={style.addressRegion}>
-        {test ? test[0].name : null}
+        <div>
+          {test ? test[0].name : null}
+        </div>
+        <div className={style.tableButton} onClick={openModal}>
+          Расчет окупаемости
+        </div>
       </div>
       <div className={style.mainRegion}>
         <div className={style.leftLine}>
@@ -169,7 +160,7 @@ export const StationMain = () => {
                 <b>Кол-во станций:</b> {test ? test.length : null} 
               </div>
               <div>
-                <b>Целевой показатель:</b> {test ? (test.length * 456249).toLocaleString('ru') : null} кВт*ч
+                <b>Целевой показатель:</b> {test ? (test.length * 613402).toLocaleString('ru') : null} кВт*ч
               </div>
               <div></div>
             </div>
@@ -199,11 +190,12 @@ export const StationMain = () => {
                 <div>Целевой показатель по отпуску э/э на 2021</div>
                 <div>
                   {test ?
-                    (test.length * 9311).toLocaleString('ru')
+                    (test.length * 5069).toLocaleString('ru')
                   : null} кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-certificate"></i>
+                <span className="material-icons greyground">star_rate</span>
+                {/* <i class="las la-certificate"></i> */}
               </div>
               </div>
             <div className={style.statPageCard}>
@@ -212,19 +204,21 @@ export const StationMain = () => {
                   <div>{sessions ? ((parseInt(totalkwh * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-charging-station"></i>
+                <span className="material-icons greyground">ev_station</span>
+                {/* <i class="las la-charging-station"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
-                <div>Выполнение плана по отпуску э/э на 2021 г.</div>
+                <div>Выполнение плана по отпуску э/э на 2021</div>
                 <div>
                   {test ?
-                    ((parseInt((totalkwh / (test.length * 9311) * 100) * 100)) / 100).toLocaleString('ru')
+                    ((parseInt((totalkwh / (test.length * 5069) * 100) * 100)) / 100).toLocaleString('ru')
                   : null}%</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-battery-half"></i>
+                <span className="material-icons greyground">battery_charging_full</span>
+                {/* <i class="las la-battery-half"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -238,7 +232,8 @@ export const StationMain = () => {
                   : null} кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-car"></i>
+                <span className="material-icons greyground">electric_car</span>
+                {/* <i class="las la-car"></i> */}
               </div>
             </div>
           </div>
@@ -251,7 +246,8 @@ export const StationMain = () => {
                 <div>{sessions ? ((parseInt(totalsessions * 100)) / 100).toLocaleString('ru') : null}</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-user-clock"></i>
+                <span className="material-icons greyground">account_box</span>
+                {/* <i class="las la-user-clock"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -264,7 +260,8 @@ export const StationMain = () => {
                   : null}%</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-check-double"></i>
+                <span className="material-icons greyground">done_outline</span>
+                {/* <i class="las la-check-double"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -278,7 +275,8 @@ export const StationMain = () => {
                   : null} мин</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-hourglass-end"></i>
+              <span className="material-icons greyground">timer</span>
+                {/* <i class="las la-hourglass-end"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -287,7 +285,8 @@ export const StationMain = () => {
                   <div>{sessions ? ((parseInt(totalcost * 100)) / 100).toLocaleString('ru') : null} руб.</div>
               </div>
               <div className={style.statPageCardRight}>
-                <i class="las la-coins"></i>
+              <span className="material-icons greyground">monetization_on</span>
+                {/* <i class="las la-coins"></i> */}
               </div>
             </div>
           </div>
@@ -317,9 +316,6 @@ export const StationMain = () => {
               fontSize: 13,
               color: 'black'
             }
-            // textStyle: {
-            //   fontSize: 40,
-            // }
           }}
           rootProps={{ 'data-testid': '2' }}
         />
@@ -377,6 +373,235 @@ export const StationMain = () => {
         />
       </div>
     </div>
+    {modalShow 
+      ? <div id="myModal" className={style.modalOpen}> 
+          <div className={style.modalContent}>
+            <span className={style.close} onClick={openModal}>&times;</span>
+            <h2>Расчет окупаемости</h2>
+            <h4>Срок окупаемости(простой): 5,1 лет</h4>
+            <h4>Срок окупаемости(дисконтированный): 7,9 лет</h4>
+            <table>
+              <tr>
+                <th>Год</th>
+                <th>Загрузка, доля часы</th>
+                <th>Постоянные затраты</th>
+                <th>Отпущено кВт*ч с учетом потерь 10%</th>
+                <th>Стоимость электроэнергии Белэнергоб руб.</th>
+                <th>Эквайринг</th>
+                <th>Реализация э/э, кВт*ч</th>
+                <th>Выручка от реализации, руб.</th>
+                <th>Выручка без налогов, руб.</th>
+                <th>Затраты на производство и реализацию, руб.</th>
+                <th>Прибыль от реализации, руб.</th>
+                <th>Налоги из прибыли, руб.</th>
+                <th>Чистая прибыль руб.</th>
+                <th>Расходы из прибыли</th>
+                <th>Капвложения, тыс.руб</th>
+                <th>ЧД, тыс. руб</th>
+                <th>Накопленный ЧД, тыс. руб</th>
+                <th>ЧДД, тыс. руб.</th>
+                <th>Накопленный ЧДД, тыс. руб.</th>
+              </tr>
+              <tr>
+                <td>2020</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>0</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td></td>
+                <td>42840</td>
+                <td>-42840</td>
+                <td>-42840</td>
+                <td>-42840</td>
+                <td>-42840</td>  
+              </tr>
+              <tr>
+                <td>2021</td>
+                <td>0,25</td>
+                <td>7260</td>
+                <td>5069</td>
+                <td>886,16258</td>
+                <td>23,244</td>
+                <td>4967,6</td>
+                <td>1937</td>
+                <td>1614</td>
+                <td>8169</td>
+                <td>-6555</td>
+                <td>-1180</td>
+                <td>-5375</td>
+                <td>-1075</td>
+                <td>0</td>
+                <td>2700</td>
+                <td>-40140</td>
+                <td>2457</td>
+                <td>-40383</td>  
+              </tr>
+              <tr>
+                <td>2022</td>
+                <td>0,75</td>
+                <td>7260</td>
+                <td>15208</td>
+                <td>2658,66256</td>
+                <td>69,744</td>
+                <td>14903,8</td>
+                <td>5812</td>
+                <td>4843</td>
+                <td>9988</td>
+                <td>-5145</td>
+                <td>-926</td>
+                <td>-4219</td>
+                <td>-844</td>
+                <td>0</td>
+                <td>3625</td>
+                <td>-36515</td>
+                <td>3009</td>
+                <td>-37374</td>
+              </tr>
+              <tr>
+                <td>2023</td>
+                <td>1,5</td>
+                <td>7 260</td>
+                <td>30417</td>
+                <td>5317,49994</td>
+                <td>139,5</td>
+                <td>29808,7</td>
+                <td>11625</td>
+                <td>9688</td>
+                <td>12717</td>
+                <td>-3029</td>
+                <td>-545</td>
+                <td>-2484</td>
+                <td>-497</td>
+                <td>0</td>
+                <td>5013</td>
+                <td>-31502</td>
+                <td>3760</td>
+                <td>-33614</td>
+              </tr>
+              <tr>
+                <td>2024</td>
+                <td>3,25</td>
+                <td>7 260</td>
+                <td>65903</td>
+                <td>11521,16246</td>
+                <td>302,256</td>
+                <td>64584,9</td>
+                <td>25188</td>
+                <td>20990</td>
+                <td>19083</td>
+                <td>1907</td>
+                <td>343</td>
+                <td>1564</td>
+                <td>313</td>
+                <td>0</td>
+                <td>8251</td>
+                <td>-23251</td>
+                <td>5611</td>
+                <td>-28003</td>
+              </tr>
+              <tr>
+                <td>2025</td>
+                <td>4,5</td>
+                <td>7 260</td>
+                <td>91250</td>
+                <td>15952,325</td>
+                <td>418,512</td>
+                <td>89425,0</td>
+                <td>34876</td>
+                <td>29063</td>
+                <td>23631</td>
+                <td>5432</td>
+                <td>978</td>
+                <td>4454</td>
+                <td>891</td>
+                <td>0</td>
+                <td>10563</td>
+                <td>-12688</td>
+                <td>6549</td>
+                <td>-21454</td>
+              </tr>
+              <tr>
+                <td>2026</td>
+                <td>5</td>
+                <td>7 260</td>
+                <td>101389</td>
+                <td>17724,82498</td>
+                <td>465,012</td>
+                <td>99361,2</td>
+                <td>38751</td>
+                <td>32293</td>
+                <td>25450</td>
+                <td>6843</td>
+                <td>1232</td>
+                <td>5611</td>
+                <td>1122</td>
+                <td>0</td>
+                <td>11489</td>
+                <td>-1199</td>
+                <td>6434</td>
+                <td>-15020</td>
+              </tr>
+              <tr>
+                <td>2027</td>
+                <td>7</td>
+                <td>7 260</td>
+                <td>141944</td>
+                <td>24814,65008</td>
+                <td>651,012</td>
+                <td>139105,1</td>
+                <td>54251</td>
+                <td>45209</td>
+                <td>32726</td>
+                <td>12483</td>
+                <td>2247</td>
+                <td>10236</td>
+                <td>2047</td>
+                <td>0</td>
+                <td>15189</td>
+                <td>13990</td>
+                <td>7746</td>
+                <td>-7274</td>
+              </tr>
+              <tr>
+                <td>2028</td>
+                <td>8</td>
+                <td>7 260</td>
+                <td>162222</td>
+                <td>28359,65004</td>
+                <td>744,012</td>
+                <td>158977,6</td>
+                <td>62001</td>
+                <td>51668</td>
+                <td>36364</td>
+                <td>15304</td>
+                <td>2755</td>
+                <td>12549</td>
+                <td>2510</td>
+                <td>0</td>
+                <td>17039</td>
+                <td>183</td>
+                <td>8008</td>
+                <td>734</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      : <div id="myModal" className={style.modal}>
+          <div className={style.modalContent}>
+            <span className={style.close}>&times;</span>
+            <p>Некоторый текст в модальном..</p>
+          </div>
+        </div>
+    }
+    </>
   )
 }
 
