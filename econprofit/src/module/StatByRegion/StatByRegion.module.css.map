@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,sBAAsB,CAAC;EACnB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;CACpB",
+    "sources": [
+        "StatByRegion.module.scss"
+    ],
+    "names": [],
+    "file": "StatByRegion.module.css"
+}

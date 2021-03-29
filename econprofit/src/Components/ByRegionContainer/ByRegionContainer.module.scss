@@ -1,0 +1,152 @@
+.stationMainContainer {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 280px);
+    overflow: scroll;
+    // height: 100%;
+    // width: calc(100% - 60px);
+    .addressRegion {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px;
+      height: 50px;
+      background-color: #eee; 
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+      border-radius: 8px;
+      line-height: 45px;
+      padding: 0px 10px;
+      font-size: 24px;
+    }
+    .mainRegion {
+      display: flex;
+      flex-direction: row;
+      margin: 0 30px 30px 30px;
+      .stationInfo {
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+        background-color: #eee; 
+        box-shadow: 0 0 12px rgba(0,0,0,0.5);
+        border-radius: 8px;
+        margin-bottom: 30px;
+        .stationInfoHeader {
+          font-weight: 500;
+          font-size: 20px;
+          text-align: center;
+          padding: 10px 0px;
+          border-bottom: 1px solid lightgrey;
+        }
+        .stationInfoMain {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 150px;
+          padding: 10px 10px 0px 10px;
+        }
+      }
+      .stationInfo2 {
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+        background-color: #eee; 
+        box-shadow: 0 0 12px rgba(0,0,0,0.5);
+        border-radius: 8px;
+        margin-bottom: 30px;
+        .stationInfoHeader {
+          font-weight: 500;
+          font-size: 20px;
+          text-align: center;
+          padding: 10px 0px;
+          border-bottom: 1px solid lightgrey;
+        }
+        .stationInfoMain {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 10px 10px 10px 10px;
+        }
+      }
+      .topLine {
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+        width: calc(100% - 60px);
+      }
+      .stationInfoStat {
+        display: flex;
+        margin-bottom: 30px;
+        justify-content: space-between;
+        .statPageCard {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 250px;
+          height: 170px;
+          background-color: #eee;
+          box-shadow: 0 0 12px rgba(0,0,0,0.5);
+          border-radius: 8px;
+          padding: 16px 0 16px 16px;
+          .statPageCardLeft {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 500;
+            margin-right: 16px;
+            :last-child {
+              font-weight: 400;
+              padding-top: 5px;
+              font-size: 22px;
+            }
+          }
+          .statPageCardRight {
+            font-size: 44px;
+            color: gray;
+            padding-right: 6px;
+            span {
+              margin-left: 0px;
+              padding: 0;
+              cursor: default;
+            }
+          }
+        }
+      }
+    }
+  }
+  .leftLine {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  table {
+    // border: 1px solid lightgrey;
+  }
+  
+  th {
+    text-align: center;
+    background-color: #eee;
+  }
+  
+  td {
+    text-align: center;
+    height: 30px;
+    padding: 8px;
+    background-color: #eee;
+  }
+  
+  .chartsLine {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .tableButton {
+    border-radius: 4px;
+    cursor: pointer;
+    // background-color: #B9E3C6;
+    background-color: rgb(142, 231, 161);
+    padding: 3px 20px;
+    font-size: 16px;
+    height: 25px;
+    line-height: 25px;
+  }

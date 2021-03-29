@@ -1,0 +1,238 @@
+.stationMainContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: calc(100% - 280px);
+  overflow: scroll;
+}
+
+.stationMainContainer .addressRegion {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 30px;
+  height: 50px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  line-height: 45px;
+  padding: 0px 10px;
+  font-size: 24px;
+}
+
+.stationMainContainer .mainRegion {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 0 30px 30px 30px;
+}
+
+.stationMainContainer .mainRegion .stationInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 360px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.stationMainContainer .mainRegion .stationInfo .stationInfoHeader {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 0px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.stationMainContainer .mainRegion .stationInfo .stationInfoMain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 150px;
+  padding: 10px 10px 0px 10px;
+}
+
+.stationMainContainer .mainRegion .stationInfo2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 360px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.stationMainContainer .mainRegion .stationInfo2 .stationInfoHeader {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 0px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.stationMainContainer .mainRegion .stationInfo2 .stationInfoMain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px 10px 10px 10px;
+}
+
+.stationMainContainer .mainRegion .topLine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 30px;
+  width: calc(100% - 60px);
+}
+
+.stationMainContainer .mainRegion .stationInfoStat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 30px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 250px;
+  height: 170px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 16px 0 16px 16px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard .statPageCardLeft {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 16px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard .statPageCardLeft :last-child {
+  font-weight: 400;
+  padding-top: 5px;
+  font-size: 22px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard .statPageCardRight {
+  font-size: 44px;
+  color: gray;
+  padding-right: 6px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCard .statPageCardRight span {
+  margin-left: 0px;
+  padding: 0;
+  cursor: default;
+}
+
+.leftLine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+th {
+  text-align: center;
+  background-color: #eee;
+}
+
+td {
+  text-align: center;
+  height: 30px;
+  padding: 8px;
+  background-color: #eee;
+}
+
+.chartsLine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.tableButton {
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #8ee7a1;
+  padding: 3px 20px;
+  font-size: 16px;
+  height: 25px;
+  line-height: 25px;
+}
+/*# sourceMappingURL=ByRegionContainer.module.css.map */

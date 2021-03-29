@@ -54,7 +54,6 @@ img {
   display: -ms-flexbox;
   display: flex;
   color: #b7b7b9;
-  margin-bottom: 35px;
 }
 
 .menuSection .menuPoint i {
@@ -75,5 +74,30 @@ img {
 
 .menuSection .menuPoint:hover {
   color: aliceblue;
+}
+
+.littleMenu {
+  margin: 0 31px;
+}
+
+.littleMenu span {
+  font-size: 18px;
+}
+
+.littleMenu .menuName {
+  margin-bottom: 5px;
+}
+
+.littleMenuClose {
+  display: none;
+  margin: 0 31px;
+}
+
+.littleMenuClose span {
+  font-size: 18px;
+}
+
+.littleMenuClose .menuName {
+  margin-bottom: 5px;
 }
 /*# sourceMappingURL=Navigation.module.css.map */

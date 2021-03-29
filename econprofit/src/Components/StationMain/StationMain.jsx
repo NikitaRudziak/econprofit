@@ -377,7 +377,7 @@ export const StationMain = () => {
       ? <div id="myModal" className={style.modalOpen}> 
           <div className={style.modalContent}>
             <span className={style.close} onClick={openModal}>&times;</span>
-            <h2>Расчет окупаемости</h2>
+            <h2>Расчет окупаемости для одной среднестат. ЭЗС</h2>
             <h4>Срок окупаемости(простой): 5,1 лет</h4>
             <h4>Срок окупаемости(дисконтированный): 7,9 лет</h4>
             <table>

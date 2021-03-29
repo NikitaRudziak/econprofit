@@ -430,7 +430,7 @@ export const StatPageContainer = () => {
             [byRegion ? byRegion[2].company : null, byRegion ? Number(byRegion[2].sumkwh) : null],
             [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].sumkwh) : null],
             [byRegion ? byRegion[4].company : null, byRegion ? Number(byRegion[4].sumkwh) : null],
-            [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].sumkwh) + Number(byRegion[7].sumkwh) : null],
+            [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].sumkwh) : null],
             [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].sumkwh) : null],
           ]}
           options={{
@@ -458,7 +458,7 @@ export const StatPageContainer = () => {
             [byRegion ? byRegion[2].company : null, byRegion ? Number(byRegion[2].sumtotal) : null],
             [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].sumtotal) : null],
             [byRegion ? byRegion[4].company : null, byRegion ? Number(byRegion[4].sumtotal) : null],
-            [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].sumtotal) + Number(byRegion[7].sumtotal) : null],
+            [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].sumtotal) : null],
             [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].sumtotal) : null],
           ]}
           options={{
@@ -486,7 +486,7 @@ export const StatPageContainer = () => {
             [byRegion ? byRegion[2].company : null, byRegion ? Number(byRegion[2].count) : null],
             [byRegion ? byRegion[6].company : null, byRegion ? Number(byRegion[6].count) : null],
             [byRegion ? byRegion[4].company : null, byRegion ? Number(byRegion[4].count) : null],
-            [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].count) + Number(byRegion[7].count) : null],
+            [byRegion ? byRegion[5].company : null, byRegion ? Number(byRegion[5].count) : null],
             [byRegion ? byRegion[3].company : null, byRegion ? Number(byRegion[3].count) : null],
           ]}
           options={{
