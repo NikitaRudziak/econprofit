@@ -115,13 +115,11 @@
 }
 
 .material-icons.darkground { 
-  /* color: #FB8C00; */
   color: rgb(183,183,185);
   background-color: rgb(27,29,40);
 }
 
 .material-icons.greyground { 
-  /* color: #FB8C00; */
   background-color: #eee;
   color: gray;
   font-size: 40px;

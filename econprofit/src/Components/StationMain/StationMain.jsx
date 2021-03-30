@@ -1,5 +1,4 @@
 import React, { useEffect, useState }from 'react';
-import { Redirect, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import style from './StationMain.module.css';
@@ -191,21 +190,20 @@ export const StationMain = () => {
                 <div>
                   {test ?
                     (test.length * 5069).toLocaleString('ru')
-                  : null} кВт*ч</div>
+                  : null} кВт*ч
+                </div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">star_rate</span>
-                {/* <i class="las la-certificate"></i> */}
               </div>
-              </div>
+            </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
                 <div onClick={view2}>Отпущено э/э с 01.01.2021</div>
-                  <div>{sessions ? ((parseInt(totalkwh * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
+                <div>{sessions ? ((parseInt(totalkwh * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">ev_station</span>
-                {/* <i class="las la-charging-station"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -214,11 +212,11 @@ export const StationMain = () => {
                 <div>
                   {test ?
                     ((parseInt((totalkwh / (test.length * 5069) * 100) * 100)) / 100).toLocaleString('ru')
-                  : null}%</div>
+                  : null}%
+                </div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">battery_charging_full</span>
-                {/* <i class="las la-battery-half"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -229,15 +227,14 @@ export const StationMain = () => {
                     perSession ?
                       (perSession).toLocaleString('ru')
                     : 'Нет данных'
-                  : null} кВт*ч</div>
+                  : null} кВт*ч
+                </div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">electric_car</span>
-                {/* <i class="las la-car"></i> */}
               </div>
             </div>
           </div>
-
 
           <div className={style.stationInfoStat}>
             <div className={style.statPageCard}>
@@ -247,7 +244,6 @@ export const StationMain = () => {
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">account_box</span>
-                {/* <i class="las la-user-clock"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -261,7 +257,6 @@ export const StationMain = () => {
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">done_outline</span>
-                {/* <i class="las la-check-double"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -275,18 +270,16 @@ export const StationMain = () => {
                   : null} мин</div>
               </div>
               <div className={style.statPageCardRight}>
-              <span className="material-icons greyground">timer</span>
-                {/* <i class="las la-hourglass-end"></i> */}
+                <span className="material-icons greyground">timer</span>
               </div>
             </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
                 <div>Выручка с 01.01.2021</div>
-                  <div>{sessions ? ((parseInt(totalcost * 100)) / 100).toLocaleString('ru') : null} руб.</div>
+                <div>{sessions ? ((parseInt(totalcost * 100)) / 100).toLocaleString('ru') : null} руб.</div>
               </div>
               <div className={style.statPageCardRight}>
-              <span className="material-icons greyground">monetization_on</span>
-                {/* <i class="las la-coins"></i> */}
+                <span className="material-icons greyground">monetization_on</span>
               </div>
             </div>
           </div>

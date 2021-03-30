@@ -3,8 +3,6 @@
     flex-direction: column;
     width: calc(100% - 280px);
     overflow: scroll;
-    // height: 100%;
-    // width: calc(100% - 60px);
     .addressRegion {
       display: flex;
       justify-content: space-between;
@@ -111,16 +109,46 @@
             }
           }
         }
+        .statPageCardBig {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 555px;
+          height: 170px;
+          background-color: #eee;
+          box-shadow: 0 0 12px rgba(0,0,0,0.5);
+          border-radius: 8px;
+          padding: 16px 0 16px 16px;
+          .statPageCardLeft {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 500;
+            margin-right: 16px;
+            :last-child {
+              font-weight: 400;
+              padding-top: 5px;
+              font-size: 22px;
+            }
+          }
+          .statPageCardRight {
+            font-size: 44px;
+            color: gray;
+            padding-right: 6px;
+            span {
+              margin-left: 0px;
+              padding: 0;
+              cursor: default;
+            }
+          }
+        }
       }
     }
   }
   .leftLine {
     display: flex;
     flex-direction: column;
-  }
-  
-  table {
-    // border: 1px solid lightgrey;
   }
   
   th {
@@ -143,10 +171,61 @@
   .tableButton {
     border-radius: 4px;
     cursor: pointer;
-    // background-color: #B9E3C6;
     background-color: rgb(142, 231, 161);
     padding: 3px 20px;
     font-size: 16px;
     height: 25px;
     line-height: 25px;
+  }
+  
+  /* Модальный (фон) */
+  .modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Оставаться на месте */
+    z-index: 1; /* Сидеть на вершине */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включите прокрутку, если это необходимо */
+    background-color: rgb(0,0,0); /* Цвет запасной вариант */
+    background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+  }
+  .modalOpen {
+    display: block; /* Скрыто по умолчанию */
+    position: fixed; /* Оставаться на месте */
+    z-index: 1; /* Сидеть на вершине */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включите прокрутку, если это необходимо */
+    background-color: rgb(0,0,0); /* Цвет запасной вариант */
+    background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+  }
+  
+  /* Модальное содержание/коробка */
+  .modalContent {
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% сверху и по центру */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Может быть больше или меньше, в зависимости от размера экрана */
+    font-size: 14px;
+  }
+  
+  /* Кнопка закрытия */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding-left: 20px;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }

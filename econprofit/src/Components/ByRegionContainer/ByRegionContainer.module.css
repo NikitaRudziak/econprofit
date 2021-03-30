@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .stationMainContainer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -195,6 +196,60 @@
   cursor: default;
 }
 
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 555px;
+  height: 170px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 16px 0 16px 16px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig .statPageCardLeft {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 16px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig .statPageCardLeft :last-child {
+  font-weight: 400;
+  padding-top: 5px;
+  font-size: 22px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig .statPageCardRight {
+  font-size: 44px;
+  color: gray;
+  padding-right: 6px;
+}
+
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig .statPageCardRight span {
+  margin-left: 0px;
+  padding: 0;
+  cursor: default;
+}
+
 .leftLine {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -234,5 +289,76 @@ td {
   font-size: 16px;
   height: 25px;
   line-height: 25px;
+}
+
+/* Модальный (фон) */
+.modal {
+  display: none;
+  /* Скрыто по умолчанию */
+  position: fixed;
+  /* Оставаться на месте */
+  z-index: 1;
+  /* Сидеть на вершине */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Полная ширина */
+  height: 100%;
+  /* Полная высота */
+  overflow: auto;
+  /* Включите прокрутку, если это необходимо */
+  background-color: black;
+  /* Цвет запасной вариант */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Черный с непрозрачностью */
+}
+
+.modalOpen {
+  display: block;
+  /* Скрыто по умолчанию */
+  position: fixed;
+  /* Оставаться на месте */
+  z-index: 1;
+  /* Сидеть на вершине */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Полная ширина */
+  height: 100%;
+  /* Полная высота */
+  overflow: auto;
+  /* Включите прокрутку, если это необходимо */
+  background-color: black;
+  /* Цвет запасной вариант */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Черный с непрозрачностью */
+}
+
+/* Модальное содержание/коробка */
+.modalContent {
+  background-color: #fefefe;
+  margin: 10% auto;
+  /* 10% сверху и по центру */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  /* Может быть больше или меньше, в зависимости от размера экрана */
+  font-size: 14px;
+}
+
+/* Кнопка закрытия */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 /*# sourceMappingURL=ByRegionContainer.module.css.map */

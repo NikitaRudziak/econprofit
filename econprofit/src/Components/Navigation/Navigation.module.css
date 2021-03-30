@@ -45,7 +45,6 @@ img {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-left: 14px;
   margin-top: 50px;
 }
 
@@ -56,12 +55,8 @@ img {
   color: #b7b7b9;
 }
 
-.menuSection .menuPoint i {
-  font-size: 30px;
-}
-
 .menuSection .menuPoint span {
-  margin-left: 0px;
+  margin-left: 14px;
 }
 
 .menuSection .menuPoint .menuName {
@@ -77,7 +72,9 @@ img {
 }
 
 .littleMenu {
-  margin: 0 31px;
+  padding: 0 25px;
+  border-left: 6px solid #a4cb9e;
+  background-color: #16171d;
 }
 
 .littleMenu span {
@@ -85,19 +82,6 @@ img {
 }
 
 .littleMenu .menuName {
-  margin-bottom: 5px;
-}
-
-.littleMenuClose {
-  display: none;
-  margin: 0 31px;
-}
-
-.littleMenuClose span {
-  font-size: 18px;
-}
-
-.littleMenuClose .menuName {
   margin-bottom: 5px;
 }
 /*# sourceMappingURL=Navigation.module.css.map */

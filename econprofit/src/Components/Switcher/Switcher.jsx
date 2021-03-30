@@ -1,10 +1,7 @@
 import React, { useEffect, useState }from 'react';
-import { Redirect, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import GoogleMapReact from 'google-map-react';
 import route from '../../back_route';
-import axios from 'axios';
 
 import style from './Switcher.module.css';
 
@@ -26,7 +23,6 @@ export const Switcher = ({}) => {
     fetch(`${route}/station`)
       .then(response => {
         return response.json();
-        // console.log(response.json())
       })
       .then(data => {
         setStations(data);
@@ -68,12 +64,10 @@ export const Switcher = ({}) => {
 
   const changeToLoc = () => {
     setActiveTable('locations')
-    // activeTable == 'locations' ? setActiveTable('stations') : setActiveTable('locations');
   }
 
   const changeToStations = () => {
     setActiveTable('stations')
-    // activeTable == 'locations' ? setActiveTable('stations') : setActiveTable('locations');
   }
 
 
@@ -117,9 +111,6 @@ export const Switcher = ({}) => {
           {generateStationRow()}
         </table> : null }
         <div className={style.switcherActionNav}>
-          {/* <div className={style.switcherPoint}>
-            Список
-          </div> */}
           <div className={style.switcherPoint}>
             Добавить
           </div>
@@ -135,12 +126,12 @@ export const Switcher = ({}) => {
   )
 }
   
-  const mapStateToProps = state => ({
-    page: state.pageReducer.page,
-    region: state.pageReducer.region,
-  });
-      
-  const mapDispatchToProps = {
-    };
+const mapStateToProps = state => ({
+  page: state.pageReducer.page,
+  region: state.pageReducer.region,
+});
     
-  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Switcher));
+const mapDispatchToProps = {
+};
+  
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Switcher));

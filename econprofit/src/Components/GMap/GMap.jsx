@@ -1,5 +1,5 @@
 import React, { useEffect, useState }from 'react';
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
@@ -9,49 +9,25 @@ import route from '../../back_route';
 import style from './GMap.module.css';
 
 const AnyReactComponent = ({id, name, address, sum, count}) => 
-  <div className={style.marker} >
-    {/* <div className={style.percent}> */}
-      {(parseInt((Number(sum) / ( 5069 * Number(count))) * 100)) * 100 / 100}%
-    {/* </div> */}
-    {/* <div className={style.modal}>
-      <div className={style.modalContainer}> */}
-        {/* {sum} {count} */}
-        
-        {}
-        {/* <div className={style.textContainer}>
-          <div className={style.stationName}>
-            {name}
-          </div>
-          <div className={style.stationAddress}>
-            {address}
-          </div>
-        </div>
-        <div className={style.iconContainer}>
-        <Link to={{pathname: `/stationinfo/${id}`}}>
-          <div>
-            <i class="lar la-chart-bar"></i>
-          </div>
-        </Link>
-        </div> */}
-      {/* </div>
-    </div> */}
+  <div className={style.marker}>
+    {(parseInt((Number(sum) / ( 5069 * Number(count))) * 100)) * 100 / 100}%
     <div className={style.modal2}>
-    <Link to={{pathname: `/maff/stationinfo/${id}`}}>
-      <div className={style.modalContainer}>
-        <div className={style.textContainer}>
-          <div className={style.stationName}>
-            {name}
+      <Link to={{pathname: `/maff/stationinfo/${id}`}}>
+        <div className={style.modalContainer}>
+          <div className={style.textContainer}>
+            <div className={style.stationName}>
+              {name}
+            </div>
+            <div className={style.stationAddress}>
+              {address}
+            </div>
           </div>
-          <div className={style.stationAddress}>
-            {address}
-          </div>
+          {/* <div className={style.iconContainer}>
+            <div>
+              <i class="lar la-chart-bar"></i>
+            </div>
+          </div> */}
         </div>
-        {/* <div className={style.iconContainer}>
-          <div>
-            <i class="lar la-chart-bar"></i>
-          </div>
-        </div> */}
-      </div>
       </Link>
     </div>
   </div>
@@ -153,8 +129,7 @@ export const GMap = () => {
               {generateLocationDatalist()}
             </datalist>
             <span onClick={clearInput}>
-               Очистить
-              {/* <i class="las la-times"></i> */}
+              Очистить
             </span>
         </div>
       </div>
@@ -187,11 +162,11 @@ export const GMap = () => {
 }
 
 const mapStateToProps = state => ({
-    page: state.pageReducer.page,
-    region: state.pageReducer.region,
-  });
+  page: state.pageReducer.page,
+  region: state.pageReducer.region,
+});
     
-  const mapDispatchToProps = {
-  };
+const mapDispatchToProps = {
+};
   
-  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GMap));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GMap));

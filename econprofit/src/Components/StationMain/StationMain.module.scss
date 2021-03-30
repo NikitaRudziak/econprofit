@@ -3,8 +3,6 @@
   flex-direction: column;
   width: calc(100% - 280px);
   overflow: scroll;
-  // height: 100%;
-  // width: calc(100% - 60px);
   .addressRegion {
     display: flex;
     justify-content: space-between;
@@ -118,10 +116,6 @@
   flex-direction: column;
 }
 
-table {
-  // border: 1px solid lightgrey;
-}
-
 th {
   text-align: center;
   background-color: #eee;
@@ -142,7 +136,6 @@ td {
 .tableButton {
   border-radius: 4px;
   cursor: pointer;
-  // background-color: #B9E3C6;
   background-color: rgb(142, 231, 161);
   padding: 3px 20px;
   font-size: 16px;

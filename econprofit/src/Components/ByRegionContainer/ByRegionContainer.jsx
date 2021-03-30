@@ -8,7 +8,6 @@ import route from '../../back_route';
 import { Chart } from "react-google-charts";
 
 export const ByRegionContainer = (props) => {
-  const { id } = useParams();
   const [test, setTest] = useState();
   const [sessions, setSessions] = useState();
   const [totalkwh, settotalkwh] = useState();
@@ -27,24 +26,6 @@ export const ByRegionContainer = (props) => {
   const [regCount, setRegCount] = useState();
 
   useEffect(() => {
-    // fetch(`../${route}/locationinfo/${id}`)
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     setTest(data);
-    //   });
-    //   fetch(`../${route}/locationinfo/${id}`)
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     setTest(data);
-    //   });
-
-
-
-    
     fetch(`${route}/regionstat`)
       .then(response => {
         return response.json();
@@ -142,62 +123,28 @@ export const ByRegionContainer = (props) => {
     // setQuery();
   }, [sessions])
 
-  // const setQuery = () => {
-  //   fetch(`${route}/regionsess/:${regionStat[region - 1].company}`)
-  //     .then(response => {
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       setSessionsStat(data);
-  //       console.log(data)
-  //     });
-  // }
-
-  const dataSet  = () => {
-
-  }
-
-  const view = () => {
-    var d = new Date(),
-    datestring = '';
-    datestring = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
-    console.log(test)
-    console.log(datestring)
-  }
-    const view2 = () => {
+  const view2 = () => {
     console.log(region)
     console.log(props.region)
     console.log(props.naming)
   }
 
-  const generateRow = () => {
-    return (
-      test ? test.map(item => (
-        <tr>
-          <td>{item.power}</td>
-          <td>{item.serialnumber}</td>
-          <td>{item.friendlycode}</td>
-        </tr>
-      )) : null
-    )
-  }
-
   const openModal = () => {
-    setRegion(region + 1)
-    // setModalShow(!modalShow)
+    // setRegion(region + 1)
+    setModalShow(!modalShow)
   }
 
   return (
     <>
-    { props.region ? <div className={style.stationMainContainer}>
+    {props.region ? <div className={style.stationMainContainer}>
       <div className={style.addressRegion}>
         <div>
           {/* {props.region && regionStat ? regionStat[props.region - 1].company : null} */}
           {props.naming ? props.naming : null}
         </div>
-        {/* <div className={style.tableButton} onClick={openModal}> */}
-          {/* Расчет окупаемости */}
-        {/* </div> */}
+        <div className={style.tableButton} onClick={openModal}>
+          Расчет окупаемости
+        </div>
       </div>
       <div className={style.mainRegion}>
         <div className={style.leftLine}>
@@ -209,9 +156,6 @@ export const ByRegionContainer = (props) => {
               <div >
                 <b>Принадлежность:</b> {props.region && regionStat ? regionStat[props.region - 1].company : null}
               </div>
-              {/* <div>
-                <b>Область:</b> {test ? test[0].region : null}
-              </div> */}
               <div>
                 <b>Кол-во станций:</b> {regCount && props.region ? regCount[props.region - 1].count : null} 
               </div>
@@ -247,13 +191,13 @@ export const ByRegionContainer = (props) => {
                 <div>
                   {regCount && props.region ? 
                     (regCount[props.region - 1].count * 5069).toLocaleString('ru')
-                  : null} кВт*ч</div>
+                  : null} кВт*ч
+                </div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">star_rate</span>
-                {/* <i class="las la-certificate"></i> */}
               </div>
-              </div>
+            </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
                 <div onClick={view2}>Отпущено э/э с 01.01.2021</div>
@@ -261,7 +205,6 @@ export const ByRegionContainer = (props) => {
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">ev_station</span>
-                {/* <i class="las la-charging-station"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -270,11 +213,11 @@ export const ByRegionContainer = (props) => {
                 <div>
                   {regCount && props.region && regionStat ?
                     ((parseInt((regionStat[props.region - 1].totalkwh / (regCount[props.region - 1].count * 5069) * 100) * 100)) / 100).toLocaleString('ru')
-                  : null}%</div>
+                  : null}%
+                </div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">battery_charging_full</span>
-                {/* <i class="las la-battery-half"></i> */}
               </div>
             </div>
             <div className={style.statPageCard}>
@@ -282,20 +225,13 @@ export const ByRegionContainer = (props) => {
                 <div>В среднем за одну зарядную сессию</div>
                 <div>
                   {regionStat && props.region ? (regionStat[props.region - 1].totalkwh / regionStat[props.region - 1].count).toLocaleString('ru') : null} кВт*ч
-                  {/* {sessions ? 
-                    perSession ?
-                      (perSession).toLocaleString('ru')
-                    : 'Нет данных'
-                  : null} кВт*ч */}
                 </div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">electric_car</span>
-                {/* <i class="las la-car"></i> */}
               </div>
             </div>
           </div>
-
 
           <div className={style.stationInfoStat}>
             <div className={style.statPageCard}>
@@ -305,7 +241,6 @@ export const ByRegionContainer = (props) => {
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">account_box</span>
-                {/* <i class="las la-user-clock"></i> */}
               </div>
             </div>
             {/* <div className={style.statPageCard}>
@@ -320,6 +255,15 @@ export const ByRegionContainer = (props) => {
                 <span className="material-icons greyground">done_outline</span>
               </div>
             </div> */}
+            <div className={style.statPageCardBig}>
+              <div className={style.statPageCardLeft}>
+                <div>Выручка с 01.01.2021</div>
+                  <div>{props.region && regionStat ? ((parseInt(regionStat[props.region - 1].totalcost * 100)) / 100).toLocaleString('ru') : null} руб.</div>
+              </div>
+              <div className={style.statPageCardRight}>
+              <span className="material-icons greyground">monetization_on</span>
+              </div>
+            </div>
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
                 <div>Средняя продолжительность одной зарядной сессии</div>
@@ -327,21 +271,11 @@ export const ByRegionContainer = (props) => {
                   {props.region && regionStat ?
                       Math.trunc(regionStat[props.region - 1].totalkwh / regionStat[props.region - 1].count * 1.2)
                     : 'Нет данных'
-                  } мин</div>
+                  } мин
+                </div>
               </div>
               <div className={style.statPageCardRight}>
-              <span className="material-icons greyground">timer</span>
-                {/* <i class="las la-hourglass-end"></i> */}
-              </div>
-            </div>
-            <div className={style.statPageCard}>
-              <div className={style.statPageCardLeft}>
-                <div>Выручка с 01.01.2021</div>
-                  <div>{props.region && regionStat ? ((parseInt(regionStat[props.region - 1].totalcost * 100)) / 100).toLocaleString('ru') : null} руб.</div>
-              </div>
-              <div className={style.statPageCardRight}>
-              <span className="material-icons greyground">monetization_on</span>
-                {/* <i class="las la-coins"></i> */}
+                <span className="material-icons greyground">timer</span>
               </div>
             </div>
           </div>
@@ -355,10 +289,10 @@ export const ByRegionContainer = (props) => {
           loader={<div>Загрузка</div>}
           data={[
             ['Task', 'Hours per Day'],
-            ['Пистолет Chademo', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+2].sum) : null],
-            ['Пистолет CCS', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+1].sum) : null],
-            ['Вилка Type2', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)].sum) : null],
-            ['Розеткка Type2', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+3].sum) : null],
+            ['Пистолет Chademo', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 2].sum) : null],
+            ['Пистолет CCS', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 1].sum) : null],
+            ['Вилка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1)].sum) : null],
+            ['Розеткка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 3].sum) : null],
           ]}
           options={{
             title: 'Отпущено по коннекторам, кВт*ч',
@@ -381,10 +315,10 @@ export const ByRegionContainer = (props) => {
           loader={<div>Загрузка</div>}
           data={[
             ['Task', 'Hours per Day'],
-            ['Пистолет Chademo', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+2].totalcost) : null],
-            ['Пистолет CCS', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+1].totalcost) : null],
-            ['Вилка Type2', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)].totalcost) : null],
-            ['Розеткка Type2', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+3].totalcost) : null],
+            ['Пистолет Chademo', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 2].totalcost) : null],
+            ['Пистолет CCS', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 1].totalcost) : null],
+            ['Вилка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1)].totalcost) : null],
+            ['Розеткка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 3].totalcost) : null],
           ]}
           options={{
             title: 'Распределение выручки по коннекторам, руб.',
@@ -407,10 +341,10 @@ export const ByRegionContainer = (props) => {
           loader={<div>Загрузка</div>}
           data={[
             ['Task', 'Hours per Day'],
-            ['Пистолет Chademo', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+2].count) : null],
-            ['Пистолет CCS', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+1].count) : null],
-            ['Вилка Type2', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)].count) : null],
-            ['Розеткка Type2', sessionsStat && props.region ? Number(sessionsStat[4*(props.region - 1)+3].count) : null],
+            ['Пистолет Chademo', sessionsStat && props.region ? Number(sessionsStat[4* (props.region - 1) + 2].count) : null],
+            ['Пистолет CCS', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 1].count) : null],
+            ['Вилка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1)].count) : null],
+            ['Розеткка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 3].count) : null],
           ]}
           options={{
             title: 'Количество зарядных сессий, ед.',
@@ -427,7 +361,236 @@ export const ByRegionContainer = (props) => {
           rootProps={{ 'data-testid': '2' }}
         />
       </div>
-    </div> : <Redirect to="/maff/main"/> }</>
+    </div> : <Redirect to="/maff/main"/> }
+    {modalShow 
+      ? <div id="myModal" className={style.modalOpen}> 
+          <div className={style.modalContent}>
+            <span className={style.close} onClick={openModal}>&times;</span>
+            <h2>Расчет окупаемости для одной среднестат. ЭЗС</h2>
+            <h4>Срок окупаемости(простой): 5,1 лет</h4>
+            <h4>Срок окупаемости(дисконтированный): 7,9 лет</h4>
+            <table>
+              <tr>
+                <th>Год</th>
+                <th>Загрузка, доля часы</th>
+                <th>Постоянные затраты</th>
+                <th>Отпущено кВт*ч с учетом потерь 10%</th>
+                <th>Стоимость электроэнергии Белэнергоб руб.</th>
+                <th>Эквайринг</th>
+                <th>Реализация э/э, кВт*ч</th>
+                <th>Выручка от реализации, руб.</th>
+                <th>Выручка без налогов, руб.</th>
+                <th>Затраты на производство и реализацию, руб.</th>
+                <th>Прибыль от реализации, руб.</th>
+                <th>Налоги из прибыли, руб.</th>
+                <th>Чистая прибыль руб.</th>
+                <th>Расходы из прибыли</th>
+                <th>Капвложения, тыс.руб</th>
+                <th>ЧД, тыс. руб</th>
+                <th>Накопленный ЧД, тыс. руб</th>
+                <th>ЧДД, тыс. руб.</th>
+                <th>Накопленный ЧДД, тыс. руб.</th>
+              </tr>
+              <tr>
+                <td>2020</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>0</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td></td>
+                <td>42840</td>
+                <td>-42840</td>
+                <td>-42840</td>
+                <td>-42840</td>
+                <td>-42840</td>  
+              </tr>
+              <tr>
+                <td>2021</td>
+                <td>0,25</td>
+                <td>7260</td>
+                <td>5069</td>
+                <td>886,16258</td>
+                <td>23,244</td>
+                <td>4967,6</td>
+                <td>1937</td>
+                <td>1614</td>
+                <td>8169</td>
+                <td>-6555</td>
+                <td>-1180</td>
+                <td>-5375</td>
+                <td>-1075</td>
+                <td>0</td>
+                <td>2700</td>
+                <td>-40140</td>
+                <td>2457</td>
+                <td>-40383</td>  
+              </tr>
+              <tr>
+                <td>2022</td>
+                <td>0,75</td>
+                <td>7260</td>
+                <td>15208</td>
+                <td>2658,66256</td>
+                <td>69,744</td>
+                <td>14903,8</td>
+                <td>5812</td>
+                <td>4843</td>
+                <td>9988</td>
+                <td>-5145</td>
+                <td>-926</td>
+                <td>-4219</td>
+                <td>-844</td>
+                <td>0</td>
+                <td>3625</td>
+                <td>-36515</td>
+                <td>3009</td>
+                <td>-37374</td>
+              </tr>
+              <tr>
+                <td>2023</td>
+                <td>1,5</td>
+                <td>7 260</td>
+                <td>30417</td>
+                <td>5317,49994</td>
+                <td>139,5</td>
+                <td>29808,7</td>
+                <td>11625</td>
+                <td>9688</td>
+                <td>12717</td>
+                <td>-3029</td>
+                <td>-545</td>
+                <td>-2484</td>
+                <td>-497</td>
+                <td>0</td>
+                <td>5013</td>
+                <td>-31502</td>
+                <td>3760</td>
+                <td>-33614</td>
+              </tr>
+              <tr>
+                <td>2024</td>
+                <td>3,25</td>
+                <td>7 260</td>
+                <td>65903</td>
+                <td>11521,16246</td>
+                <td>302,256</td>
+                <td>64584,9</td>
+                <td>25188</td>
+                <td>20990</td>
+                <td>19083</td>
+                <td>1907</td>
+                <td>343</td>
+                <td>1564</td>
+                <td>313</td>
+                <td>0</td>
+                <td>8251</td>
+                <td>-23251</td>
+                <td>5611</td>
+                <td>-28003</td>
+              </tr>
+              <tr>
+                <td>2025</td>
+                <td>4,5</td>
+                <td>7 260</td>
+                <td>91250</td>
+                <td>15952,325</td>
+                <td>418,512</td>
+                <td>89425,0</td>
+                <td>34876</td>
+                <td>29063</td>
+                <td>23631</td>
+                <td>5432</td>
+                <td>978</td>
+                <td>4454</td>
+                <td>891</td>
+                <td>0</td>
+                <td>10563</td>
+                <td>-12688</td>
+                <td>6549</td>
+                <td>-21454</td>
+              </tr>
+              <tr>
+                <td>2026</td>
+                <td>5</td>
+                <td>7 260</td>
+                <td>101389</td>
+                <td>17724,82498</td>
+                <td>465,012</td>
+                <td>99361,2</td>
+                <td>38751</td>
+                <td>32293</td>
+                <td>25450</td>
+                <td>6843</td>
+                <td>1232</td>
+                <td>5611</td>
+                <td>1122</td>
+                <td>0</td>
+                <td>11489</td>
+                <td>-1199</td>
+                <td>6434</td>
+                <td>-15020</td>
+              </tr>
+              <tr>
+                <td>2027</td>
+                <td>7</td>
+                <td>7 260</td>
+                <td>141944</td>
+                <td>24814,65008</td>
+                <td>651,012</td>
+                <td>139105,1</td>
+                <td>54251</td>
+                <td>45209</td>
+                <td>32726</td>
+                <td>12483</td>
+                <td>2247</td>
+                <td>10236</td>
+                <td>2047</td>
+                <td>0</td>
+                <td>15189</td>
+                <td>13990</td>
+                <td>7746</td>
+                <td>-7274</td>
+              </tr>
+              <tr>
+                <td>2028</td>
+                <td>8</td>
+                <td>7 260</td>
+                <td>162222</td>
+                <td>28359,65004</td>
+                <td>744,012</td>
+                <td>158977,6</td>
+                <td>62001</td>
+                <td>51668</td>
+                <td>36364</td>
+                <td>15304</td>
+                <td>2755</td>
+                <td>12549</td>
+                <td>2510</td>
+                <td>0</td>
+                <td>17039</td>
+                <td>183</td>
+                <td>8008</td>
+                <td>734</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      : <div id="myModal" className={style.modal}>
+          <div className={style.modalContent}>
+            <span className={style.close}>&times;</span>
+            <p>Некоторый текст в модальном..</p>
+          </div>
+        </div>
+    }
+    </>
   )
 }
 

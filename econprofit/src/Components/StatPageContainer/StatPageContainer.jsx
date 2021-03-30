@@ -1,5 +1,4 @@
 import React, { useEffect, useState }from 'react';
-import { Redirect, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import route from '../../back_route';
@@ -18,7 +17,6 @@ export const StatPageContainer = () => {
   const [byRegion, setByRegion] = useState();
   const [byConnector, setByConnector] = useState();
   const [lastDate, setLastDate] = useState();
-  // let timerId = setInterval(() => alert('tick'), 2000);
 
   useEffect(() => {
     fetch(`${route}/summaryValues`) 
@@ -129,11 +127,7 @@ export const StatPageContainer = () => {
     to = '',
     from = '';
     to = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
-    // d.setDate(lastDate[0].chargingfrom)
-    // console.log(od)
-    // d.setDate(d.getDate() - 1) 
-     from = od.getFullYear() + '-' + (od.getMonth()+1) + '-' + (od.getDate()+1)
-    //  console.log(from)
+    from = od.getFullYear() + '-' + (od.getMonth()+1) + '-' + (od.getDate()+1)
     fetch(`${route}/test/${from}/${to}`)
       .then(response => {
         return response.json();
@@ -195,46 +189,35 @@ export const StatPageContainer = () => {
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">star_rate</span>
-            {/* <i class="las la-certificate"></i> */}
           </div>
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div
-              onClick={view}
-            >Выполнение плана по отпуску э/э на 2021</div>
+            <div onClick={view}>Выполнение плана по отпуску э/э на 2021</div>
             <div>
-              {sum ? ((parseInt((sum[0].sumkw / 2215153 * 100) * 100)) / 100).toLocaleString('ru') : null}
-              {/* {sum ? (parseInt(sum[0].sumkw * 100)) / 100 : null}  */}
-              %</div>
+              {sum ? ((parseInt((sum[0].sumkw / 2215153 * 100) * 100)) / 100).toLocaleString('ru') : null}%
+            </div>
           </div>
           <div className={style.statPageCardRight}>
-          
-            {/* <i class="las la-battery-half"></i> */}
             <span className="material-icons greyground">battery_charging_full</span>
           </div>
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div
-              onClick={view}
-            >Отпущено э/э с 01.01.2021</div>
+            <div onClick={view}>Отпущено э/э с 01.01.2021</div>
             <div>{sum ? ((parseInt(sum[0].sumkw * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">ev_station</span>
-            {/* <i class="las la-charging-station"></i> */}
           </div>
         </div>
         <div className={style.statPageCard} onClick={shareData}>
           <div className={style.statPageCardLeft}>
             <div>Кол-во зарядных сессий с 01.01.2021</div>
             <div>{sum ? (Number(sum[0].sessioncount)).toLocaleString('ru') : null} ед.</div>
-            {/* sum[0].sessioncount */}
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">account_box</span>
-            {/* <i class="las la-user-clock"></i> */}
           </div>
         </div>
       </div>
@@ -246,20 +229,16 @@ export const StatPageContainer = () => {
             <div>{(268056674).toLocaleString('ru')} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
-            {/* <i class="las la-certificate"></i> */}
             <span className="material-icons greyground">star_rate</span>
           </div>
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div
-              onClick={view}
-            >Общее выполнение плана по отпуску э/э</div>
-            <div>{sum ?  ((parseInt((sum[0].sumkw / 268056674 * 100) * 100)) / 100).toLocaleString('ru') : null}%</div>
+            <div onClick={view}>Общее выполнение плана по отпуску э/э</div>
+            <div>{sum ? ((parseInt((sum[0].sumkw / 268056674 * 100) * 100)) / 100).toLocaleString('ru') : null}%</div>
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">battery_charging_full</span>
-            {/* <i class="las la-battery-half"></i> */}
           </div>
         </div>
         <div className={style.statPageCard}>
@@ -268,27 +247,23 @@ export const StatPageContainer = () => {
             <div>{sum ? ((parseInt(sum[0].sumtotal * 100)) / 100).toLocaleString('ru') : null} руб.</div>
           </div>
           <div className={style.statPageCardRight}>
-            {/* <i class="las la-coins"></i> */}
             <span className="material-icons greyground">monetization_on</span>
           </div>
         </div>
         
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div 
-            onClick={sendNewDay}
-            >Успешные зарядные сессии</div>
+            <div onClick={sendNewDay}>Успешные зарядные сессии</div>
             <div>
               {(failed && sum) ? 
                 (failed[0].failedsessioncount && sum[0].sessioncount) ?
                 ((parseInt((100 - (failed[0].failedsessioncount / sum[0].sessioncount * 100)) * 100)) / 100).toLocaleString('ru') 
                 : '-'
                 : null}%
-              </div>
+            </div>
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">done_outline</span>
-            {/* <i class="las la-check-double"></i> */}
           </div>
         </div>
       </div>          
@@ -316,7 +291,6 @@ export const StatPageContainer = () => {
             pieSliceTextStyle: {
               fontSize: 13,
               color: 'black'
-              // color: 'grey'
             }
           }}
           rootProps={{ 'data-testid': '2' }}
@@ -345,7 +319,6 @@ export const StatPageContainer = () => {
               color: 'black'
             }
           }}
-          
           rootProps={{ 'data-testid': '2' }}
         />
         <Chart
@@ -524,7 +497,6 @@ export const StatPageContainer = () => {
               color: 'black'
             },
           }}
-          
           rootProps={{ 'data-testid': '2' }}
         />
       </div>
