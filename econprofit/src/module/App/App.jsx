@@ -6,7 +6,6 @@ import { StatPageContainer } from '../../Components/StatPageContainer/StatPageCo
 import style from './App.module.css';
 
 export const App = (props) => {
-
   return (
     <div className={style.appContainer}>
       <Navigation />

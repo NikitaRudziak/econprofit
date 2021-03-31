@@ -33,7 +33,7 @@
 }
 
 img {
-  width: 240px;
+  width: 280px;
   height: auto;
 }
 
@@ -80,7 +80,7 @@ img {
 }
 
 .littleMenu {
-  padding: 0 39px;
+  padding: 0 0 0 39px;
   border-left: 6px solid #8ee7a1;
 }
 

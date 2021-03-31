@@ -24,6 +24,7 @@ export const ByRegionContainer = (props) => {
   const [region, setRegion] = useState(1);
   const [sessionsStat, setSessionsStat] = useState();
   const [regCount, setRegCount] = useState();
+  const [byConnector, setByConnector] = useState();
 
   useEffect(() => {
     fetch(`${route}/regionstat`)
@@ -48,6 +49,14 @@ export const ByRegionContainer = (props) => {
       })
       .then(data => {
         setRegCount(data);
+        console.log(data)
+      });
+    fetch(`${route}/bymode`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setByConnector(data);
         console.log(data)
       });
       
@@ -127,6 +136,7 @@ export const ByRegionContainer = (props) => {
     console.log(region)
     console.log(props.region)
     console.log(props.naming)
+    console.log(byConnector)
   }
 
   const openModal = () => {
@@ -157,7 +167,7 @@ export const ByRegionContainer = (props) => {
                 <b>Принадлежность:</b> {props.region && regionStat ? regionStat[props.region - 1].company : null}
               </div>
               <div>
-                <b>Кол-во станций:</b> {regCount && props.region ? regCount[props.region - 1].count : null} 
+                <b>Кол-во станций:</b> {regCount && props.region ? regCount[props.region - 1].count : null}
               </div>
               <div>
                 <b>Целевой показатель:</b> {regCount && props.region ? (Number(regCount[props.region - 1].count) * 613402).toLocaleString('ru') : null} кВт*ч
@@ -166,19 +176,13 @@ export const ByRegionContainer = (props) => {
             </div>
           </div>
           {/* <div className={style.stationInfo2}>
-            <div className={style.stationInfoHeader} onClick={view}>
-              Информация о станции(ях)
+            <div className={style.stationInfoHeader}>
+              Информация о станциях
             </div>
             <div className={style.stationInfoMain}>
-              <table>
-                <tr>
-                  <th>Мощность</th>
-                  <th>Серийный</th>
-                  <th>OCPP</th>
-                </tr>
-                {generateRow()}
-              </table>
-              <div></div>
+              <div><b>ЭЗС переменного тока: </b> {props.region && byConnector ? byConnector[3 * (props.region - 1)].count : null} ед.</div>
+              <div><b>ЭЗС постоянного тока: </b> {props.region && byConnector ? byConnector[3 * (props.region - 1) + 1].count : null} ед.</div>
+              <div><b>Комбинированные ЭЗС: </b> {props.region && byConnector ? byConnector[3 * (props.region - 1) + 2].count : null} ед.</div>
               <div></div>
             </div>
           </div> */}
