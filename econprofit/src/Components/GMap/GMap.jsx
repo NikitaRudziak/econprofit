@@ -8,11 +8,13 @@ import route from '../../back_route';
 
 import style from './GMap.module.css';
 
-const AnyReactComponent = ({id, name, address, sum, count}) => 
+const AnyReactComponent = ({id, name, address, sum, count, lat, lng}) => {
+  return (
   <div className={style.marker}>
     {(parseInt((Number(sum) / ( 5069 * Number(count))) * 100)) * 100 / 100}%
+    {/* {Number(sum).toLocaleString('RU')} */}
     <div className={style.modal2}>
-      <Link to={{pathname: `/maff/stationinfo/${id}`}}>
+      <Link to={{pathname: `/maff/stationinfo/${id}`, lat: lat, lng: lng}}>
         <div className={style.modalContainer}>
           <div className={style.textContainer}>
             <div className={style.stationName}>
@@ -31,9 +33,11 @@ const AnyReactComponent = ({id, name, address, sum, count}) =>
       </Link>
     </div>
   </div>
+  )
+}
 
-export const GMap = () => {
-  const [center, setCenter] = useState({lat: 53.9004368, lng: 27.5580622 });
+export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
+  const [center, setCenter] = useState({lat: latitude, lng: longitude });
   const [zoom, setZoom] = useState(11);
   const [locationList, setLocationList] = useState([]);
   const [percent, setPercent] = useState([]);
@@ -56,14 +60,28 @@ export const GMap = () => {
       .then(data => {
         setPercent(data);
       });
+    console.log(zoom2)
   }, [])
+
+  // useEffect(()=> {
+  //   if(latitude) {
+  //     let obj ={
+  //       lat: latitude,
+  //       lo
+  //     }
+  //   } 
+  // }, [latitude])
+
+  // useEffect(() => {
+  //   console.log(props.latitude)
+  // }, [props.latitude])
 
   useEffect(() => {
     let arr = []
     if(locationList && percent) {
       locationList.map(item => {
         percent.map(item2 => {
-          if (item.name == item2.name) {
+          if (item.address === item2.address) {
             let obj = {
               id: item.id,
               name: item.name,
@@ -73,12 +91,14 @@ export const GMap = () => {
               sum: item2.sum,
               count: item.count
             }
+            // console.log(obj)
             arr.push(obj);
           }
         })
       })
     }
     setTest(arr);
+    // console.log(arr)
   }, [locationList, percent])
 
   const generateLocationDatalist = () => {
@@ -102,7 +122,7 @@ export const GMap = () => {
     })
     if (lat != 0) {
       setCenter({lat: Number(lat), lng: Number(lng) })
-      setZoom(17)
+      setZoom2(17)
       console.log(lat, lng)
     }
   }
@@ -110,11 +130,13 @@ export const GMap = () => {
   const clearInput = () => {
     document.getElementById("station").value = "";
     setCenter({lat: 53.9004368, lng: 27.5580622 });
-    setZoom(11);
+    setZoom2(11);
   }
 
   const view = () => {
+    console.log(locationList)
     console.log(percent)
+    // setCenter({lat: 1, lng: 2})
   }
 
   return (
@@ -136,7 +158,7 @@ export const GMap = () => {
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyBoUSex8GgH0dsuHOCfz7yX4CvRCWzCKck" }}
         center={center}
-        zoom={zoom}
+        zoom={zoom2}
         // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
       {test.map(item => (
@@ -148,6 +170,7 @@ export const GMap = () => {
           address={item.address}
           sum={item.sum}
           count={item.count}
+          // zoom={zoom2}
         />
         )
       )}
@@ -161,12 +184,23 @@ export const GMap = () => {
   )
 }
 
-const mapStateToProps = state => ({
-  page: state.pageReducer.page,
-  region: state.pageReducer.region,
-});
+// const mapStateToProps = (state) => {
+//   return{
+//   // page: state.pageReducer.page,
+//   // region: state.pageReducer.region,
+//     // console.log(state)
+//     latitude: state.pageReducer.lat,
+//     longitude: state.pageReducer.lng,
+//   }
+// };
+
+const mapStateToProps = state => {
+  return {
+    page1: state.pageReducer.page,
+  }
+}
     
-const mapDispatchToProps = {
-};
+// const mapDispatchToProps = {
+// };
   
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GMap));
+export default withRouter(connect(mapStateToProps, null)(GMap));

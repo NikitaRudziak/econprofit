@@ -234,7 +234,7 @@ export const ByRegionContainer = (props) => {
           </div>
 
           <div className={style.stationInfoStat}>
-            <div className={style.statPageCard}>
+            <div className={style.statPageCardMiddle}>
               <div className={style.statPageCardLeft}>
                 <div>Кол-во зарядных сессий с 01.01.2021</div>
                 <div>{props.region && regionStat ? ((parseInt(regionStat[props.region - 1].count * 100)) / 100).toLocaleString('ru') : null} ед.</div>
@@ -255,7 +255,7 @@ export const ByRegionContainer = (props) => {
                 <span className="material-icons greyground">done_outline</span>
               </div>
             </div> */}
-            <div className={style.statPageCardBig}>
+            <div className={style.statPageCardMiddle}>
               <div className={style.statPageCardLeft}>
                 <div>Выручка с 01.01.2021</div>
                   <div>{props.region && regionStat ? ((parseInt(regionStat[props.region - 1].totalcost * 100)) / 100).toLocaleString('ru') : null} руб.</div>
@@ -264,7 +264,7 @@ export const ByRegionContainer = (props) => {
               <span className="material-icons greyground">monetization_on</span>
               </div>
             </div>
-            <div className={style.statPageCard}>
+            <div className={style.statPageCardMiddle}>
               <div className={style.statPageCardLeft}>
                 <div>Средняя продолжительность одной зарядной сессии</div>
                 <div>

@@ -14,6 +14,19 @@ export const pageReducer = (state = store, action) => {
           visible: action.visible,
       }
     }
+    case 'SET_COORDINATES': {
+      return {
+        ...state,
+          lat: action.lat,
+          lng: action.lng
+      }
+    }
+    case 'SET_ZOOM': {
+      return {
+        ...state,
+          zoom: action.zoom,
+      }
+    }
     case 'SET_AUTHNAME': {
       return {
         ...state,

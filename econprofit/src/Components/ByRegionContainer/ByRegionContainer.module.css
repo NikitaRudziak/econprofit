@@ -153,7 +153,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 250px;
+  width: 22%;
   height: 170px;
   background-color: #eee;
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
@@ -196,7 +196,7 @@
   cursor: default;
 }
 
-.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig {
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardMiddle {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -207,7 +207,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 555px;
+  width: 30.5%;
   height: 170px;
   background-color: #eee;
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
@@ -216,7 +216,7 @@
   padding: 16px 0 16px 16px;
 }
 
-.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig .statPageCardLeft {
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardMiddle .statPageCardLeft {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -232,19 +232,19 @@
   margin-right: 16px;
 }
 
-.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig .statPageCardLeft :last-child {
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardMiddle .statPageCardLeft :last-child {
   font-weight: 400;
   padding-top: 5px;
   font-size: 22px;
 }
 
-.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig .statPageCardRight {
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardMiddle .statPageCardRight {
   font-size: 44px;
   color: gray;
   padding-right: 6px;
 }
 
-.stationMainContainer .mainRegion .stationInfoStat .statPageCardBig .statPageCardRight span {
+.stationMainContainer .mainRegion .stationInfoStat .statPageCardMiddle .statPageCardRight span {
   margin-left: 0px;
   padding: 0;
   cursor: default;

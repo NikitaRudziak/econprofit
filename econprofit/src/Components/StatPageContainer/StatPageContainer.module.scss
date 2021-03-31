@@ -4,11 +4,12 @@
   // overflow: scroll;
   // position: relative;
   height: 100%;
-  // width: calc(100% - 280px);
+  // width: calc(100% - 500px);
   .statPageCardCont {
     display: flex;
     justify-content: space-between;
-    width: 1580px;
+    width: calc(100% - 60px);
+    // width: 1580px;
     margin: 30px;
     .statPageCard {
       display: flex;
@@ -48,5 +49,22 @@
   .chartRegion {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+.tableRegion {
+  padding: 0 30px 20px 30px;
+  width: 96%;
+  // width: 1580px;
+  table {
+    tr {
+      td {
+        font-size: 14px;
+      }
+      th {
+        font-size: 14px;
+        // word-wrap: break-word;
+      }
+    }
   }
 }

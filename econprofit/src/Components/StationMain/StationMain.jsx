@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import route from '../../back_route';
 import { Chart } from "react-google-charts";
 
-export const StationMain = () => {
+export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   const { id } = useParams();
   const [test, setTest] = useState();
   const [sessions, setSessions] = useState();
@@ -36,6 +36,9 @@ export const StationMain = () => {
         setSessions(data);
         console.log(data)
       });
+    // console.log(page1)
+    setCenter2(Number(lat), Number(lng))
+    setZoom2(14);
   }, [])
 
   useEffect(() => {
@@ -598,12 +601,15 @@ export const StationMain = () => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  page: state.pageReducer.page,
-  region: state.pageReducer.region,
-});
+const mapStateToProps = (state) => {
+  return {
+  page1: state.pageReducer.page,
+  // region: state.pageReducer.region,
+  }
+};
     
 const mapDispatchToProps = {
+
 };
   
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StationMain));

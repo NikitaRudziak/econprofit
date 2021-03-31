@@ -16,7 +16,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 1580px;
+  width: calc(100% - 60px);
   margin: 30px;
 }
 
@@ -80,5 +80,18 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.tableRegion {
+  padding: 0 30px 20px 30px;
+  width: 96%;
+}
+
+.tableRegion table tr td {
+  font-size: 14px;
+}
+
+.tableRegion table tr th {
+  font-size: 14px;
 }
 /*# sourceMappingURL=StatPageContainer.module.css.map */

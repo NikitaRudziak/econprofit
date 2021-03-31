@@ -6,7 +6,7 @@ import { Chart } from "react-google-charts";
 
 import style from './StatPageContainer.module.css';
 
-export const StatPageContainer = () => {
+export const StatPageContainer = ({page}) => {
   const [test, setTest] = useState([]);
   const [sum, setSum] = useState()
   const [failed, setFailed] = useState();
@@ -176,7 +176,7 @@ export const StatPageContainer = () => {
   }
 
   const view = () => {
-    console.log(test);
+    console.log(page);
   }
 
   return (
@@ -499,6 +499,220 @@ export const StatPageContainer = () => {
           }}
           rootProps={{ 'data-testid': '2' }}
         />
+      </div>
+      <div className={style.tableRegion}>
+      <table>
+        <tr>
+          <th>Год</th>
+          <th>Загрузка, доля часы</th>
+          <th>Постоянные затраты</th>
+          <th>Отпущено кВт*ч с учетом потерь 10%</th>
+          <th>Стоимость электроэнергии Белэнергоб руб.</th>
+          <th>Эквайринг</th>
+          <th>Реализация э/э, кВт*ч</th>
+          <th>Выручка от реализации, руб.</th>
+          <th>Выручка без налогов, руб.</th>
+          <th>Затраты на производство и реализацию, руб.</th>
+          <th>Прибыль от реализации, руб.</th>
+          <th>Налоги из прибыли, руб.</th>
+          <th>Чистая прибыль руб.</th>
+          <th>Расходы из прибыли</th>
+          <th>Капвложения, тыс.руб</th>
+          <th>ЧД, тыс. руб</th>
+          <th>Накопленный ЧД, тыс. руб</th>
+          <th>ЧДД, тыс. руб.</th>
+          <th>Накопленный ЧДД, тыс. руб.</th>
+        </tr>
+        <tr>
+          <td>2020</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td></td>
+          <td>42840</td>
+          <td>-42840</td>
+          <td>-42840</td>
+          <td>-42840</td>
+          <td>-42840</td>  
+        </tr>
+        <tr>
+          <td>2021</td>
+          <td>0,25</td>
+          <td>7260</td>
+          <td>5069</td>
+          <td>886,16258</td>
+          <td>23,244</td>
+          <td>4967,6</td>
+          <td>1937</td>
+          <td>1614</td>
+          <td>8169</td>
+          <td>-6555</td>
+          <td>-1180</td>
+          <td>-5375</td>
+          <td>-1075</td>
+          <td>0</td>
+          <td>2700</td>
+          <td>-40140</td>
+          <td>2457</td>
+          <td>-40383</td>  
+        </tr>
+        <tr>
+          <td>2022</td>
+          <td>0,75</td>
+          <td>7260</td>
+          <td>15208</td>
+          <td>2658,66256</td>
+          <td>69,744</td>
+          <td>14903,8</td>
+          <td>5812</td>
+          <td>4843</td>
+          <td>9988</td>
+          <td>-5145</td>
+          <td>-926</td>
+          <td>-4219</td>
+          <td>-844</td>
+          <td>0</td>
+          <td>3625</td>
+          <td>-36515</td>
+          <td>3009</td>
+          <td>-37374</td>
+        </tr>
+        <tr>
+          <td>2023</td>
+          <td>1,5</td>
+          <td>7 260</td>
+          <td>30417</td>
+          <td>5317,49994</td>
+          <td>139,5</td>
+          <td>29808,7</td>
+          <td>11625</td>
+          <td>9688</td>
+          <td>12717</td>
+          <td>-3029</td>
+          <td>-545</td>
+          <td>-2484</td>
+          <td>-497</td>
+          <td>0</td>
+          <td>5013</td>
+          <td>-31502</td>
+          <td>3760</td>
+          <td>-33614</td>
+        </tr>
+        <tr>
+          <td>2024</td>
+          <td>3,25</td>
+          <td>7 260</td>
+          <td>65903</td>
+          <td>11521,16246</td>
+          <td>302,256</td>
+          <td>64584,9</td>
+          <td>25188</td>
+          <td>20990</td>
+          <td>19083</td>
+          <td>1907</td>
+          <td>343</td>
+          <td>1564</td>
+          <td>313</td>
+          <td>0</td>
+          <td>8251</td>
+          <td>-23251</td>
+          <td>5611</td>
+          <td>-28003</td>
+        </tr>
+        <tr>
+          <td>2025</td>
+          <td>4,5</td>
+          <td>7 260</td>
+          <td>91250</td>
+          <td>15952,325</td>
+          <td>418,512</td>
+          <td>89425,0</td>
+          <td>34876</td>
+          <td>29063</td>
+          <td>23631</td>
+          <td>5432</td>
+          <td>978</td>
+          <td>4454</td>
+          <td>891</td>
+          <td>0</td>
+          <td>10563</td>
+          <td>-12688</td>
+          <td>6549</td>
+          <td>-21454</td>
+        </tr>
+        <tr>
+          <td>2026</td>
+          <td>5</td>
+          <td>7 260</td>
+          <td>101389</td>
+          <td>17724,82498</td>
+          <td>465,012</td>
+          <td>99361,2</td>
+          <td>38751</td>
+          <td>32293</td>
+          <td>25450</td>
+          <td>6843</td>
+          <td>1232</td>
+          <td>5611</td>
+          <td>1122</td>
+          <td>0</td>
+          <td>11489</td>
+          <td>-1199</td>
+          <td>6434</td>
+          <td>-15020</td>
+        </tr>
+        <tr>
+          <td>2027</td>
+          <td>7</td>
+          <td>7 260</td>
+          <td>141944</td>
+          <td>24814,65008</td>
+          <td>651,012</td>
+          <td>139105,1</td>
+          <td>54251</td>
+          <td>45209</td>
+          <td>32726</td>
+          <td>12483</td>
+          <td>2247</td>
+          <td>10236</td>
+          <td>2047</td>
+          <td>0</td>
+          <td>15189</td>
+          <td>13990</td>
+          <td>7746</td>
+          <td>-7274</td>
+        </tr>
+        <tr>
+          <td>2028</td>
+          <td>8</td>
+          <td>7 260</td>
+          <td>162222</td>
+          <td>28359,65004</td>
+          <td>744,012</td>
+          <td>158977,6</td>
+          <td>62001</td>
+          <td>51668</td>
+          <td>36364</td>
+          <td>15304</td>
+          <td>2755</td>
+          <td>12549</td>
+          <td>2510</td>
+          <td>0</td>
+          <td>17039</td>
+          <td>183</td>
+          <td>8008</td>
+          <td>734</td>
+        </tr>
+      </table>
       </div>
     </div>
   )

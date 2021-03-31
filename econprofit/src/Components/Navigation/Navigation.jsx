@@ -15,9 +15,11 @@ export const Navigation = () => {
 
   return (
     <div className={style.navigationContainer}>
-      <div className={style.logoSection}>
-        <img src={logo} alt=""/>
-      </div>
+      <Link to='/maff/map'>
+        <div className={style.logoSection}>
+          <img src={logo} alt=""/>
+        </div>
+      </Link>
       <div className={style.menuSection}>
         <div className={style.menuPoint} onClick={changeVisibility}>
           <span className="material-icons darkground">insert_chart_outlined</span>

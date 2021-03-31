@@ -51,7 +51,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 360px;
   background-color: #eee;
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
@@ -90,7 +89,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 360px;
   background-color: #eee;
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
@@ -153,7 +151,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 250px;
+  width: 22%;
   height: 170px;
   background-color: #eee;
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);

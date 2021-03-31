@@ -79,7 +79,7 @@
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          width: 250px;
+          width: 22%;
           height: 170px;
           background-color: #eee;
           box-shadow: 0 0 12px rgba(0,0,0,0.5);
@@ -109,16 +109,18 @@
             }
           }
         }
-        .statPageCardBig {
+        
+        .statPageCardMiddle {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          width: 555px;
+          width: 30.5%;
           height: 170px;
           background-color: #eee;
           box-shadow: 0 0 12px rgba(0,0,0,0.5);
           border-radius: 8px;
           padding: 16px 0 16px 16px;
+        
           .statPageCardLeft {
             display: flex;
             flex-direction: column;

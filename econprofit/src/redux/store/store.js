@@ -1,21 +1,11 @@
 export const store = {
-    page: 'main',
-    visible: false,
-    authName: '',
-    region: '',
-    typeEmpl: ''
-      // user: {
-      //   nickName: '',
-      //   id: 0,
-      //   forTrash: 0,
-      //   name: '',
-      //   forSPT: '',
-      //   initModal: 'none',
-      //   trackID: null,
-      //   genreName: '',
-      //   initAttention: 'none',
-      //   mesType: '',
-      //   playTrash: ''
-      // }
-    }
+  page: 'main',
+  visible: false,
+  authName: '',
+  region: '',
+  typeEmpl: '',
+  lat: 53.9004368,
+  lng: 27.5580622,
+  zoom: 11
+}
   
