@@ -6,11 +6,6 @@ import { ByRegionContainer } from '../../Components/ByRegionContainer/ByRegionCo
 import style from './StatByRegion.module.css';
 
 export const StatByRegion = (props) => {
-  useEffect(()=> {
-    if(props) {
-      console.log(props)
-    } 
-  }, [props])
     
   return (
     <div className={style.StatByRegionContainer}>

@@ -175,7 +175,7 @@ export const ByRegionContainer = (props) => {
               <div></div>
             </div>
           </div>
-          {/* <div className={style.stationInfo2}>
+          <div className={style.stationInfo2}>
             <div className={style.stationInfoHeader}>
               Информация о станциях
             </div>
@@ -185,7 +185,7 @@ export const ByRegionContainer = (props) => {
               <div><b>Комбинированные ЭЗС: </b> {props.region && byConnector ? byConnector[3 * (props.region - 1) + 2].count : null} ед.</div>
               <div></div>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className={style.topLine}>
           <div className={style.stationInfoStat}>

@@ -2,10 +2,19 @@ import React, { useEffect, useState }from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import route from '../../back_route';
+import Docxtemplater from "docxtemplater";
+import PizZip from "pizzip";
+import PizZipUtils from "pizzip/utils/index.js";
+import { saveAs } from "file-saver";
+import document from "./main.docx";
 
 import style from './Switcher.module.css';
 
-export const Switcher = ({}) => {
+function loadFile(url, callback) {
+  PizZipUtils.getBinaryContent(url, callback);
+}
+
+export const Switcher = () => {
   const [activeTable, setActiveTable] = useState('locations');
   const [locations, setLocations] = useState([]);
   const [stations, setStations] = useState([]);
@@ -70,6 +79,63 @@ export const Switcher = ({}) => {
     setActiveTable('stations')
   }
 
+  const generateDocument = () => {
+    loadFile(document, function(
+      error,
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+      var zip = new PizZip(content);
+      var doc = new Docxtemplater().loadZip(zip);
+      doc.setData({
+        FirstName: "Сусаренко",
+        LastName: "Максим",
+        position: "Начальник ОЭЗИ"
+      });
+      try {
+        // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+              error,
+              key
+            ) {
+              error[key] = value[key];
+              return error;
+            },
+            {});
+          }
+          return value;
+        }
+        console.log(JSON.stringify({ error: error }, replaceErrors));
+
+        if (error.properties && error.properties.errors instanceof Array) {
+          const errorMessages = error.properties.errors
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          console.log("errorMessages", errorMessages);
+          // errorMessages is a humanly readable message looking like this :
+          // 'The tag beginning with "foobar" is unopened'
+        }
+        throw error;
+      }
+      var out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      }); //Output the document using Data-URI
+      saveAs(out, "output.docx");
+    });
+  };
+
+
 
   return (
     <div className={style.switcherContainer}>
@@ -111,7 +177,7 @@ export const Switcher = ({}) => {
           {generateStationRow()}
         </table> : null }
         <div className={style.switcherActionNav}>
-          <div className={style.switcherPoint}>
+          <div className={style.switcherPoint} onClick={generateDocument}>
             Добавить
           </div>
           <div className={style.switcherPoint}>

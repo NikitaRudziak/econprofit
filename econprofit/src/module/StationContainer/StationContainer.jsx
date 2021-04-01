@@ -8,11 +8,6 @@ import { setCoordinates, setZoom } from '../../redux/actions';
 import style from './StationContainer.module.css';
 
 export const StationContainer = (props) => {
-  useEffect(() => {
-    if(props) {
-      console.log(props)
-    }
-  }, [props])
 
   return (
     <div className={style.stationContainer}>

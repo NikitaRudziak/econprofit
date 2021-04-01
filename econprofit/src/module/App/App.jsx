@@ -5,7 +5,7 @@ import { Navigation } from '../../Components/Navigation/Navigation';
 import { StatPageContainer } from '../../Components/StatPageContainer/StatPageContainer';
 import style from './App.module.css';
 
-export const App = (props) => {
+export const App = () => {
   return (
     <div className={style.appContainer}>
       <Navigation />

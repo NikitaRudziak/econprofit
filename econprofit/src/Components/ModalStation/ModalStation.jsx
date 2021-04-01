@@ -7,7 +7,7 @@ import route from '../../back_route';
 
 import style from './ModalStation.module.css';
 
-export const ModalStation = ({}) => {
+export const ModalStation = () => {
   return (
     <div className={style.modalContainer}>
       <div className={style.modalHeader}>

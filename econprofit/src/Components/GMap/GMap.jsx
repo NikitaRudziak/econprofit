@@ -63,19 +63,6 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
     console.log(zoom2)
   }, [])
 
-  // useEffect(()=> {
-  //   if(latitude) {
-  //     let obj ={
-  //       lat: latitude,
-  //       lo
-  //     }
-  //   } 
-  // }, [latitude])
-
-  // useEffect(() => {
-  //   console.log(props.latitude)
-  // }, [props.latitude])
-
   useEffect(() => {
     let arr = []
     if(locationList && percent) {
@@ -91,14 +78,12 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
               sum: item2.sum,
               count: item.count
             }
-            // console.log(obj)
             arr.push(obj);
           }
         })
       })
     }
     setTest(arr);
-    // console.log(arr)
   }, [locationList, percent])
 
   const generateLocationDatalist = () => {
