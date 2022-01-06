@@ -90,9 +90,9 @@ export const Switcher = () => {
       var zip = new PizZip(content);
       var doc = new Docxtemplater().loadZip(zip);
       doc.setData({
-        FirstName: "Сусаренко",
-        LastName: "Максим",
-        position: "Начальник ОЭЗИ"
+        FirstName: "Котляров",
+        LastName: "Анатолий",
+        position: "Начальник ОПРНЭТ"
       });
       try {
         // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)

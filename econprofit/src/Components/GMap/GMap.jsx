@@ -11,7 +11,7 @@ import style from './GMap.module.css';
 const AnyReactComponent = ({id, name, address, sum, count, lat, lng}) => {
   return (
   <div className={style.marker}>
-    {(parseInt((Number(sum) / ( 5069 * Number(count))) * 100)) * 100 / 100}%
+    {(parseFloat((Number(sum) / ( 30422 * Number(count))) * 100).toFixed(1)) * 100 / 100}%
     {/* {Number(sum).toLocaleString('RU')} */}
     <div className={style.modal2}>
       <Link to={{pathname: `/maff/stationinfo/${id}`, lat: lat, lng: lng}}>
