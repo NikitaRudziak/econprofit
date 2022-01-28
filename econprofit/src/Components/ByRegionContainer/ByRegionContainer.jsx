@@ -6,6 +6,7 @@ import style from './ByRegionContainer.module.css';
 import { useParams } from 'react-router-dom'
 import route from '../../back_route';
 import { Chart } from "react-google-charts";
+import img from '../StatPageContainer/data.png'
 
 export const ByRegionContainer = (props) => {
   const [test, setTest] = useState();
@@ -26,6 +27,7 @@ export const ByRegionContainer = (props) => {
   const [regCount, setRegCount] = useState();
   const [byConnector, setByConnector] = useState();
   const [br, setBr] = useState()
+  const [dest, setDest] = useState([])
 
   useEffect(() => {
     fetch(`${route}/regionstat`)
@@ -34,7 +36,7 @@ export const ByRegionContainer = (props) => {
       })
       .then(data => {
         setRegionStat(data);
-        console.log(data)
+        // console.log(data)
       });
     fetch(`${route}/regionsess`)
       .then(response => {
@@ -42,7 +44,7 @@ export const ByRegionContainer = (props) => {
       })
       .then(data => {
         setSessionsStat(data);
-        console.log(data)
+        // console.log(data)
       });
     fetch(`${route}/regioncount`)
       .then(response => {
@@ -50,7 +52,7 @@ export const ByRegionContainer = (props) => {
       })
       .then(data => {
         setRegCount(data);
-        console.log(data)
+        // console.log(data)
       });
     fetch(`${route}/bymode`)
       .then(response => {
@@ -58,7 +60,7 @@ export const ByRegionContainer = (props) => {
       })
       .then(data => {
         setByConnector(data);
-        console.log(data)
+        // console.log(data)
       });
     fetch(`${route}/timespendbyregion`)
       .then(response => {
@@ -66,7 +68,23 @@ export const ByRegionContainer = (props) => {
       })
       .then(data => {
         setBr(data);
-        console.log(data)
+        // console.log(data)
+      });
+    fetch(`${route}/timespendbyregion`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setBr(data);
+        // console.log(data)
+      });
+    fetch(`${route}/dest`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setDest(data);
+        // console.log(data)
       });
   }, [])
 
@@ -134,48 +152,62 @@ export const ByRegionContainer = (props) => {
     setByType(kwharr)
     setByTypecash(casharr)
     setCount(arrcount);
-
-
     setRegion(1)
-    // console.log(props)
-    // setQuery();
   }, [sessions])
 
-  // const view2 = () => {
-  //   console.log(region)
-  //   console.log(props.region)
-  //   console.log(props.naming)
-  //   console.log(byConnector)
-  // }
 
   const openModal = () => {
-    // setRegion(region + 1)
     setModalShow(!modalShow)
   }
 
   const getGoal = (item) => {
-    console.log('sdfdsfsdf' + item)
     if(item == 0) { //брест
       return 52
     }
     if(item == 1) { //витебск
-      return 44
+      return 46
     }
     if(item == 2) { //гомель
-      return 53
+      return 56
     }
     if(item == 3) { //гродно
-      return 60
+      return 64
     }
     if(item == 4) { //минск
-      return 419
+      return 41
     }
     if(item == 5) { //минскобл
-      return 31
+      return 40
     }
     if(item == 6) { //могилев
-      return 33
+      return 29
     }
+  }
+
+  const getDest = () => {
+    let num = 0;
+    dest.map(item => {
+      if(item.company == props.reg && item.destination == 'Областной центр') {
+        num = item.count;
+      }
+      if(item.company == 'Минскоблнефтепродукт' && item.destination == 'Областной центр') {
+        num = 0;
+      }
+      
+    })
+    return num;
+  }
+  
+  const getAzs = () => {
+    let azs = 0;
+    console.log(dest);
+    dest.map(item => {
+      if(item.company == props.reg && item.nearplaces == 'АЗС') {
+        azs = item.count;
+      }
+      
+    })
+    return azs;
   }
 
   return (
@@ -207,9 +239,18 @@ export const ByRegionContainer = (props) => {
                 <b>Целевой показатель:</b> {regCount && props.region ? 
                   (getGoal(props.region - 1) * 1103437).toLocaleString('ru') : null} 
                 {/* (Number(regCount[props.region - 1].count) * 1103437).toLocaleString('ru') : null}  */}
-                кВт*ч
+                 кВт*ч
               </div>
-              <div></div>
+              <div >
+                <b>В областном центре:</b> {dest ? getDest() : null} шт.
+                {/* {props.region && regionStat ? regionStat[props.region - 1].company : null} */}
+              </div>
+              {/* <div >
+                <b>На территории АЗС:</b> {dest ? getAzs() : null} шт.
+              </div> */}
+              <div>
+                
+              </div>
             </div>
           </div>
           <div className={style.stationInfo2}>
@@ -231,10 +272,6 @@ export const ByRegionContainer = (props) => {
                 <div>Целевой показатель по отпуску э/э на 2022</div>
                 <div>
                   {(getGoal(props.region - 1) * 30422).toLocaleString('ru')} кВт*ч
-                  {/* {30422 * } кВт*ч */}
-                  {/* {regCount && props.region ? 
-                    (regCount[props.region - 1].count * 30422).toLocaleString('ru')
-                  : null} кВт*ч */}
                 </div>
               </div>
               <div className={style.statPageCardRight}>
@@ -286,18 +323,6 @@ export const ByRegionContainer = (props) => {
                 <span className="material-icons greyground">account_box</span>
               </div>
             </div>
-            {/* <div className={style.statPageCard}>
-              <div className={style.statPageCardLeft}>
-                <div>Целевой показатель до 2028 г.</div> */}
-                {/* <div>{regCount && props.region ? ((regionStat[props.region - 1].totalkwh / (Number(regCount[props.region - 1].count) * 613402)) * 100).toLocaleString('ru') : null} %</div> */}
-                {/* <div>{regCount && props.region ? ((regionStat[props.region - 1].totalkwh / (Number(regCount[props.region - 1].count) * 613402)) * 100).toLocaleString('ru')
-                  : 'Нет данных'
-                  }%</div> */}
-              {/* </div>
-              <div className={style.statPageCardRight}>
-                <span className="material-icons greyground">done_outline</span>
-              </div>
-            </div> */}
             <div className={style.statPageCardMiddle}>
               <div className={style.statPageCardLeft}>
                 <div>Выручка с 01.01.2022</div>
@@ -314,7 +339,6 @@ export const ByRegionContainer = (props) => {
                   {props.region && regionStat && br && br[0].timespend ?
                       br[props.region-1].timespend.hours ? br[props.region-1].timespend.hours + ' ч. ' + br[props.region-1].timespend.minutes
                       : br[props.region-1].timespend.minutes
-                      // Math.trunc(regionStat[props.region - 1].totalkwh / regionStat[props.region - 1].count * 1.2)
                     : 'Нет данных'
                   } мин.
                 </div>
@@ -326,7 +350,7 @@ export const ByRegionContainer = (props) => {
           </div>
         </div>
       </div>  
-      {/* <div className={style.chartsLine}>
+      <div className={style.chartsLine}>
         <Chart
           width={'500px'}
           height={'400px'}
@@ -337,7 +361,7 @@ export const ByRegionContainer = (props) => {
             ['Пистолет Chademo', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 2].sum) : null],
             ['Пистолет CCS', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 1].sum) : null],
             ['Вилка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1)].sum) : null],
-            ['Розеткка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 3].sum) : null],
+            ['Розетка Type2', sessionsStat && props.region ? Number(sessionsStat[4 * (props.region - 1) + 3].sum) : null],
           ]}
           options={{
             title: 'Отпущено по коннекторам, кВт*ч',
@@ -405,16 +429,17 @@ export const ByRegionContainer = (props) => {
           }}
           rootProps={{ 'data-testid': '2' }}
         />
-      </div> */}
+      </div>
     </div> : <Redirect to="/maff/main"/> }
     {modalShow 
       ? <div id="myModal" className={style.modalOpen}> 
           <div className={style.modalContent}>
             <span className={style.close} onClick={openModal}>&times;</span>
             <h2>Расчет окупаемости для одной среднестат. ЭЗС</h2>
-            <h4>Срок окупаемости(простой): 5,1 лет</h4>
-            <h4>Срок окупаемости(дисконтированный): 7,9 лет</h4>
-            <table>
+            <h4>Срок окупаемости(простой): 5,7 лет</h4>
+            <h4>Срок окупаемости(дисконтированный): 8,3 лет</h4>
+            <img className={style.table_png} src={img} alt="" />
+            {/* <table>
               <tr>
                 <th>Год</th>
                 <th>Загрузка, доля часы</th>
@@ -604,7 +629,7 @@ export const ByRegionContainer = (props) => {
                 <td>7251,27</td>
                 <td>15137,37</td>
               </tr>
-            </table>
+            </table> */}
           </div>
         </div>
       : <div id="myModal" className={style.modal}>

@@ -11,7 +11,7 @@ export const PageMapContainer = ({latitude, longitude, zoom, setCenter, setZoom}
 
   return (
     <div className={style.pageMapContainer}>
-      <Navigation />
+      <Navigation view='true'/>
       <GMap latitude={latitude} longitude={longitude} setCenter2={setCenter} setZoom2={setZoom} zoom2={zoom} />
     </div>
   )

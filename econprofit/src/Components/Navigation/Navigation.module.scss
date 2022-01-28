@@ -6,7 +6,7 @@
 .navigationContainer {
   display: flex;
   flex-direction: column;
-  width: 280px;
+  width: 295px;
   min-height: 100vh;
   // height: 100vh;
   background-color: rgb(27,29,40);
@@ -67,4 +67,63 @@ img {
   .menuName:hover {
     color: aliceblue  ;
   }
+}
+
+.leg_item {
+  display: flex;
+  color: #ccc;
+  margin: 20px;
+}
+
+.legRed {
+  width: 120px;
+  height: 25px;
+  margin-right: 20px;
+  background-color: rgb(202, 85, 85);
+}
+
+.legOrange {
+  width: 120px;
+  height: 25px;
+  margin-right: 20px;
+  background-color: rgb(253, 179, 152);
+}
+
+.legYellow {
+  width: 120px;
+  height: 25px;
+  margin-right: 20px;
+  background-color: rgb(253, 255, 121);
+}
+
+.leg {
+  width: 120px;
+  height: 25px;
+  margin-right: 20px;
+  background-color: rgb(185,227,198);
+}
+
+.legGreen {
+  width: 120px;
+  height: 25px;
+  margin-right: 20px;
+  background-color: rgb(89,201,165);
+}
+
+.leg_title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 20px;
+  color: #ccc;
+}
+
+.legend {
+  // margin-top: 17vw;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }

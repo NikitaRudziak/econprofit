@@ -10,7 +10,7 @@ export const StatByRegion = (props) => {
   return (
     <div className={style.StatByRegionContainer}>
       <Navigation />
-      <ByRegionContainer region={props.location.type} naming={props.location.name} />
+      <ByRegionContainer region={props.location.type} naming={props.location.name} reg={props.location.reg}/>
     </div>
   );
 }

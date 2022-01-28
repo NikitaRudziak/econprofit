@@ -82,6 +82,10 @@
           justify-content: space-between;
 }
 
+.table_png {
+  width: 82vw;
+}
+
 .tableRegion {
   padding: 0 30px 20px 30px;
   width: 96%;

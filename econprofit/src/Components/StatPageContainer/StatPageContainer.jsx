@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import route from '../../back_route';
 import { Chart } from "react-google-charts";
+import img from "../StatPageContainer/data.png";
 
 import style from './StatPageContainer.module.css';
 
@@ -26,7 +27,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setSum(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -37,7 +38,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setFailed(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -48,7 +49,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setChademoKwh(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -59,7 +60,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setCCSKwh(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -70,7 +71,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setType2Kwh(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -81,7 +82,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setType2plugkwh(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -92,7 +93,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setByRegion(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -104,7 +105,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setByConnector(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -115,7 +116,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setLastDate(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -126,7 +127,7 @@ export const StatPageContainer = ({page}) => {
       })
       .then(data => {
         setByMode(data);
-        console.log(data)
+        // console.log(data)
       });
   }, [])
 
@@ -154,7 +155,6 @@ export const StatPageContainer = ({page}) => {
             email: item['Identification']['User']['Email'],
             connector: item['Connector']['Type']['Title']
           }
-          console.log(cnt+=1)
           arr.push(obj);
         })
         setTest(arr);
@@ -184,10 +184,6 @@ export const StatPageContainer = ({page}) => {
     })
   }
 
-  const view = () => {
-    console.log(page);
-  }
-
   const stationSum = (array) => {
     let count = 0;
     array.map(item => {
@@ -208,16 +204,9 @@ export const StatPageContainer = ({page}) => {
               <div>AC/DC: {byMode ? byMode[2].count : null} шт.</div>
               <div>Всего: {byMode ? stationSum(byMode) : null} шт.</div>
             </div>
-            {/* <div></div> */}
-            {/* <div></div> */}
-            {/* <div onClick={view}>Выполнение плана по отпуску э/э на 2021</div>
-            <div>
-              {sum ? ((parseInt((sum[0].sumkw / 2215153 * 100) * 100)) / 100).toLocaleString('ru') : null}%
-            </div> */}
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">ev_station</span>
-            {/* <span className="material-icons greyground">battery_charging_full</span> */}
           </div>
         </div>
         <div className={style.statPageCard}>
@@ -231,7 +220,7 @@ export const StatPageContainer = ({page}) => {
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div onClick={view}>Выполнение плана по отпуску э/э на 2022</div>
+            <div>Выполнение плана по отпуску э/э на 2022</div>
             <div>
               {sum ? ((parseInt((sum[0].sumkw / 21052631.58  * 100) * 100)) / 100).toLocaleString('ru') : null}%
             </div>
@@ -242,7 +231,7 @@ export const StatPageContainer = ({page}) => {
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div onClick={view}>Отпущено э/э с 01.01.2022</div>
+            <div>Отпущено э/э с 01.01.2022</div>
             <div>{sum ? ((parseInt(sum[0].sumkw * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
@@ -272,7 +261,7 @@ export const StatPageContainer = ({page}) => {
         </div>
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
-            <div onClick={view}>Общее выполнение плана по отпуску э/э</div>
+            <div>Общее выполнение плана по отпуску э/э</div>
             <div>{sum ? ((parseInt(((sum[0].sumkw) / 763578947.37 * 100 ) * 100) + 0,35) / 100).toLocaleString('ru') : null}%</div>
           </div>
           <div className={style.statPageCardRight}>
@@ -539,7 +528,8 @@ export const StatPageContainer = ({page}) => {
         />
       </div>
       <div className={style.tableRegion}>
-      <table>
+        <img className={style.table_png} src={img} alt="" />
+      {/* <table>
         <tr>
           <th>Год</th>
           <th>Загрузка, доля часы</th>
@@ -729,7 +719,7 @@ export const StatPageContainer = ({page}) => {
           <td>7251,27</td>
           <td>15137,37</td>
         </tr>
-      </table>
+      </table> */}
       </div>
     </div>
   )

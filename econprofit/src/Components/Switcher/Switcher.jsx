@@ -112,7 +112,7 @@ export const Switcher = () => {
           }
           return value;
         }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+        // console.log(JSON.stringify({ error: error }, replaceErrors));
 
         if (error.properties && error.properties.errors instanceof Array) {
           const errorMessages = error.properties.errors

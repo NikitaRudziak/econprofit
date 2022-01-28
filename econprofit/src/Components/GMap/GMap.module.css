@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .gmapContainer {
   height: calc(100vh - 60px);
   width: calc(100% - 280px);
@@ -11,6 +12,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -46,6 +50,16 @@
   padding: 3px 10px;
 }
 
+.downloadButton {
+  cursor: pointer;
+  color: black;
+  background-color: #8ee7a1;
+  margin-right: 20px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
 span {
   cursor: pointer;
   color: black;
@@ -59,7 +73,7 @@ span {
   left: 50%;
   width: 35px;
   height: 18px;
-  background-color: #8ee7a1;
+  background-color: #b9e3c6;
   border: 2px solid #fff;
   border-radius: 5px;
   -webkit-user-select: none;
@@ -131,8 +145,6 @@ span {
 
 .marker .modal {
   display: none;
-  margin-left: -100px;
-  padding: 7px;
   background-color: #eee;
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
@@ -158,6 +170,428 @@ span {
   font-size: 26px;
 }
 
+.marker_red {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35px;
+  height: 18px;
+  background-color: #ca5555;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  color: #eee;
+}
+
+.marker_red .percent {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 30px;
+  height: 18px;
+  background-color: lightgray;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.marker_red:hover {
+  z-index: 1;
+}
+
+.marker_red .modal2 {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  text-align: start;
+  border-radius: 8px;
+}
+
+.marker_red .modal2 a {
+  color: black;
+}
+
+.marker_red .modal2 a .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker_red .modal2 a .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker_red .modal2 a .iconContainer {
+  font-size: 26px;
+}
+
+.marker_red .modal {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.marker_red .modal .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker_red .modal .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker_red .modal .iconContainer {
+  font-size: 26px;
+}
+
+.marker_orange {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35px;
+  height: 18px;
+  background-color: #fdb398;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+.marker_orange .percent {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 30px;
+  height: 18px;
+  background-color: lightgray;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.marker_orange:hover {
+  z-index: 1;
+}
+
+.marker_orange .modal2 {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  text-align: start;
+  border-radius: 8px;
+}
+
+.marker_orange .modal2 a {
+  color: black;
+}
+
+.marker_orange .modal2 a .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker_orange .modal2 a .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker_orange .modal2 a .iconContainer {
+  font-size: 26px;
+}
+
+.marker_orange .modal {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.marker_orange .modal .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker_orange .modal .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker_orange .modal .iconContainer {
+  font-size: 26px;
+}
+
+.marker_yellow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35px;
+  height: 18px;
+  background-color: #fdff79;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+.marker_yellow .percent {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 30px;
+  height: 18px;
+  background-color: lightgray;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.marker_yellow:hover {
+  z-index: 1;
+}
+
+.marker_yellow .modal2 {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  text-align: start;
+  border-radius: 8px;
+}
+
+.marker_yellow .modal2 a {
+  color: black;
+}
+
+.marker_yellow .modal2 a .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker_yellow .modal2 a .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker_yellow .modal2 a .iconContainer {
+  font-size: 26px;
+}
+
+.marker_yellow .modal {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.marker_yellow .modal .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker_yellow .modal .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker_yellow .modal .iconContainer {
+  font-size: 26px;
+}
+
+.marker_green {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35px;
+  height: 18px;
+  background-color: #59c9a5;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  color: #3b3b3b;
+}
+
+.marker_green .percent {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 30px;
+  height: 18px;
+  background-color: lightgray;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.marker_green:hover {
+  z-index: 1;
+}
+
+.marker_green .modal2 {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  text-align: start;
+  border-radius: 8px;
+}
+
+.marker_green .modal2 a {
+  color: black;
+}
+
+.marker_green .modal2 a .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker_green .modal2 a .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker_green .modal2 a .iconContainer {
+  font-size: 26px;
+}
+
+.marker_green .modal {
+  display: none;
+  margin-left: -100px;
+  padding: 7px;
+  background-color: #eee;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.marker_green .modal .modalContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px;
+}
+
+.marker_green .modal .stationName {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.marker_green .modal .iconContainer {
+  font-size: 26px;
+}
+
 .marker:hover .modal2 {
   display: block;
   position: absolute;
@@ -172,5 +606,157 @@ span {
   top: -60px;
   z-index: 1001;
   width: 250px;
+}
+
+.marker_red:hover .modal2 {
+  display: block;
+  position: absolute;
+  top: 20px;
+  z-index: 1001;
+  width: 250px;
+}
+
+.marker_red:hover .modal {
+  display: block;
+  position: absolute;
+  top: -60px;
+  z-index: 1001;
+  width: 250px;
+}
+
+.marker_yellow:hover .modal2 {
+  display: block;
+  position: absolute;
+  top: 20px;
+  z-index: 1001;
+  width: 250px;
+}
+
+.marker_yellow:hover .modal {
+  display: block;
+  position: absolute;
+  top: -60px;
+  z-index: 1001;
+  width: 250px;
+}
+
+.marker_orange:hover .modal2 {
+  display: block;
+  position: absolute;
+  top: 20px;
+  z-index: 1001;
+  width: 250px;
+}
+
+.marker_orange:hover .modal {
+  display: block;
+  position: absolute;
+  top: -60px;
+  z-index: 1001;
+  width: 250px;
+}
+
+.marker_green:hover .modal2 {
+  display: block;
+  position: absolute;
+  top: 20px;
+  z-index: 1001;
+  width: 250px;
+}
+
+.marker_green:hover .modal {
+  display: block;
+  position: absolute;
+  top: -60px;
+  z-index: 1001;
+  width: 250px;
+}
+
+/* Модальный (фон) */
+.modal {
+  display: none;
+  /* Скрыто по умолчанию */
+  position: fixed;
+  /* Оставаться на месте */
+  z-index: 1;
+  /* Сидеть на вершине */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Полная ширина */
+  height: 100%;
+  /* Полная высота */
+  overflow: auto;
+  /* Включите прокрутку, если это необходимо */
+  background-color: black;
+  /* Цвет запасной вариант */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Черный с непрозрачностью */
+}
+
+.modalOpen {
+  display: block;
+  /* Скрыто по умолчанию */
+  position: fixed;
+  /* Оставаться на месте */
+  z-index: 1;
+  /* Сидеть на вершине */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Полная ширина */
+  height: 100%;
+  /* Полная высота */
+  overflow: auto;
+  /* Включите прокрутку, если это необходимо */
+  background-color: black;
+  /* Цвет запасной вариант */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Черный с непрозрачностью */
+}
+
+/* Модальное содержание/коробка */
+.modalContent {
+  background-color: #fefefe;
+  margin: 10% auto;
+  /* 10% сверху и по центру */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+  /* Может быть больше или меньше, в зависимости от размера экрана */
+  font-size: 14px;
+}
+
+.modalContent .modalButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+/* Кнопка закрытия */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.table_png {
+  width: 90vw;
+}
+
+.modalRow {
+  cursor: pointer;
 }
 /*# sourceMappingURL=GMap.module.css.map */
