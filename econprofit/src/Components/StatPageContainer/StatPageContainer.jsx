@@ -7,7 +7,7 @@ import img from "../StatPageContainer/data.png";
 
 import style from './StatPageContainer.module.css';
 
-export const StatPageContainer = ({page}) => {
+export const StatPageContainer = () => {
   const [test, setTest] = useState([]);
   const [sum, setSum] = useState()
   const [failed, setFailed] = useState();
@@ -132,18 +132,15 @@ export const StatPageContainer = ({page}) => {
   }, [])
 
   const shareData = () => {
-    var d = new Date()
-    var od = new Date(lastDate[0].chargingfrom),
-    to = '',
-    from = '';
-    to = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
-    from = od.getFullYear() + '-' + (od.getMonth()+1) + '-' + (od.getDate()+1)
+    let d = new Date();
+    let od = new Date(lastDate[0].chargingfrom),
+      to = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(),
+      from = od.getFullYear() + '-' + (od.getMonth() + 1) + '-' + (od.getDate() + 1);
     fetch(`${route}/test/${from}/${to}`)
       .then(response => {
         return response.json();
       })
       .then(data => {
-        let cnt = 0;
         let arr = [];
         data['Content'].map(item => {
           let obj = {
@@ -187,7 +184,7 @@ export const StatPageContainer = ({page}) => {
   const stationSum = (array) => {
     let count = 0;
     array.map(item => {
-      count += Number(item.count)
+      count += Number(item.count);
     })
     return count;
   }
@@ -262,7 +259,7 @@ export const StatPageContainer = ({page}) => {
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
             <div>Общее выполнение плана по отпуску э/э</div>
-            <div>{sum ? ((parseInt(((sum[0].sumkw) / 763578947.37 * 100 ) * 100) + 0,35) / 100).toLocaleString('ru') : null}%</div>
+            <div>{sum ? (((parseInt(((sum[0].sumkw) / 763578947.37 * 100 ) * 100)) / 100) + 0.35).toLocaleString('ru') : null}%</div>
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">battery_charging_full</span>
@@ -285,8 +282,7 @@ export const StatPageContainer = ({page}) => {
               {(failed && sum) ? 
                 (failed[0].failedsessioncount && sum[0].sessioncount) ?
                 ((parseInt((100 - (failed[0].failedsessioncount / sum[0].sessioncount * 100)) * 100)) / 100).toLocaleString('ru') 
-                : '-'
-                : null}%
+                : '-' : null}%
             </div>
           </div>
           <div className={style.statPageCardRight}>
@@ -374,22 +370,6 @@ export const StatPageContainer = ({page}) => {
           }}
           rootProps={{ 'data-testid': '2' }}
         />
-        {/* <Chart
-          width={'375px'}
-          height={'280px'}
-          chartType="PieChart"
-          loader={<div>Загрузка</div>}
-          data={[
-            ['Task', 'Hours per Day'],
-            ['Успешные', (failed && sum) ? sum[0].sessioncount - failed[0].failedsessioncount : null],
-            ['Неуспешные', failed ? Number(failed[0].failedsessioncount) : null],
-          ]}
-          options={{
-            title: 'Сессии',
-            is3D: true,
-          }}
-          rootProps={{ 'data-testid': '2' }}
-        /> */}
         <Chart
           width={'400px'}
           height={'280px'}
@@ -529,197 +509,6 @@ export const StatPageContainer = ({page}) => {
       </div>
       <div className={style.tableRegion}>
         <img className={style.table_png} src={img} alt="" />
-      {/* <table>
-        <tr>
-          <th>Год</th>
-          <th>Загрузка, доля часы</th>
-          <th>Постоянные затраты</th>
-          <th>Отпущено кВт*ч с учетом потерь 10%</th>
-          <th>Стоимость электроэнергии Белэнергоб руб.</th>
-          <th>Эквайринг</th>
-          <th>Реализация э/э, кВт*ч</th>
-          <th>Выручка от реализации, руб.</th>
-          <th>Выручка без налогов, руб.</th>
-          <th>Затраты на производство и реализацию, руб.</th>
-          <th>Прибыль от реализации, руб.</th>
-          <th>Налоги из прибыли, руб.</th>
-          <th>Чистая прибыль руб.</th>
-          <th>Расходы из прибыли</th>
-          <th>Капвложения, тыс.руб</th>
-          <th>ЧД, тыс. руб</th>
-          <th>Накопленный ЧД, тыс. руб</th>
-          <th>ЧДД, тыс. руб.</th>
-          <th>Накопленный ЧДД, тыс. руб.</th>
-        </tr>
-        <tr>
-          <td>2021</td>
-          <td>0,25</td>
-          <td>6936,42</td>
-          <td>4563</td>
-          <td>797,78</td>
-          <td>18,73</td>
-          <td>4335,26</td>
-          <td>1560,69</td>
-          <td>1300,58</td>
-          <td>7752,92</td>
-          <td>-6452,35</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>3973,99</td>
-          <td>-27817,92</td>
-          <td>3616,33</td>
-          <td>-28175,58</td>  
-        </tr>
-        <tr>
-          <td>2022</td>
-          <td>1,66</td>
-          <td>6936,42</td>
-          <td>30422,88</td>
-          <td>5318,53</td>
-          <td>124,86</td>
-          <td>28901,73</td>
-          <td>10404,62</td>
-          <td>8670,52</td>
-          <td>12379,80</td>
-          <td>-3709,28</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>3973,99</td>
-          <td>-23843,93</td>
-          <td>3298,41</td>
-          <td>-24877,17</td>
-        </tr>
-        <tr>
-          <td>2023</td>
-          <td>3,66</td>
-          <td>6936,42</td>
-          <td>66930,33</td>
-          <td>11700,76</td>
-          <td>274,68</td>
-          <td>63583,82</td>
-          <td>22890,17</td>
-          <td>19075,14</td>
-          <td>18911,86</td>
-          <td>163,29</td>
-          <td>29,39</td>
-          <td>133,89</td>
-          <td>26,78</td>
-          <td>0</td>
-          <td>4081,10</td>
-          <td>-19762,83</td>
-          <td>3060,83</td>
-          <td>-21816,34</td>
-        </tr>
-        <tr>
-          <td>2024</td>
-          <td>6</td>
-          <td>6936,42</td>
-          <td>109522,36</td>
-          <td>19146,70</td>
-          <td>449,48</td>
-          <td>104046,24</td>
-          <td>27456,65</td>
-          <td>31213,87</td>
-          <td>26532,60</td>
-          <td>4681,28</td>
-          <td>842,63</td>
-          <td>3838,65</td>
-          <td>767,73</td>
-          <td>0</td>
-          <td>7044,91</td>
-          <td>-12717,92</td>
-          <td>4790,54</td>
-          <td>-17025,80</td>
-        </tr>
-        <tr>
-          <td>2025</td>
-          <td>4,5</td>
-          <td>6936,42</td>
-          <td>212960,15</td>
-          <td>37229,69</td>
-          <td>873,99</td>
-          <td>202312,14</td>
-          <td>72832,37</td>
-          <td>60693,64</td>
-          <td>45040,10</td>
-          <td>15653,54</td>
-          <td>2817,64</td>
-          <td>12835,91</td>
-          <td>2567,18</td>
-          <td>0</td>
-          <td>14242,71</td>
-          <td>1524,79</td>
-          <td>8830,48</td>
-          <td>-8195,32</td>
-        </tr>
-        <tr>
-          <td>2026</td>
-          <td>11,66</td>
-          <td>6936,42</td>
-          <td>219044,72</td>
-          <td>38293,40</td>
-          <td>898,96</td>
-          <td>208092,49</td>
-          <td>74913,29</td>
-          <td>62427,75</td>
-          <td>46128,77</td>
-          <td>16298,97</td>
-          <td>2933,81</td>
-          <td>13365,16</td>
-          <td>2673,03</td>
-          <td>0</td>
-          <td>14666,11</td>
-          <td>16190,91</td>
-          <td>8213,02</td>
-          <td>17,70</td>
-        </tr>
-        <tr>
-          <td>2027</td>
-          <td>12,61</td>
-          <td>6936,42</td>
-          <td>229996,96</td>
-          <td>40208,07</td>
-          <td>943,91</td>
-          <td>218497,11</td>
-          <td>78658,96</td>
-          <td>65549,13</td>
-          <td>48088,39</td>
-          <td>17460,74</td>
-          <td>3142,93</td>
-          <td>14317,81</td>
-          <td>2863,56</td>
-          <td>0</td>
-          <td>15428,23</td>
-          <td>31619,14</td>
-          <td>7868,40</td>
-          <td>7886,10</td>
-        </tr>
-        <tr>
-          <td>2028</td>
-          <td>12,61</td>
-          <td>6936,42</td>
-          <td>229996,96</td>
-          <td>40208,07</td>
-          <td>943,91</td>
-          <td>218497,11</td>
-          <td>78658,96</td>
-          <td>65549,13</td>
-          <td>48088,39</td>
-          <td>17460,74</td>
-          <td>3142,93</td>
-          <td>14317,81</td>
-          <td>2863,56</td>
-          <td>0</td>
-          <td>15428,23</td>
-          <td>47047,38</td>
-          <td>7251,27</td>
-          <td>15137,37</td>
-        </tr>
-      </table> */}
       </div>
     </div>
   )
@@ -729,8 +518,5 @@ const mapStateToProps = state => ({
   page: state.pageReducer.page,
   region: state.pageReducer.region,
 });
-    
-const mapDispatchToProps = {
-};
   
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StatPageContainer));
+export default withRouter(connect(mapStateToProps, null)(StatPageContainer));

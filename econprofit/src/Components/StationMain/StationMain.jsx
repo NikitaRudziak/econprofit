@@ -5,7 +5,7 @@ import style from './StationMain.module.css';
 import { useParams } from 'react-router-dom'
 import route from '../../back_route';
 import { Chart } from "react-google-charts";
-import img from '../StatPageContainer/data.png'
+import img from '../StatPageContainer/data.png';
 
 export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   const { id } = useParams();
@@ -23,16 +23,16 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
-    fetch(`../${route}/locationinfo/${id}`)
-    // fetch(`${route}/locationinfo/${id}`)
+    // fetch(`../${route}/locationinfo/${id}`)
+    fetch(`${route}/locationinfo/${id}`)
       .then(response => {
         return response.json();
       })
       .then(data => {
         setTest(data);
       });
-    // fetch(`${route}/sessioninfo/${id}`)
-    fetch(`../${route}/sessioninfo/${id}`)
+    fetch(`${route}/sessioninfo/${id}`)
+    // fetch(`../${route}/sessioninfo/${id}`)
       .then(response => {
         return response.json();
       })
@@ -40,8 +40,8 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         setSessions(data);
         // console.log(data)
       });
-    fetch(`../${route}/timespend/${id}`)
-    // fetch(`${route}/timespend/${id}`)
+    // fetch(`../${route}/timespend/${id}`)
+    fetch(`${route}/timespend/${id}`)
       .then(response => {
         return response.json();
       })
@@ -50,14 +50,14 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         // console.log(data)
       });
     // console.log(page1)
-    setCenter2(Number(lat), Number(lng))
+    setCenter2(Number(lat), Number(lng));
     setZoom2(14);
   }, [])
 
   useEffect(() => {
-    let totalkwh=0;
-    let totalcost=0;
-    let totalsessions=0;
+    let totalkwh = 0;
+    let totalcost = 0;
+    let totalsessions = 0;
     let failed = 0;
     let perSession = 0;
     let type2 = 0;
@@ -82,49 +82,43 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         totalcost += Number(item.totalcost);
         totalsessions += 1;
         if (Number(item.kwh) < 0.5) {
-          failed += 1
+          failed += 1;
         }
         if (item.connector == 'Вилка Type 2') {
           type2 += Number(item.kwh);
           type2cash += Number(item.totalcost);
-          type2count++;
+          type2count ++;
         }
         if (item.connector == 'Пистолет CCS') {
-          ccs += Number(item.kwh)
-          ccscash += Number(item.totalcost)
-          ccscount++
+          ccs += Number(item.kwh);
+          ccscash += Number(item.totalcost);
+          ccscount ++;
         }
         if (item.connector == 'Пистолет CHAdeMO') {
-          chademo += Number(item.kwh)
-          chademocash += Number(item.totalcost)
-          chademocount++
+          chademo += Number(item.kwh);
+          chademocash += Number(item.totalcost);
+          chademocount ++;
         }
         if (item.connector == 'Розетка Type 2') {
-          type2plug += Number(item.kwh)
-          type2plugcash += Number(item.totalcost)
-          type2plugcount++;
+          type2plug += Number(item.kwh);
+          type2plugcash += Number(item.totalcost);
+          type2plugcount ++;
         }
       }) 
     }
-    arrcount.push(type2count, ccscount, chademocount, type2plugcount)
+    arrcount.push(type2count, ccscount, chademocount, type2plugcount);
     kwharr.push(type2, ccs, chademo, type2plug);
     casharr.push(type2cash, ccscash, chademocash, type2plugcash);
     perSession = (parseInt((totalkwh / (totalsessions - failed)) * 100)) / 100;
-    settotalkwh(totalkwh)
-    settotalcost(totalcost)
-    settotalsessions(totalsessions)
-    setFailed(failed)
-    setPerSession(perSession)
-    setByType(kwharr)
-    setByTypecash(casharr)
+    settotalkwh(totalkwh);
+    settotalcost(totalcost);
+    settotalsessions(totalsessions);
+    setFailed(failed);
+    setPerSession(perSession);
+    setByType(kwharr);
+    setByTypecash(casharr);
     setCount(arrcount);
   }, [sessions])
-
-  const view = () => {
-    var d = new Date(),
-    datestring = '';
-    datestring = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate()
-  }
 
   const generateRow = () => {
     return (
@@ -139,7 +133,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   }
 
   const openModal = () => {
-    setModalShow(!modalShow)
+    setModalShow(!modalShow);
   }
 
   return (
@@ -156,7 +150,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
       <div className={style.mainRegion}>
         <div className={style.leftLine}>
           <div className={style.stationInfo}>
-            <div className={style.stationInfoHeader} onClick={view}>
+            <div className={style.stationInfoHeader}>
               Информация о локации
             </div>
             <div className={style.stationInfoMain}>
@@ -184,7 +178,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
             </div>
           </div>
           <div className={style.stationInfo2}>
-            <div className={style.stationInfoHeader} onClick={view}>
+            <div className={style.stationInfoHeader}>
               Информация о станции(ях)
             </div>
             <div className={style.stationInfoMain}>
@@ -207,9 +201,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
               <div className={style.statPageCardLeft}>
                 <div>Целевой показатель по отпуску э/э на 2022</div>
                 <div>
-                  {test ?
-                    (test.length * 30422).toLocaleString('ru')
-                  : null} кВт*ч
+                  {test ? (test.length * 30422).toLocaleString('ru') : null} кВт*ч
                 </div>
               </div>
               <div className={style.statPageCardRight}>
@@ -285,8 +277,6 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
                   {test ?
                     timespend ?
                     timespend[0].timespend.hours ? timespend[0].timespend.hours + ' ч. ' + timespend[0].timespend.minutes + ' мин.': timespend[0].timespend.minutes + ' мин.'
-                      // timespend.hours + timespend.minutes
-                      // Math.trunc(perSession * 1.2)
                     : null
                   : null}</div>
               </div>
@@ -410,13 +400,8 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
 
 const mapStateToProps = (state) => {
   return {
-  page1: state.pageReducer.page,
-  // region: state.pageReducer.region,
+    page1: state.pageReducer.page,
   }
 };
-    
-const mapDispatchToProps = {
-
-};
   
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StationMain));
+export default withRouter(connect(mapStateToProps, null)(StationMain));

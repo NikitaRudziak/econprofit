@@ -2,7 +2,7 @@ import React, { useEffect, useState }from 'react';
 import { Redirect, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import logo from './malanka_logo_small.png'
+import logo from './malanka_logo_small.png';
 
 import style from './Navigation.module.css';
 
@@ -10,7 +10,7 @@ export const Navigation = ({view}) => {
   const [show, setShow] = useState(false);
 
   const changeVisibility = () => {
-    setShow(!show)
+    setShow(!show);
   }
 
   return (
@@ -84,7 +84,6 @@ export const Navigation = ({view}) => {
           </div>
         </div> : null}
       </div>
-      
     </div>
   )
 }
@@ -93,8 +92,5 @@ const mapStateToProps = state => ({
   page: state.pageReducer.page,
   region: state.pageReducer.region,
 });
-  
-const mapDispatchToProps = {
-};
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));
+export default withRouter(connect(mapStateToProps, null)(Navigation));

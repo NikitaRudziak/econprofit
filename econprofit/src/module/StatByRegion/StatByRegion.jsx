@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Navigation } from '../../Components/Navigation/Navigation';
@@ -10,7 +10,7 @@ export const StatByRegion = (props) => {
   return (
     <div className={style.StatByRegionContainer}>
       <Navigation />
-      <ByRegionContainer region={props.location.type} naming={props.location.name} reg={props.location.reg}/>
+      <ByRegionContainer region={props.location.type} naming={props.location.name} reg={props.location.reg} />
     </div>
   );
 }

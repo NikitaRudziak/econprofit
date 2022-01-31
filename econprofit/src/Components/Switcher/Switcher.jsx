@@ -18,7 +18,6 @@ export const Switcher = () => {
   const [activeTable, setActiveTable] = useState('locations');
   const [locations, setLocations] = useState([]);
   const [stations, setStations] = useState([]);
-  const [test, setTest] = useState([]);
 
   useEffect(() => {
     fetch(`${route}/location`)
@@ -72,11 +71,11 @@ export const Switcher = () => {
   }
 
   const changeToLoc = () => {
-    setActiveTable('locations')
+    setActiveTable('locations');
   }
 
   const changeToStations = () => {
-    setActiveTable('stations')
+    setActiveTable('stations');
   }
 
   const generateDocument = () => {
@@ -134,8 +133,6 @@ export const Switcher = () => {
       saveAs(out, "output.docx");
     });
   };
-
-
 
   return (
     <div className={style.switcherContainer}>
@@ -196,8 +193,5 @@ const mapStateToProps = state => ({
   page: state.pageReducer.page,
   region: state.pageReducer.region,
 });
-    
-const mapDispatchToProps = {
-};
   
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Switcher));
+export default withRouter(connect(mapStateToProps, null)(Switcher));

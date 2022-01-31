@@ -1,9 +1,6 @@
-import React, { useEffect, useState }from 'react';
-import { Redirect, Link } from "react-router-dom";
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import GoogleMapReact from 'google-map-react';
-import route from '../../back_route';
 
 import style from './ModalStation.module.css';
 
@@ -21,8 +18,5 @@ const mapStateToProps = state => ({
   page: state.pageReducer.page,
   region: state.pageReducer.region,
 });
-    
-const mapDispatchToProps = {
-  };
   
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ModalStation));
+export default withRouter(connect(mapStateToProps, null)(ModalStation));

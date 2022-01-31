@@ -1,4 +1,4 @@
-import React, { useEffect, useState }from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Navigation } from '../../Components/Navigation/Navigation';
@@ -12,7 +12,7 @@ export const StationContainer = (props) => {
   return (
     <div className={style.stationContainer}>
       <Navigation />
-      <StationMain lat={props.location.lat} setCenter2={props.setCenter} setZoom2={props.setZoom} lng={props.location.lng}/>
+      <StationMain lat={props.location.lat} setCenter2={props.setCenter} setZoom2={props.setZoom} lng={props.location.lng} />
     </div>
   )
 }

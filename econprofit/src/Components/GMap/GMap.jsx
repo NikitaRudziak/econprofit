@@ -8,7 +8,6 @@ import { saveAs } from 'file-saver';
 import ModalStation from '../ModalStation/ModalStation';
 import route from '../../back_route';
 
-
 import style from './GMap.module.css';
 
 let max = 0;
@@ -16,37 +15,35 @@ let max = 0;
 const AnyReactComponent = ({color, id, name, address, sum, count, lat, lng, perc}) => {
   return (
     <>
-    <div className={style[color]}>
-      <div>
-        {(parseFloat((Number(sum) / ( 30422 * Number(count))) * 100).toFixed(1)) * 100 / 100}%
-      </div>
-      <div className={style.modal2}>
-        <Link to={{pathname: `/maff/stationinfo/${id}`, lat: lat, lng: lng}}>
-          <div className={style.modalContainer}>
-            <div className={style.textContainer}>
-              <div className={style.stationName}>
-                {name}
-              </div>
-              <div className={style.stationAddress}>
-                {address}
+      <div className={style[color]}>
+        <div>
+          {(parseFloat((Number(sum) / ( 30422 * Number(count))) * 100).toFixed(1)) * 100 / 100}%
+        </div>
+        <div className={style.modal2}>
+          <Link to={{pathname: `/maff/stationinfo/${id}`, lat: lat, lng: lng}}>
+            <div className={style.modalContainer}>
+              <div className={style.textContainer}>
+                <div className={style.stationName}>
+                  {name}
+                </div>
+                <div className={style.stationAddress}>
+                  {address}
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
-      </div>
-    </div> 
-  </>
+          </Link>
+        </div>
+      </div> 
+    </>
   )
 }
 
 export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
   const [center, setCenter] = useState({lat: latitude, lng: longitude });
-  const [zoom, setZoom] = useState(11);
   const [locationList, setLocationList] = useState([]);
   const [percent, setPercent] = useState([]);
-  const [isVisible, setIsVisible] = useState(false)
-  const [test, setTest] = useState([])
-  const [dot, setDot] = useState();
+  const [isVisible, setIsVisible] = useState(false);
+  const [test, setTest] = useState([]);
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
@@ -73,7 +70,7 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
         percent.map(item2 => {
           if (item.address === item2.address) {
             if((parseFloat((Number(item2.sum) / ( 30422 * Number(item.count))) * 100).toFixed(1)) * 100 / 100 > max) {
-              max = (parseFloat((Number(item2.sum) / ( 30422 * Number(item.count))) * 100).toFixed(1)) * 100 / 100
+              max = (parseFloat((Number(item2.sum) / ( 30422 * Number(item.count))) * 100).toFixed(1)) * 100 / 100;
             }
             let obj = {
               id: item.id,
@@ -115,8 +112,8 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
       }
     })
     if (lat != 0) {
-      setCenter({lat: Number(lat), lng: Number(lng) })
-      setZoom2(17)
+      setCenter({lat: Number(lat), lng: Number(lng) });
+      setZoom2(17);
     }
   }
 
@@ -202,7 +199,7 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
   }
 
   const openModal = () => {
-    setModalShow(!modalShow)
+    setModalShow(!modalShow);
   }
 
   const s2ab = (s) => {
@@ -233,7 +230,7 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
   }
 
   const goToMark = (lat, lng) => {
-    setCenter({lat: Number(lat), lng: Number(lng) })
+    setCenter({lat: Number(lat), lng: Number(lng) });
     setZoom2(17);
     openModal();
   }
@@ -300,10 +297,7 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
             <div className={style.modalButton}>
               <div className={style.downloadButton} onClick={exportToXLS}>Скачать</div>
               <div className={style.close} onClick={openModal}>&times;</div>
-              {/* <span onClick={exportToXLS}>Скачать</span>
-              <span className={style.close} onClick={openModal}>&times;</span> */}
             </div>
-            
             <table id='Malanka_report'>
               <tr>
                 <th>Локация</th>
