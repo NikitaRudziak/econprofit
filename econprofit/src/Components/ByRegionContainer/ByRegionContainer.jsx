@@ -113,7 +113,6 @@ export const ByRegionContainer = (props) => {
       if(item.company == 'Минскоблнефтепродукт' && item.destination == 'Областной центр') {
         num = 0;
       }
-      
     })
     return num;
   }

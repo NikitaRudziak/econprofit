@@ -12,31 +12,29 @@ import style from './GMap.module.css';
 
 let max = 0;
 
-const AnyReactComponent = ({color, id, name, address, sum, count, lat, lng, perc}) => {
-  return (
-    <>
-      <div className={style[color]}>
-        <div>
-          {(parseFloat((Number(sum) / ( 30422 * Number(count))) * 100).toFixed(1)) * 100 / 100}%
-        </div>
-        <div className={style.modal2}>
-          <Link to={{pathname: `/maff/stationinfo/${id}`, lat: lat, lng: lng}}>
-            <div className={style.modalContainer}>
-              <div className={style.textContainer}>
-                <div className={style.stationName}>
-                  {name}
-                </div>
-                <div className={style.stationAddress}>
-                  {address}
-                </div>
+const AnyReactComponent = ({color, id, name, address, sum, count, lat, lng, perc}) => (
+  <>
+    <div className={style[color]}>
+      <div>
+        {(parseFloat((Number(sum) / ( 30422 * Number(count))) * 100).toFixed(1)) * 100 / 100}%
+      </div>
+      <div className={style.modal2}>
+        <Link to={{pathname: `/maff/stationinfo/${id}`, lat: lat, lng: lng}}>
+          <div className={style.modalContainer}>
+            <div className={style.textContainer}>
+              <div className={style.stationName}>
+                {name}
+              </div>
+              <div className={style.stationAddress}>
+                {address}
               </div>
             </div>
-          </Link>
-        </div>
-      </div> 
-    </>
-  )
-}
+          </div>
+        </Link>
+      </div>
+    </div> 
+  </>
+)
 
 export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
   const [center, setCenter] = useState({lat: latitude, lng: longitude });

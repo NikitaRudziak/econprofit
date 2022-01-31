@@ -7,15 +7,12 @@ import { GMap } from '../../Components/GMap/GMap';
 import style from './PageMapContainer.module.css';
 import { setCoordinates, setZoom } from '../../redux/actions';
 
-export const PageMapContainer = ({latitude, longitude, zoom, setCenter, setZoom}) => {
-
-  return (
-    <div className={style.pageMapContainer}>
-      <Navigation view='true'/>
-      <GMap latitude={latitude} longitude={longitude} setCenter2={setCenter} setZoom2={setZoom} zoom2={zoom} />
-    </div>
-  )
-}
+export const PageMapContainer = ({latitude, longitude, zoom, setCenter, setZoom}) => (
+  <div className={style.pageMapContainer}>
+    <Navigation view='true'/>
+    <GMap latitude={latitude} longitude={longitude} setCenter2={setCenter} setZoom2={setZoom} zoom2={zoom} />
+  </div>
+)
 
 const mapStateToProps = state => {
   return {

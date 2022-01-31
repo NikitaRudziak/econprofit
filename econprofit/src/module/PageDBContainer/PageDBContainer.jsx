@@ -6,16 +6,14 @@ import { Switcher } from '../../Components/Switcher/Switcher';
 
 import style from './PageDBContainer.module.css';
 
-export const PageDBContainer = () => {
-  return (
-    <div className={style.pageDBContainer}>
-      <Navigation />
-      <div className={style.rightContainer}>
-        <Switcher />
-      </div>
+export const PageDBContainer = () => (
+  <div className={style.pageDBContainer}>
+    <Navigation />
+    <div className={style.rightContainer}>
+      <Switcher />
     </div>
-  )
-}
+  </div>
+)
 
 const mapStateToProps = state => ({
   page: state.pageReducer.page,

@@ -1,5 +1,5 @@
-import React, { useEffect, useState }from 'react';
-import { Redirect, Link } from "react-router-dom";
+import React, { useState }from 'react';
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import logo from './malanka_logo_small.png';

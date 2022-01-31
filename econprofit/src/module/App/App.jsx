@@ -5,14 +5,12 @@ import { Navigation } from '../../Components/Navigation/Navigation';
 import { StatPageContainer } from '../../Components/StatPageContainer/StatPageContainer';
 import style from './App.module.css';
 
-export const App = () => {
-  return (
+export const App = () => (
     <div className={style.appContainer}>
       <Navigation />
       <StatPageContainer />
     </div>
-  );
-}
+)
 
 const mapStateToProps = state => {
   return {
