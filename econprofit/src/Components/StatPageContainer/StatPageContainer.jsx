@@ -9,7 +9,7 @@ import style from './StatPageContainer.module.css';
 
 export const StatPageContainer = () => {
   const [test, setTest] = useState([]);
-  const [sum, setSum] = useState()
+  const [sum, setSum] = useState();
   const [failed, setFailed] = useState();
   const [chademoKwh, setChademoKwh] = useState();
   const [ccsKwh, setCCSKwh] = useState();
@@ -199,7 +199,23 @@ export const StatPageContainer = () => {
               <div>AC: {byMode ? byMode[0].count : null} шт.</div>
               <div>DC: {byMode ? byMode[1].count : null} шт.</div>
               <div>AC/DC: {byMode ? byMode[2].count : null} шт.</div>
-              <div>Всего: {byMode ? stationSum(byMode) : null} шт.</div>
+              <div className={style.dropdown}>
+                <div className={style.dropbtn}>Без сим: 9 шт.</div>
+                <div className={style.dropdownContent}>
+                  <div className={style.contentTitle}>Зарядные станции без сим-карт</div>
+                  <div>
+                    <div className={style.list_item}>АЗС возле Гиппо, Гомель - 1 шт.</div>
+                    <div className={style.list_item}>АЗС, ул. Героев подпольщиков, Гомель - 1 шт.</div>
+                    <div className={style.list_item}>АЗС, ул. Танковая, Минск - 2 шт.</div>
+                    <div className={style.list_item}>Пр-т Победителей, 84, Минск - 2 шт.</div>
+                    <div className={style.list_item}>Нефтехимпроект, Минск - 1 шт.</div>
+                    <div className={style.list_item}>Ул. Красноармейская, 22а, Минск - 2 шт.</div>
+                    <div className={style.list_item}>Итого: 9 шт.</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div>Всего: {byMode ? Number(stationSum(byMode)) + 9 : null} шт.</div>
             </div>
           </div>
           <div className={style.statPageCardRight}>

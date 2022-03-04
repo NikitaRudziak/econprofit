@@ -39,7 +39,7 @@ export const Navigation = ({view}) => {
             <Link to={{pathname: '/maff/regioninfo', type: 1, name: 'Брестская область', reg: 'Брестоблнефтепродукт'}}>
               <div className={style.menuName}>Брестская область</div>
             </Link>
-            <Link to={{pathname: '/maff/regioninfo', type: 2, name: 'Витебская область', reg: 'Витебскоблнефтепродукт '}}>
+            <Link to={{pathname: '/maff/regioninfo', type: 2, name: 'Витебская область', reg: 'Витебскоблнефтепродукт'}}>
               <div className={style.menuName}>Витебская область</div>
             </Link>
             <Link to={{pathname: '/maff/regioninfo', type: 3, name: 'Гомельская область', reg: 'Гомельоблнефтепродукт'}}>
@@ -80,7 +80,7 @@ export const Navigation = ({view}) => {
             </div>
             <div className={style.leg_item}>
               <div className={style.legRed}></div>
-              <div>0% &lt;25%</div>
+              <div>&lt;25%</div>
           </div>
         </div> : null}
       </div>

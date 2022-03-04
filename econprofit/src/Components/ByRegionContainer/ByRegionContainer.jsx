@@ -240,7 +240,18 @@ export const ByRegionContainer = (props) => {
                   (getGoal(props.region - 1) * 1103437).toLocaleString('ru') : null} кВт*ч
               </div>
               <div >
-                <b>В областном центре:</b> {dest ? getDest() : null} шт.
+                {dest  ?  
+                  getDest() != 0 ?  <b>В областном центре: </b>  : null 
+                  : null} 
+                
+                {dest  ?  
+                  getDest() != 0 ? 
+                    getDest()
+                    : null 
+                : null} 
+                {dest  ?  
+                  getDest() != 0 ?  'шт.' : null 
+                  : null} 
               </div>
               {/* <div >
                 <b>На территории АЗС:</b> {dest ? getAzs() : null} шт.

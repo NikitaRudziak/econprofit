@@ -47,11 +47,17 @@ img {
   .menuPoint:hover  {
     color: aliceblue;
   }
+  
   .menuPoint:first-child{
     margin-bottom: 5px;
+    color: rgb(183,183,185);
   }
   .menuPoint:last-child{
     margin-top: 10px;
+  }
+  .menuPoint:last-child:hover{
+    margin-top: 10px;
+    color: aliceblue;
   }
 }
 
@@ -65,6 +71,9 @@ img {
     margin-bottom: 5px;
   }
   .menuName:hover {
+    color: aliceblue  ;
+  }
+  .menuName:first-child:hover {
     color: aliceblue  ;
   }
 }

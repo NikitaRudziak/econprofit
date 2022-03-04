@@ -23,16 +23,16 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
-    // fetch(`../${route}/locationinfo/${id}`)
-    fetch(`${route}/locationinfo/${id}`)
+    fetch(`../${route}/locationinfo/${id}`)
+    // fetch(`${route}/locationinfo/${id}`)
       .then(response => {
         return response.json();
       })
       .then(data => {
         setTest(data);
       });
-    fetch(`${route}/sessioninfo/${id}`)
-    // fetch(`../${route}/sessioninfo/${id}`)
+    // fetch(`${route}/sessioninfo/${id}`)
+    fetch(`../${route}/sessioninfo/${id}`)
       .then(response => {
         return response.json();
       })
@@ -40,8 +40,8 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         setSessions(data);
         // console.log(data)
       });
-    // fetch(`../${route}/timespend/${id}`)
-    fetch(`${route}/timespend/${id}`)
+    fetch(`../${route}/timespend/${id}`)
+    // fetch(`${route}/timespend/${id}`)
       .then(response => {
         return response.json();
       })

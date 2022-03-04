@@ -35,10 +35,11 @@
   cursor: pointer;
   color: black;
   background-color: rgb(142, 231, 161);
-  margin-right: 20px;
+  // margin-right: 20px;
   padding: 6px 10px;
   border-radius: 4px;
   font-size: 16px;
+  height: 25px;
 }
 
 span {
@@ -571,4 +572,94 @@ span {
 
 .modalRow {
   cursor: pointer;
+  background-color: rgb(89,201,165);
+}
+
+.green {
+  // background-color: rgb(89,201,165);
+  background-color: #CCCCFF;
+}
+
+.gray {
+  // background-color: #eee;
+  background-color: #cbffea;
+}
+
+.yellow {
+  // background-color: rgb(253, 255, 121);
+  background-color: #FAE7B5;
+}
+
+.blue {
+  // background-color: rgb(149, 149, 241);
+  background-color: #9ACEEB;
+}
+
+.red {
+  // background-color: rgb(241, 149, 149);
+  background-color: #A2ADD0;
+}
+
+.mint {
+  // background-color: rgb(129, 255, 207);;
+  color: #eee;
+  background-color: #17806D;
+}
+
+.pint {
+  // background-color: rgb(255, 165, 129);;
+  background-color: #fcb2f8;
+}
+
+.b {
+  // background-color: rgb(129, 226, 255);;
+  color: #eee;
+  background-color: #834D18;
+}
+
+.pos {
+  padding: 8px 18px;
+}
+
+.modalLegend {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.table_percent {
+  width: 100%;
+  tr {
+    width: 100%;
+  }
+}
+
+.modalInput {
+  height: 25px;
+  padding: 5px 10px;
+  margin: 0px 20px;
+}
+
+.q {
+  background-color: rgb(202, 85, 85);
+  color: #eee;
+}
+
+.w {
+  background-color: rgb(253, 179, 152);
+}
+
+.e {
+  background-color: rgb(253, 255, 121);
+}
+
+.r {
+  background-color: rgb(185,227,198);
+}
+
+.t {
+  background-color: rgb(89,201,165);
 }

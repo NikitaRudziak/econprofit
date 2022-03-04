@@ -98,4 +98,45 @@
 .tableRegion table tr th {
   font-size: 14px;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  width: 500px;
+  padding: 10px;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdownContent .contentTitle {
+  text-align: center;
+  margin: 20px 0px;
+}
+
+.list_item {
+  padding: 10px;
+  font-size: 18px;
+}
+
+.dropdownContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownContent a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
+}
 /*# sourceMappingURL=StatPageContainer.module.css.map */

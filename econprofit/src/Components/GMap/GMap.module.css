@@ -54,10 +54,10 @@
   cursor: pointer;
   color: black;
   background-color: #8ee7a1;
-  margin-right: 20px;
   padding: 6px 10px;
   border-radius: 4px;
   font-size: 16px;
+  height: 25px;
 }
 
 span {
@@ -758,5 +758,98 @@ span {
 
 .modalRow {
   cursor: pointer;
+  background-color: #59c9a5;
+}
+
+.green {
+  background-color: #CCCCFF;
+}
+
+.gray {
+  background-color: #cbffea;
+}
+
+.yellow {
+  background-color: #FAE7B5;
+}
+
+.blue {
+  background-color: #9ACEEB;
+}
+
+.red {
+  background-color: #A2ADD0;
+}
+
+.mint {
+  color: #eee;
+  background-color: #17806D;
+}
+
+.pint {
+  background-color: #fcb2f8;
+}
+
+.b {
+  color: #eee;
+  background-color: #834D18;
+}
+
+.pos {
+  padding: 8px 18px;
+}
+
+.modalLegend {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-right: 20px;
+}
+
+.table_percent {
+  width: 100%;
+}
+
+.table_percent tr {
+  width: 100%;
+}
+
+.modalInput {
+  height: 25px;
+  padding: 5px 10px;
+  margin: 0px 20px;
+}
+
+.q {
+  background-color: #ca5555;
+  color: #eee;
+}
+
+.w {
+  background-color: #fdb398;
+}
+
+.e {
+  background-color: #fdff79;
+}
+
+.r {
+  background-color: #b9e3c6;
+}
+
+.t {
+  background-color: #59c9a5;
 }
 /*# sourceMappingURL=GMap.module.css.map */
