@@ -1,4 +1,4 @@
-import React, { useEffect, useState }from 'react';
+import React, { useEffect, useState, useCallback }from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import style from './StationMain.module.css';
@@ -6,6 +6,12 @@ import { useParams } from 'react-router-dom'
 import route from '../../back_route';
 import { Chart } from "react-google-charts";
 import img from '../StatPageContainer/data.png';
+import { Dialog, DialogTitle, Typography, Stack, TextField } from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import DateFnsUtils from '@date-io/date-fns';
+
 
 export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   const { id } = useParams();
@@ -21,6 +27,28 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   const [count, setCount] = useState();
   const [timespend, setTimeSpend] = useState();
   const [modalShow, setModalShow] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [byMonth, setByMonth] = useState();
+  const [obj, setObj] = React.useState(false);
+  const [value, setValue] = React.useState(new Date());
+  const [data, setData] = React.useState({
+    totalkwhbyMonth: null,
+    totalcostbyMonth: null,
+  });
+  const escFunction = useCallback((event) => {
+    console.log(event)
+    // if (event.key === "Escape") {
+    //   setOpen(false)
+    //   console.log('ffff')
+    // }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
 
   useEffect(() => {
     fetch(`../${route}/locationinfo/${id}`)
@@ -49,7 +77,15 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         setTimeSpend(data);
         // console.log(data)
       });
-    // console.log(page1)
+      // fetch(`${route}/getconstantsbymonth`)
+      fetch(`../${route}/getconstantsbymonth`)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          setByMonth(data)
+          console.log(data)
+        })
     setCenter2(Number(lat), Number(lng));
     setZoom2(14);
   }, [])
@@ -75,11 +111,18 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
     let kwharr = [];
     let casharr = [];
     let arrcount = [];
-
+    let totalkwhbyMonth = 0;
+    let totalcostbyMonth = 0;
     if(sessions) {
       sessions.map(item => {
         totalkwh += Number(item.kwh);
         totalcost += Number(item.totalcost);
+        let currMonth = new Date(byMonth[byMonth.length-1].monthdate);
+        let m = new Date(item.chargingfrom)
+        if ( m >= currMonth && m < currMonth.setMonth(currMonth.getMonth() + 1)) {
+          totalkwhbyMonth += Number(item.kwh);
+          totalcostbyMonth += Number(item.totalcost)
+        }
         totalsessions += 1;
         if (Number(item.kwh) < 0.5) {
           failed += 1;
@@ -106,6 +149,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         }
       }) 
     }
+    setData({totalkwhbyMonth: totalkwhbyMonth, totalcostbyMonth: totalcostbyMonth})
     arrcount.push(type2count, ccscount, chademocount, type2plugcount);
     kwharr.push(type2, ccs, chademo, type2plug);
     casharr.push(type2cash, ccscash, chademocash, type2plugcash);
@@ -118,7 +162,77 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
     setByType(kwharr);
     setByTypecash(casharr);
     setCount(arrcount);
+    // 
+    //   console.log('yes')
+      
+    // }
   }, [sessions])
+
+  useEffect (() => {
+    console.log(test)
+    console.log(byMonth)
+    let obj = null;
+    if (test && byMonth && data) {
+    let zatrproizv = ((test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)
+      + (byMonth[byMonth.length-1].techobsl * test.length / 600)
+      + (byMonth[byMonth.length-1].rent * test.length / 600)
+      + (test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].insure)
+      + (byMonth[byMonth.length-1].zp * test.length / 600)
+      + (byMonth[byMonth.length-1].prog * test.length / 600)
+      + (byMonth[byMonth.length-1].sviaz * test.length / 600)
+      + (byMonth[byMonth.length-1].askue * test.length / 600)
+      + (byMonth[byMonth.length-1].komandir * test.length / 600)
+      + (byMonth[byMonth.length-1].other * test.length / 600)
+      + (data.totalkwhbyMonth / byMonth[byMonth.length-1].sumkwh * byMonth[byMonth.length-1].energy)
+      + (data.totalcostbyMonth * byMonth[byMonth.length-1].bank / byMonth[byMonth.length-1].sumcost)).toFixed(2);
+    obj = {
+      name: byMonth[byMonth.length-1].name,
+ 	    monthdate: byMonth[byMonth.length-1].monthdate,
+      sumkwh: (data.totalkwhbyMonth).toFixed(2),
+ 	    kwhperday: (data.totalkwhbyMonth / 30).toFixed(2),
+ 	    sumcost: (data.totalcostbyMonth).toFixed(2),
+ 	    nds: (data.totalcostbyMonth /1.2*0.2).toFixed(2),
+ 	    costwnds: (data.totalcostbyMonth-data.totalcostbyMonth /1.2*0.2).toFixed(2),
+      zatrproizv: zatrproizv,
+      uslperem: (data.totalkwhbyMonth / byMonth[byMonth.length-1].sumkwh * byMonth[byMonth.length-1].energy 
+        + data.totalcostbyMonth * byMonth[byMonth.length-1].bank / byMonth[byMonth.length-1].sumcost).toFixed(2),
+ 	    energy: (data.totalkwhbyMonth / byMonth[byMonth.length-1].sumkwh * byMonth[byMonth.length-1].energy).toFixed(2),
+ 	    bank: (data.totalcostbyMonth * byMonth[byMonth.length-1].bank / byMonth[byMonth.length-1].sumcost).toFixed(2),
+      uslpost: ((
+        test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)
+        + (byMonth[byMonth.length-1].techobsl * test.length / 600)
+        + (byMonth[byMonth.length-1].rent * test.length / 600)
+        + (test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].insure)
+        + (byMonth[byMonth.length-1].zp * test.length / 600)
+        + (byMonth[byMonth.length-1].prog * test.length / 600)
+        + (byMonth[byMonth.length-1].sviaz * test.length / 600)
+        + (byMonth[byMonth.length-1].askue * test.length / 600)
+        + (byMonth[byMonth.length-1].komandir * test.length / 600)
+        + (byMonth[byMonth.length-1].other * test.length / 600)).toFixed(2),
+      amort: (test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort).toFixed(2),
+ 	    techobsl: (byMonth[byMonth.length-1].techobsl * test.length / 600).toFixed(2),
+ 	    rent: (byMonth[byMonth.length-1].rent * test.length / 600).toFixed(2),
+ 	    insure: (test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].insure).toFixed(2),
+ 	    zp: (byMonth[byMonth.length-1].zp * test.length / 600).toFixed(2),
+ 	    prog: (byMonth[byMonth.length-1].prog * test.length / 600).toFixed(2),
+ 	    sviaz: (byMonth[byMonth.length-1].sviaz * test.length / 600).toFixed(2),
+ 	    askue: (byMonth[byMonth.length-1].askue * test.length / 600).toFixed(2),
+ 	    komandir: (byMonth[byMonth.length-1].komandir * test.length / 600).toFixed(2),
+ 	    other: (byMonth[byMonth.length-1].other * test.length / 600).toFixed(2),
+      pokrzatr: ((data.totalcostbyMonth-data.totalcostbyMonth /1.2*0.2) / zatrproizv * 100).toFixed(2),
+      zatrbezamort: (zatrproizv - (test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)).toFixed(2),
+      pokrzatrperc: ((data.totalcostbyMonth-data.totalcostbyMonth /1.2*0.2) / (zatrproizv - (test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)) * 100).toFixed(2),
+      pribil: ((data.totalcostbyMonth-data.totalcostbyMonth /1.2*0.2) - zatrproizv).toFixed(2),
+      rentabreal: (((data.totalcostbyMonth-data.totalcostbyMonth /1.2*0.2) - zatrproizv) / zatrproizv * 100).toFixed(2),
+      rentabprod: (((data.totalcostbyMonth-data.totalcostbyMonth /1.2*0.2) - zatrproizv) / data.totalcostbyMonth * 100).toFixed(2),
+      zatr1kw: (zatrproizv / data.totalkwhbyMonth).toFixed(2)
+    }
+    
+  }
+  setObj(obj)
+  console.log(obj)
+    
+  }, [test, byMonth, data])
 
   const generateRow = () => {
     return (
@@ -136,6 +250,10 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
     setModalShow(!modalShow);
   }
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <>
     <div className={style.stationMainContainer}>
@@ -143,7 +261,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         <div>
           {test ? test[0].name : null}
         </div>
-        <div className={style.tableButton} onClick={openModal}>
+        <div className={style.tableButton} onClick={handleClickOpen} >
           Расчет окупаемости
         </div>
       </div>
@@ -170,7 +288,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
                 <b>Кол-во станций:</b> {test ? test.length : null}
               </div>
               <div>
-                <b>Целевой показатель:</b> {test ? (test.length * 1103437).toLocaleString('ru') : null} кВт*ч
+                <b>Целевой показатель:</b> {test ? (test[0].cp_2022 * 8).toLocaleString('ru') : null} кВт*ч
               </div>
               <div>
                 <br />
@@ -201,7 +319,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
               <div className={style.statPageCardLeft}>
                 <div>Целевой показатель по отпуску э/э на 2022</div>
                 <div>
-                  {test ? (test.length * 30422).toLocaleString('ru') : null} кВт*ч
+                  {test ? (test[0].cp_2022) : null} кВт*ч
                 </div>
               </div>
               <div className={style.statPageCardRight}>
@@ -211,7 +329,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
                 <div>Отпущено э/э с 01.01.2022</div>
-                <div>{sessions ? ((parseInt(totalkwh * 100)) / 100).toLocaleString('ru') : null} кВт*ч</div>
+                <div>{sessions ? totalkwh.toLocaleString('ru') : null} кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">ev_station</span>
@@ -222,8 +340,8 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
                 <div>Выполнение плана по отпуску э/э на 2022</div>
                 <div>
                   {test ?
-                    ((parseInt((totalkwh / (test.length * 30422) * 100) * 100)) / 100).toLocaleString('ru')
-                  : null}%
+                    ((parseInt((totalkwh / (Number(test[0].cp_2022)) * 100) * 100)) / 100).toLocaleString('ru')
+                  : null} %
                 </div>
               </div>
               <div className={style.statPageCardRight}>
@@ -291,6 +409,49 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">monetization_on</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={style.stationInfoStat}>
+            <div className={style.statPageCard}>
+              <div className={style.statPageCardLeft}>
+                <div>Покрытие затрат выручкой без НДС</div>
+                <div>{obj ? (obj.pokrzatr).toLocaleString('ru') : null} %</div>
+              </div>
+              <div className={style.statPageCardRight}>
+                <span className="material-icons greyground">monetization_on</span>
+              </div>
+            </div>
+            <div className={style.statPageCard}>
+              <div className={style.statPageCardLeft}>
+                <div>Покрытие затрат без амортизации выручкой без НДС</div>
+                <div>{
+                  obj ? (obj.pokrzatrperc).toLocaleString('ru') : null
+                  } %</div>
+              </div>
+              <div className={style.statPageCardRight}>
+                <span className="material-icons greyground">monetization_on</span>
+                
+              </div>
+            </div>
+            <div className={style.statPageCard}>
+              <div className={style.statPageCardLeft}>
+                <div>Общие затраты на 1 кВт*ч оказанных услуг</div>
+                <div>
+                  {obj ? obj.zatr1kw : null} руб./кВт*ч</div>
+              </div>
+              <div className={style.statPageCardRight}> 
+              <span className="material-icons greyground">monetization_on</span>
+              </div>
+            </div>
+            <div className={style.statPageCard}>
+              <div className={style.statPageCardLeft}>
+                <div>Выручка без НДС на 1 кВт*ч оказанных услуг</div>
+                <div>{sessions ? (Number(data.totalcostbyMonth) / Number(data.totalkwhbyMonth)).toLocaleString('ru') : null} руб./кВт*ч</div>
+              </div>
+              <div className={style.statPageCardRight}>
+              <span className="material-icons greyground">monetization_on</span>
               </div>
             </div>
           </div>
@@ -377,7 +538,54 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         />
       </div>
     </div>
-    {modalShow 
+    <Dialog open={open} maxWidth='lg'>
+      <DialogTitle>Целевые показатели<span className={style.close} onClick={() => setOpen(false)}>&times;</span></DialogTitle>
+      <Stack>
+        {obj ? <Stack spacing={2} sx={{width: '50vw', padding:'20px'}} >
+          <TextField id="outlined-basic" label="Название" variant="outlined" size="small" name="name" value={obj.name} disabled/>
+          {/* <TextField id="outlined-basic" label="Дата / месяц" variant="outlined" size="small" name="monthdate" value={obj.monthdate} disabled/> */}
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    views={['year', 'month']}
+                    label="Месяц / Год"
+                    minDate={new Date('2020-03-01')}
+                    maxDate={new Date('2027-06-01')}
+                    value={obj.monthdate}
+                    
+                    renderInput={(params) => <TextField {...params} helperText={null} disabled />}
+                  />
+                </LocalizationProvider>
+          <TextField id="outlined-basic" label="Объем оказанных услуг, кВт*ч" variant="outlined" size="small" name="sumkwh" value={obj.sumkwh} disabled/>
+          <TextField id="outlined-basic" label="Среднесуточный отпуск услуг, кВт*ч" variant="outlined" size="small" name="kwhperday" value={obj.kwhperday} disabled/>
+          <TextField id="outlined-basic" label="Выручка от реализации с НДС, руб" variant="outlined" size="small" name="sumcost" value={obj.sumcost} disabled/>
+          <TextField id="outlined-basic" label="НДС, руб" variant="outlined" size="small" name="nds" value={obj.nds} disabled/>
+          <TextField id="outlined-basic" label="Выручка от реализации без НДС, руб" variant="outlined" size="small" name="costwnds" value={obj.costwnds} disabled/>
+          <TextField id="outlined-basic" label="Затраты на производство и реализацию, руб" variant="outlined" size="small" name="zatrproizv" value={obj.zatrproizv}  disabled/>
+          <TextField id="outlined-basic" label="Условно-переменные, руб" variant="outlined" size="small" value={obj.uslperem} disabled/>
+          <TextField id="outlined-basic" label="Электроэнергия, руб" variant="outlined" size="small" name="energy" value={obj.energy} disabled/>
+          <TextField id="outlined-basic" label="Услуги банка, руб" variant="outlined" size="small" name="bank" value={obj.bank} disabled/>
+          <TextField id="outlined-basic" label="Условно-постоянные, руб" variant="outlined" size="small" value={obj.uslpost} disabled/>
+          <TextField id="outlined-basic" label="Амортизация ОС и НМА, руб" variant="outlined" size="small" name="amort" value={obj.amort} disabled/>
+          <TextField id="outlined-basic" label="ТО, руб" variant="outlined" size="small" name="techobsl" value={obj.techobsl} disabled/>
+          <TextField id="outlined-basic" label="Аренда, руб" variant="outlined" size="small" name="rent" value={obj.rent} disabled/>
+          <TextField id="outlined-basic" label="Страхование, руб" variant="outlined" size="small" name="insure" value={obj.insure} disabled/>
+          <TextField id="outlined-basic" label="Заработная плата / ФСЗН, руб" variant="outlined" size="small" name="zp" value={obj.zp} disabled/>
+          <TextField id="outlined-basic" label="ПО, руб" variant="outlined" size="small" name="prog" value={obj.prog} disabled/>
+          <TextField id="outlined-basic" label="Услуги связи VPN, руб" variant="outlined" size="small" name="sviaz" value={obj.sviaz} disabled/>
+          <TextField id="outlined-basic" label="Обслуживание АСКУЕ, руб" variant="outlined" size="small" name="askue" value={obj.askue} disabled/>
+          <TextField id="outlined-basic" label="Командировки, руб" variant="outlined" size="small" name="komandir" value={obj.komandir} disabled/>
+          <TextField id="outlined-basic" label="Прочие, руб" variant="outlined" size="small" name="other" value={obj.other} disabled/>
+          <TextField id="outlined-basic" label="Покрытие затрат на производство и реализацию выручкой без НДС, %" variant="outlined" size="small" name="pokrzatr" value={obj.pokrzatr} disabled/>
+          <TextField id="outlined-basic" label="Затраты на производство и реализацию без амортизации ОС и НМА, руб" variant="outlined" size="small" name="zatrbezamort" value={obj.zatrbezamort} disabled/>
+          <TextField id="outlined-basic" label="Покрытие затрат на производство и реализацию без амортизации ОС и НМА выручкой без НДС, %" variant="outlined"  size="small" name="pokrzatrperc" value={obj.pokrzatrperc} disabled/>
+          <TextField id="outlined-basic" label="Прибыль, руб" variant="outlined" size="small" name="pribil" value={obj.pribil} disabled/>
+          <TextField id="outlined-basic" label="Рентабельность реализованной продукции, %" variant="outlined" size="small" name="rentabreal" value={obj.rentabreal} disabled/>
+          <TextField id="outlined-basic" label="Рентабельность продаж, %" variant="outlined" size="small" name="rentabprod" value={obj.rentabprod} disabled/>
+          <TextField id="outlined-basic" label="Затраты (руб.) на 1кВт*ч оказанных услуг, руб" variant="outlined" size="small" name="zatr1kw" value={obj.zatr1kw} disabled/>
+        </Stack> : null}
+      </Stack>
+    </Dialog>
+    {/* {modalShow 
       ? <div id="myModal" className={style.modalOpen}> 
           <div className={style.modalContent}>
             <span className={style.close} onClick={openModal}>&times;</span>
@@ -393,7 +601,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
             <p>Некоторый текст в модальном..</p>
           </div>
         </div>
-    }
+    } */}
     </>
   )
 }

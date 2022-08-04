@@ -5,6 +5,10 @@ import { withRouter } from 'react-router-dom';
 import style from './ByRegionContainer.module.css';
 import route from '../../back_route';
 import { Chart } from "react-google-charts";
+import { Dialog, DialogTitle, Typography, Stack, TextField } from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import img from '../StatPageContainer/data.png';
 
 export const ByRegionContainer = (props) => {
@@ -15,6 +19,9 @@ export const ByRegionContainer = (props) => {
   const [byConnector, setByConnector] = useState();
   const [br, setBr] = useState();
   const [dest, setDest] = useState([]);
+  const [cp,setCP] = useState();
+  const [open, setOpen] = React.useState(false);
+  const [byMonth, setByMonth] = useState();
 
   useEffect(() => {
     fetch(`${route}/regionstat`)
@@ -39,6 +46,14 @@ export const ByRegionContainer = (props) => {
       })
       .then(data => {
         setRegCount(data);
+        // console.log(data)
+      });
+    fetch(`${route}/getcp`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setCP(data);
         // console.log(data)
       });
     fetch(`${route}/bymode`)
@@ -73,6 +88,15 @@ export const ByRegionContainer = (props) => {
         setDest(data);
         // console.log(data)
       });
+    // fetch(`../${route}/getconstantsbymonth`)
+    fetch(`${route}/getconstantsbymonth`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setByMonth(data)
+        console.log(data)
+      })
     getPY();
   }, [])
 
@@ -211,6 +235,10 @@ export const ByRegionContainer = (props) => {
     return azs;
   }
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <>
     {props.region ? <div className={style.stationMainContainer}>
@@ -218,7 +246,7 @@ export const ByRegionContainer = (props) => {
         <div>
           {props.naming ? props.naming : null}
         </div>
-        <div className={style.tableButton} onClick={openModal}>
+        <div className={style.tableButton} onClick={handleClickOpen}>
           Расчет окупаемости 
         </div>
       </div>
@@ -236,8 +264,8 @@ export const ByRegionContainer = (props) => {
                 <b>Кол-во станций:</b> {regCount && props.region ? regCount[props.region - 1].count + ' из ' + getGoal(props.region - 1) : null} 
               </div>
               <div>
-                <b>Целевой показатель:</b> {regCount && props.region ? 
-                  (getGoal(props.region - 1) * 1103437).toLocaleString('ru') : null} кВт*ч
+                <b>Целевой показатель:</b> {cp && props.region ? 
+                  (Number(cp[props.region-1].cp) * 8).toLocaleString('ru')  : null} кВт*ч
               </div>
               <div >
                 {dest  ?  
@@ -253,9 +281,6 @@ export const ByRegionContainer = (props) => {
                   getDest() != 0 ?  'шт.' : null 
                   : null} 
               </div>
-              {/* <div >
-                <b>На территории АЗС:</b> {dest ? getAzs() : null} шт.
-              </div> */}
               <div>
                 
               </div>
@@ -279,7 +304,7 @@ export const ByRegionContainer = (props) => {
               <div className={style.statPageCardLeft}>
                 <div>Целевой показатель по отпуску э/э на 2022</div>
                 <div>
-                  {(getGoal(props.region - 1) * 30422).toLocaleString('ru')} кВт*ч
+                  {cp ? (Number(cp[props.region-1].cp)).toLocaleString('ru') : null} кВт*ч
                 </div>
               </div>
               <div className={style.statPageCardRight}>
@@ -300,7 +325,7 @@ export const ByRegionContainer = (props) => {
                 <div>Выполнение плана по отпуску э/э на 2022</div>
                 <div>
                   {regCount && props.region && regionStat ?
-                    ((parseInt((regionStat[props.region - 1].totalkwh / (regCount[props.region - 1].count * 30422) * 100) * 100)) / 100).toLocaleString('ru')
+                    parseFloat(regionStat[props.region - 1].totalkwh / Number(cp[props.region-1].cp) * 100).toLocaleString('ru')
                   : null}%
                 </div>
               </div>
@@ -325,7 +350,9 @@ export const ByRegionContainer = (props) => {
             <div className={style.statPageCardMiddle}>
               <div className={style.statPageCardLeft}>
                 <div>Кол-во зарядных сессий с 01.01.2022</div>
-                <div>{props.region && regionStat ? ((parseInt(regionStat[props.region - 1].count * 100)) / 100).toLocaleString('ru') : null} ед.</div>
+                <div>{props.region && regionStat ? ((Number(regionStat[props.region - 1].count * 100)) / 100).toLocaleString('ru') 
+                // ((Number(regionStat[props.region - 1].count * 100)) / 100).toLocaleString('ru') 
+                : null} ед.</div>
               </div>
               <div className={style.statPageCardRight}>
                 <span className="material-icons greyground">account_box</span>
@@ -524,7 +551,53 @@ export const ByRegionContainer = (props) => {
         </div>
       </div>
     </div> : <Redirect to="/maff/main"/> }
-    {modalShow 
+    <Dialog open={open} maxWidth='lg'>
+      <DialogTitle>Целевые показатели<span className={style.close} onClick={() => setOpen(false)}>&times;</span></DialogTitle>
+      {/* <Stack>
+        {obj ? <Stack spacing={2} sx={{width: '50vw', padding:'20px'}} >
+          <TextField id="outlined-basic" label="Название" variant="outlined" size="small" name="name" value={obj.name} disabled/>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    views={['year', 'month']}
+                    label="Месяц / Год"
+                    minDate={new Date('2020-03-01')}
+                    maxDate={new Date('2027-06-01')}
+                    value={obj.monthdate}
+                    
+                    renderInput={(params) => <TextField {...params} helperText={null} disabled />}
+                  />
+          </LocalizationProvider> */}
+          {/* <TextField id="outlined-basic" label="Объем оказанных услуг, кВт*ч" variant="outlined" size="small" name="sumkwh" value={obj.sumkwh} disabled/>
+          <TextField id="outlined-basic" label="Среднесуточный отпуск услуг, кВт*ч" variant="outlined" size="small" name="kwhperday" value={obj.kwhperday} disabled/>
+          <TextField id="outlined-basic" label="Выручка от реализации с НДС, руб" variant="outlined" size="small" name="sumcost" value={obj.sumcost} disabled/>
+          <TextField id="outlined-basic" label="НДС, руб" variant="outlined" size="small" name="nds" value={obj.nds} disabled/>
+          <TextField id="outlined-basic" label="Выручка от реализации без НДС, руб" variant="outlined" size="small" name="costwnds" value={obj.costwnds} disabled/>
+          <TextField id="outlined-basic" label="Затраты на производство и реализацию, руб" variant="outlined" size="small" name="zatrproizv" value={obj.zatrproizv}  disabled/>
+          <TextField id="outlined-basic" label="Условно-переменные, руб" variant="outlined" size="small" value={obj.uslperem} disabled/>
+          <TextField id="outlined-basic" label="Электроэнергия, руб" variant="outlined" size="small" name="energy" value={obj.energy} disabled/>
+          <TextField id="outlined-basic" label="Услуги банка, руб" variant="outlined" size="small" name="bank" value={obj.bank} disabled/>
+          <TextField id="outlined-basic" label="Условно-постоянные, руб" variant="outlined" size="small" value={obj.uslpost} disabled/>
+          <TextField id="outlined-basic" label="Амортизация ОС и НМА, руб" variant="outlined" size="small" name="amort" value={obj.amort} disabled/>
+          <TextField id="outlined-basic" label="ТО, руб" variant="outlined" size="small" name="techobsl" value={obj.techobsl} disabled/>
+          <TextField id="outlined-basic" label="Аренда, руб" variant="outlined" size="small" name="rent" value={obj.rent} disabled/>
+          <TextField id="outlined-basic" label="Страхование, руб" variant="outlined" size="small" name="insure" value={obj.insure} disabled/>
+          <TextField id="outlined-basic" label="Заработная плата / ФСЗН, руб" variant="outlined" size="small" name="zp" value={obj.zp} disabled/>
+          <TextField id="outlined-basic" label="ПО, руб" variant="outlined" size="small" name="prog" value={obj.prog} disabled/>
+          <TextField id="outlined-basic" label="Услуги связи VPN, руб" variant="outlined" size="small" name="sviaz" value={obj.sviaz} disabled/>
+          <TextField id="outlined-basic" label="Обслуживание АСКУЕ, руб" variant="outlined" size="small" name="askue" value={obj.askue} disabled/>
+          <TextField id="outlined-basic" label="Командировки, руб" variant="outlined" size="small" name="komandir" value={obj.komandir} disabled/>
+          <TextField id="outlined-basic" label="Прочие, руб" variant="outlined" size="small" name="other" value={obj.other} disabled/>
+          <TextField id="outlined-basic" label="Покрытие затрат на производство и реализацию выручкой без НДС, %" variant="outlined" size="small" name="pokrzatr" value={obj.pokrzatr} disabled/>
+          <TextField id="outlined-basic" label="Затраты на производство и реализацию без амортизации ОС и НМА, руб" variant="outlined" size="small" name="zatrbezamort" value={obj.zatrbezamort} disabled/>
+          <TextField id="outlined-basic" label="Покрытие затрат на производство и реализацию без амортизации ОС и НМА выручкой без НДС, %" variant="outlined"  size="small" name="pokrzatrperc" value={obj.pokrzatrperc} disabled/>
+          <TextField id="outlined-basic" label="Прибыль, руб" variant="outlined" size="small" name="pribil" value={obj.pribil} disabled/>
+          <TextField id="outlined-basic" label="Рентабельность реализованной продукции, %" variant="outlined" size="small" name="rentabreal" value={obj.rentabreal} disabled/>
+          <TextField id="outlined-basic" label="Рентабельность продаж, %" variant="outlined" size="small" name="rentabprod" value={obj.rentabprod} disabled/>
+          <TextField id="outlined-basic" label="Затраты (руб.) на 1кВт*ч оказанных услуг, руб" variant="outlined" size="small" name="zatr1kw" value={obj.zatr1kw} disabled/> */}
+        {/* </Stack> : null}
+      </Stack> */}
+    </Dialog>
+    {/* {modalShow 
       ? <div id="myModal" className={style.modalOpen}> 
           <div className={style.modalContent}>
             <span className={style.close} onClick={openModal}>&times;</span>
@@ -540,7 +613,7 @@ export const ByRegionContainer = (props) => {
             <p>Некоторый текст в модальном..</p>
           </div>
         </div>
-    }
+    } */}
     </>
   )
 }

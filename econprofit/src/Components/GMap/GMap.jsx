@@ -12,14 +12,21 @@ import style from './GMap.module.css';
 
 let max = 0;
 
-const AnyReactComponent = ({color, id, name, address, sum, count, lat, lng, perc}) => (
+const AnyReactComponent = ({color, id, name, address, sum, count, lat, lng, perc, reg = false}) => (
   <>
     <div className={style[color]}>
       <div>
-        {(parseFloat((Number(sum) / ( 30422 * Number(count))) * 100).toFixed(1)) * 100 / 100}%
+        {count}
       </div>
       <div className={style.modal2}>
-        <Link to={{pathname: `/maff/stationinfo/${id}`, lat: lat, lng: lng}}>
+        <Link to={{
+            pathname: reg ? `/maff/regioninfo` : `/maff/stationinfo/${id}`,
+            type: reg ? reg.type : null,
+            name: reg ? reg.name : null,
+            reg: reg ? reg.reg : null,
+            lat: lat,
+            lng: lng,
+          }}>
           <div className={style.modalContainer}>
             <div className={style.textContainer}>
               <div className={style.stationName}>
@@ -44,6 +51,10 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
   const [test, setTest] = useState([]);
   const [find, setFind] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [changeMarkers, setChangeMarkers] = useState();
+  const [markers, setMarkers] = useState([]);
+  const [regionStat, setRegionStat] = useState();
+  const [cp,setCP] = useState();
 
   useEffect(() => {
     fetch(`${route}/countinfo`)
@@ -60,6 +71,29 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
       .then(data => {
         setPercent(data);
       });
+    fetch(`${route}/getregmarkers`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setMarkers(data);
+      });
+      fetch(`${route}/regionstat`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setRegionStat(data);
+        // console.log(data)
+      });
+      fetch(`${route}/getcp`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setCP(data);
+        // console.log(data)
+      });
   }, [])
 
   useEffect(() => {
@@ -68,8 +102,8 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
       locationList.map(item => {
         percent.map(item2 => {
           if (item.address === item2.address) {
-            if((parseFloat((Number(item2.sum) / ( 30422 * Number(item.count))) * 100).toFixed(1)) * 100 / 100 > max) {
-              max = (parseFloat((Number(item2.sum) / ( 30422 * Number(item.count))) * 100).toFixed(1)) * 100 / 100;
+            if((parseFloat((Number(item2.sum) / (Number(item.cp_2022))) * 100).toFixed(1)) * 100 / 100 > max) {
+              max = (parseFloat((Number(item2.sum) / (Number(item.cp_2022))) * 100).toFixed(1)) * 100 / 100;
             }
             let obj = {
               id: item.id,
@@ -81,8 +115,9 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
               longitude: item2.longitude,
               sum: item2.sum,
               count: item.count,
-              perc: (parseFloat((Number(item2.sum) / ( 30422 * Number(item.count))) * 100).toFixed(2)) * 100 / 100
+              perc: (parseFloat((Number(item2.sum) / (Number(item.cp_2022))) * 100).toFixed(2)) * 100 / 100
             }
+            console.log(obj)
             arr.push(obj);
           }
         })
@@ -112,7 +147,6 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
     )
   }
 
-
   const changeDot = (arg) => {
     let lat = 0;
     let lng = 0;
@@ -134,88 +168,63 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
     setZoom2(11);
   }
 
+  const setColor = (percent) => {
+    let now = new Date();
+    let start = new Date(now.getFullYear(), 0, 0);
+    let diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    let oneDay = 1000 * 60 * 60 * 24;
+    let day = Math.floor(diff / oneDay);
+    if (percent <= day * 0.273 * 25 / 100 && percent >= 0) {
+      return 'marker_red'
+    }
+    if (percent > day * 0.273 * 25 / 100 && percent <= day * 0.273 * 50 / 100) {
+      return 'marker_orange'
+    }
+    if (percent > day * 0.273 * 50 / 100 && percent <= day * 0.273 * 75 / 100 ) {
+      return 'marker_yellow'
+    }
+    if (percent > day * 0.273 * 75 / 100 && percent < day * 0.273) {
+      return 'marker'
+    }
+    if (percent >= day * 0.273 || percent >= 100) {
+      return 'marker_green'
+    }
+  }
+
   const getMarkers = (test) => {
-    return test.map(item => {
-      const percent = (parseFloat((Number(item.sum) / ( 30422 * Number(item.count))) * 100).toFixed(1)) * 100 / 100;
-      let now = new Date();
-      let start = new Date(now.getFullYear(), 0, 0);
-      let diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-      let oneDay = 1000 * 60 * 60 * 24;
-      let day = Math.floor(diff / oneDay);
-      if(percent <= day * 0.273 * 25 / 100 && percent >= 0) {
+    if (changeMarkers <= 7) {
+      return markers.map(item => (
+        <AnyReactComponent
+          color={setColor(Number(Number(regionStat[Number(item.type)-1].totalkwh) / Number(cp[Number(item.type)-1].cp) * 100).toFixed(2))}
+          id={item.id}
+          lat={Number(item.lat)}
+          lng={Number(item.lng)}
+          name={item.namec}
+          address={null}
+          sum={11}
+          count={Number(Number(regionStat[Number(item.type)-1].totalkwh) / Number(cp[Number(item.type)-1].cp) * 100).toFixed(2).toLocaleString('ru')}
+          reg={{type: Number(item.type), name: item.namec, reg: item.regc}}
+        />
+      ))
+    } else {
+      return test.map(item => {
         return (
           <AnyReactComponent
-            color = 'marker_red'
+            color = {setColor(Number(item.perc))}
             id={item.id}
             lat={item.latitude}
             lng={item.longitude}
             name={item.name}
             address={item.address}
             sum={item.sum}
-            count={item.count}
+            count={item.perc}
           />
         )
-      }
-      if(percent > day * 0.273 * 25 / 100 && percent <= day * 0.273 * 50 / 100) {
-        return (
-          <AnyReactComponent
-            color = 'marker_orange'
-            id={item.id}
-            lat={item.latitude}
-            lng={item.longitude}
-            name={item.name}
-            address={item.address}
-            sum={item.sum}
-            count={item.count}
-          />
-        )
-      }
-      if(percent > day * 0.273 * 50 / 100 && percent <= day * 0.273 * 75 / 100 ) {
-        return <AnyReactComponent
-          color= 'marker_yellow'
-          id={item.id}
-          lat={item.latitude}
-          lng={item.longitude}
-          name={item.name}
-          address={item.address}
-          sum={item.sum}
-          count={item.count}
-        />
-      }
-      if(percent > day * 0.273 * 75 / 100 && percent < day * 0.273) {
-        return <AnyReactComponent
-          color= 'marker'
-          id={item.id}
-          lat={item.latitude}
-          lng={item.longitude}
-          name={item.name}
-          address={item.address}
-          sum={item.sum}
-          count={item.count}
-        />
-      }
-      if(percent >= day * 0.273 || percent >= 100) {
-        return <AnyReactComponent
-          color= 'marker_green'
-          id={item.id}
-          lat={item.latitude}
-          lng={item.longitude}
-          name={item.name}
-          address={item.address}
-          sum={item.sum}
-          count={item.count}
-        />
-      }
-    })
+      })
+    }
   }
 
   const openModal = () => {
-    // e.preventDefault();
-    setModalShow(!modalShow);
-  }
-
-  const openModal2 = (e) => {
-    e.stopPropagation()
     setModalShow(!modalShow);
   }
 
@@ -295,7 +304,6 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
               <td>{item.name}</td>
               <td>{item.company}</td>
               <td>{item.nearplaces}</td>
-              
               <td className={style[perce]}>{item.perc}</td>
             </tr>
           )
@@ -534,6 +542,7 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
         bootstrapURLKeys={{ key: "AIzaSyBoUSex8GgH0dsuHOCfz7yX4CvRCWzCKck" }}
         center={center}
         zoom={zoom2}
+        onChange={(e) => setChangeMarkers(e.zoom)}
       >
         {getMarkers(test)}
       </GoogleMapReact>
@@ -562,7 +571,6 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
                 <div className={`${style.pint} ${style.pos}`}>Зона отдыха</div>
                 <div className={`${style.b} ${style.pos}`}>Зона каршеринга</div>
               </div>
-              
               <div className={style.close} onClick={openModal}>&times;</div>
             </div>
             <table className={style.table_percent} id='Malanka_report'>

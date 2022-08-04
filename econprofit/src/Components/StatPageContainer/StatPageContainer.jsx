@@ -197,25 +197,25 @@ export const StatPageContainer = () => {
             <div>Краткая информация</div>
             <div>
               <div>AC: {byMode ? byMode[0].count : null} шт.</div>
-              <div>DC: {byMode ? byMode[1].count : null} шт.</div>
-              <div>AC/DC: {byMode ? byMode[2].count : null} шт.</div>
+              <div>DC: {byMode ? byMode[2].count : null} шт.</div>
+              <div>AC/DC: {byMode ? Number(byMode[1].count) + Number(byMode[3].count) : null} шт.</div>
               <div className={style.dropdown}>
-                <div className={style.dropbtn}>Без сим: 9 шт.</div>
+                <div className={style.dropbtn}>Без сим: 3 шт.</div>
                 <div className={style.dropdownContent}>
                   <div className={style.contentTitle}>Зарядные станции без сим-карт</div>
                   <div>
-                    <div className={style.list_item}>АЗС возле Гиппо, Гомель - 1 шт.</div>
+                    {/* <div className={style.list_item}>АЗС возле Гиппо, Гомель - 1 шт.</div> */}
                     <div className={style.list_item}>АЗС, ул. Героев подпольщиков, Гомель - 1 шт.</div>
                     <div className={style.list_item}>АЗС, ул. Танковая, Минск - 2 шт.</div>
-                    <div className={style.list_item}>Пр-т Победителей, 84, Минск - 2 шт.</div>
-                    <div className={style.list_item}>Нефтехимпроект, Минск - 1 шт.</div>
-                    <div className={style.list_item}>Ул. Красноармейская, 22а, Минск - 2 шт.</div>
-                    <div className={style.list_item}>Итого: 9 шт.</div>
+                    {/* <div className={style.list_item}>Пр-т Победителей, 84, Минск - 2 шт.</div> */}
+                    {/* <div className={style.list_item}>Нефтехимпроект, Минск - 1 шт.</div> */}
+                    {/* <div className={style.list_item}>Ул. Красноармейская, 22а, Минск - 2 шт.</div> */}
+                    <div className={style.list_item}>Итого: 3 шт.</div>
                   </div>
                 </div>
               </div>
               
-              <div>Всего: {byMode ? Number(stationSum(byMode)) + 9 : null} шт.</div>
+              <div>Всего: {byMode ? Number(stationSum(byMode)) + 3 : null} шт.</div>
             </div>
           </div>
           <div className={style.statPageCardRight}>
@@ -225,7 +225,7 @@ export const StatPageContainer = () => {
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
             <div>Целевой показатель по отпуску э/э на 2022</div>
-            <div>{(21052631.58).toLocaleString('ru')} кВт*ч</div>
+            <div>{(7412000).toLocaleString('ru')} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">star_rate</span>
@@ -235,7 +235,7 @@ export const StatPageContainer = () => {
           <div className={style.statPageCardLeft}>
             <div>Выполнение плана по отпуску э/э на 2022</div>
             <div>
-              {sum ? ((parseInt((sum[0].sumkw / 21052631.58  * 100) * 100)) / 100).toLocaleString('ru') : null}%
+              {sum ? ((parseInt((sum[0].sumkw / 7412000  * 100) * 100)) / 100).toLocaleString('ru') : null}%
             </div>
           </div>
           <div className={style.statPageCardRight}>
@@ -266,7 +266,7 @@ export const StatPageContainer = () => {
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
             <div>Целевой показатель по отпуску э/э для обеспечения окупаемости</div>
-            <div>{(763578947.37).toLocaleString('ru')} кВт*ч</div>
+            <div>{(347921888.78).toLocaleString('ru')} кВт*ч</div>
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">star_rate</span>
@@ -275,7 +275,8 @@ export const StatPageContainer = () => {
         <div className={style.statPageCard}>
           <div className={style.statPageCardLeft}>
             <div>Общее выполнение плана по отпуску э/э</div>
-            <div>{sum ? (((parseInt(((sum[0].sumkw) / 763578947.37 * 100 ) * 100)) / 100) + 0.35).toLocaleString('ru') : null}%</div>
+            <div>{sum ? (((parseInt(((sum[0].sumkw) / 347921888.78 * 100 ) * 100)) / 100) + 0.35).toLocaleString('ru') : null}%</div>
+            {/* 763578947.37 */}
           </div>
           <div className={style.statPageCardRight}>
             <span className="material-icons greyground">battery_charging_full</span>
