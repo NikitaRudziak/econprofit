@@ -22,6 +22,9 @@ export const ByRegionContainer = (props) => {
   const [cp,setCP] = useState();
   const [open, setOpen] = React.useState(false);
   const [byMonth, setByMonth] = useState();
+  const [obj, setObj] = React.useState(false);
+  const [arr, setArr] = React.useState(false);
+  const [zatr, setZatr] = React.useState(false);
 
   useEffect(() => {
     fetch(`${route}/regionstat`)
@@ -70,7 +73,13 @@ export const ByRegionContainer = (props) => {
       })
       .then(data => {
         setBr(data);
-        // console.log(data)
+      });
+    fetch(`${route}/gettotalzatr`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setZatr(data);
       });
     fetch(`${route}/timespendbyregion`)
       .then(response => {
@@ -88,17 +97,96 @@ export const ByRegionContainer = (props) => {
         setDest(data);
         // console.log(data)
       });
-    // fetch(`../${route}/getconstantsbymonth`)
-    fetch(`${route}/getconstantsbymonth`)
+    fetch(`../${route}/getconstantsbymonth`)
+    // fetch(`${route}/getconstantsbymonth`)
       .then(response => {
         return response.json();
       })
       .then(data => {
-        setByMonth(data)
-        console.log(data)
-      })
+        let currMonth = new Date(data[data.length-1].monthdate);
+        let nextMonth = new Date(currMonth);
+        nextMonth = new Date(nextMonth.setMonth(nextMonth.getMonth() + 1))
+        console.log(data[data.length-1].monthdate)
+        console.log(currMonth)
+        console.log(nextMonth.toLocaleDateString())
+        fetch(`${route}/totalmonth/${currMonth.toLocaleDateString()}/${nextMonth.toLocaleDateString()}`)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            setArr(data);
+            console.log(data)
+          });
+          setByMonth(data)
+          console.log(data)
+        })
     getPY();
   }, [])
+
+  useEffect (() => {
+    let obj = null;
+    console.log(arr)
+    if (byMonth && arr) {
+      console.log(arr)
+      console.log(props.region)
+      let zatrproizv = ((zatr[props.region - 1].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)
+        + (byMonth[byMonth.length-1].techobsl * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].rent * regCount[props.region - 1].count / 600)
+        + (zatr[props.region - 1].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].insure)
+        + (byMonth[byMonth.length-1].zp * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].prog * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].sviaz * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].askue * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].komandir * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].other * regCount[props.region - 1].count / 600)
+        + (arr[props.region - 1].totalkwhbymonth / byMonth[byMonth.length-1].sumkwh * byMonth[byMonth.length-1].energy)
+        + (arr[props.region - 1].totalcostbymonth * byMonth[byMonth.length-1].bank / byMonth[byMonth.length-1].sumcost)).toFixed(2);
+    obj = {
+      name: byMonth[byMonth.length-1].name,
+ 	    monthdate: byMonth[byMonth.length-1].monthdate,
+      sumkwh: Number(arr[props.region - 1].totalkwhbymonth).toFixed(2),
+ 	    kwhperday: Number(arr[props.region - 1].totalkwhbymonth / 30).toFixed(2),
+ 	    sumcost: Number(arr[props.region - 1].totalcostbymonth).toFixed(2),
+ 	    nds: Number(arr[props.region - 1].totalcostbymonth /1.2*0.2).toFixed(2),
+ 	    costwnds: Number(arr[props.region - 1].totalcostbymonth-arr[props.region - 1].totalcostbymonth /1.2*0.2).toFixed(2),
+      zatrproizv: zatrproizv,
+      uslperem: Number(arr[props.region - 1].totalkwhbymonth / byMonth[byMonth.length-1].sumkwh * byMonth[byMonth.length-1].energy 
+        + Number(arr[props.region - 1].totalcostbymonth) * byMonth[byMonth.length-1].bank / byMonth[byMonth.length-1].sumcost).toFixed(2),
+ 	    energy: Number(arr[props.region - 1].totalkwhbymonth / byMonth[byMonth.length-1].sumkwh * byMonth[byMonth.length-1].energy).toFixed(2),
+ 	    bank: Number(arr[props.region - 1].totalcostbymonth * byMonth[byMonth.length-1].bank / byMonth[byMonth.length-1].sumcost).toFixed(2),
+      uslpost: ((
+        zatr[props.region - 1].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)
+        + (byMonth[byMonth.length-1].techobsl * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].rent * regCount[props.region - 1].count / 600)
+        + (zatr[props.region - 1].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].insure)
+        + (byMonth[byMonth.length-1].zp * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].prog * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].sviaz * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].askue * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].komandir * regCount[props.region - 1].count / 600)
+        + (byMonth[byMonth.length-1].other * regCount[props.region - 1].count / 600)).toFixed(2),
+      amort: (zatr[props.region - 1].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort).toFixed(2),
+ 	    techobsl: (byMonth[byMonth.length-1].techobsl * regCount[props.region - 1].count / 600).toFixed(2),
+ 	    rent: (byMonth[byMonth.length-1].rent * regCount[props.region - 1].count / 600).toFixed(2),
+ 	    insure: (zatr[props.region - 1].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].insure).toFixed(2),
+ 	    zp: (byMonth[byMonth.length-1].zp * regCount[props.region - 1].count / 600).toFixed(2),
+ 	    prog: (byMonth[byMonth.length-1].prog * regCount[props.region - 1].count / 600).toFixed(2),
+ 	    sviaz: (byMonth[byMonth.length-1].sviaz * regCount[props.region - 1].count / 600).toFixed(2),
+ 	    askue: (byMonth[byMonth.length-1].askue * regCount[props.region - 1].count / 600).toFixed(2),
+ 	    komandir: (byMonth[byMonth.length-1].komandir * regCount[props.region - 1].count / 600).toFixed(2),
+ 	    other: (byMonth[byMonth.length-1].other * regCount[props.region - 1].count / 600).toFixed(2),
+      pokrzatr: ((arr[props.region - 1].totalcostbymonth-arr[props.region - 1].totalcostbymonth /1.2*0.2) / zatrproizv * 100).toFixed(2),
+      zatrbezamort: (zatrproizv - (zatr[props.region - 1].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)).toFixed(2),
+      pokrzatrperc: ((arr[props.region - 1].totalcostbymonth-arr[props.region - 1].totalcostbymonth /1.2*0.2) / (zatrproizv - (zatr[props.region - 1].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)) * 100).toFixed(2),
+      pribil: ((Number(arr[props.region - 1].totalcostbymonth)-Number(arr[props.region - 1].totalcostbymonth) /1.2*0.2) - zatrproizv).toFixed(2),
+      rentabreal: (((arr[props.region - 1].totalcostbymonth-arr[props.region - 1].totalcostbymonth /1.2*0.2) - zatrproizv) / zatrproizv * 100).toFixed(2),
+      rentabprod: (((arr[props.region - 1].totalcostbymonth-arr[props.region - 1].totalcostbymonth /1.2*0.2) - zatrproizv) / arr[props.region - 1].totalcostbymonth * 100).toFixed(2),
+      zatr1kw: (zatrproizv / arr[props.region - 1].totalkwhbymonth).toFixed(2)
+    }
+    setObj(obj)
+    console.log(obj)
+  }
+  }, [byMonth, arr, props.region])
 
   const openModal = () => {
     setModalShow(!modalShow);
@@ -236,6 +324,7 @@ export const ByRegionContainer = (props) => {
   }
 
   const handleClickOpen = () => {
+    
     setOpen(true);
   };
 
@@ -553,21 +642,21 @@ export const ByRegionContainer = (props) => {
     </div> : <Redirect to="/maff/main"/> }
     <Dialog open={open} maxWidth='lg'>
       <DialogTitle>Целевые показатели<span className={style.close} onClick={() => setOpen(false)}>&times;</span></DialogTitle>
-      {/* <Stack>
+      <Stack>
         {obj ? <Stack spacing={2} sx={{width: '50vw', padding:'20px'}} >
           <TextField id="outlined-basic" label="Название" variant="outlined" size="small" name="name" value={obj.name} disabled/>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    views={['year', 'month']}
-                    label="Месяц / Год"
-                    minDate={new Date('2020-03-01')}
-                    maxDate={new Date('2027-06-01')}
-                    value={obj.monthdate}
-                    
-                    renderInput={(params) => <TextField {...params} helperText={null} disabled />}
-                  />
-          </LocalizationProvider> */}
-          {/* <TextField id="outlined-basic" label="Объем оказанных услуг, кВт*ч" variant="outlined" size="small" name="sumkwh" value={obj.sumkwh} disabled/>
+            <DatePicker
+              views={['year', 'month']}
+              label="Месяц / Год"
+              minDate={new Date('2020-03-01')}
+              maxDate={new Date('2027-06-01')}
+              value={obj.monthdate}
+              
+              renderInput={(params) => <TextField {...params} helperText={null} disabled />}
+            />
+          </LocalizationProvider> 
+          <TextField id="outlined-basic" label="Объем оказанных услуг, кВт*ч" variant="outlined" size="small" name="sumkwh" value={obj.sumkwh} disabled/>
           <TextField id="outlined-basic" label="Среднесуточный отпуск услуг, кВт*ч" variant="outlined" size="small" name="kwhperday" value={obj.kwhperday} disabled/>
           <TextField id="outlined-basic" label="Выручка от реализации с НДС, руб" variant="outlined" size="small" name="sumcost" value={obj.sumcost} disabled/>
           <TextField id="outlined-basic" label="НДС, руб" variant="outlined" size="small" name="nds" value={obj.nds} disabled/>
@@ -593,11 +682,11 @@ export const ByRegionContainer = (props) => {
           <TextField id="outlined-basic" label="Прибыль, руб" variant="outlined" size="small" name="pribil" value={obj.pribil} disabled/>
           <TextField id="outlined-basic" label="Рентабельность реализованной продукции, %" variant="outlined" size="small" name="rentabreal" value={obj.rentabreal} disabled/>
           <TextField id="outlined-basic" label="Рентабельность продаж, %" variant="outlined" size="small" name="rentabprod" value={obj.rentabprod} disabled/>
-          <TextField id="outlined-basic" label="Затраты (руб.) на 1кВт*ч оказанных услуг, руб" variant="outlined" size="small" name="zatr1kw" value={obj.zatr1kw} disabled/> */}
-        {/* </Stack> : null}
-      </Stack> */}
+          <TextField id="outlined-basic" label="Затраты (руб.) на 1кВт*ч оказанных услуг, руб" variant="outlined" size="small" name="zatr1kw" value={obj.zatr1kw} disabled/>
+         </Stack> : null}
+      </Stack>
     </Dialog>
-    {/* {modalShow 
+    {modalShow 
       ? <div id="myModal" className={style.modalOpen}> 
           <div className={style.modalContent}>
             <span className={style.close} onClick={openModal}>&times;</span>
@@ -613,7 +702,7 @@ export const ByRegionContainer = (props) => {
             <p>Некоторый текст в модальном..</p>
           </div>
         </div>
-    } */}
+    }
     </>
   )
 }

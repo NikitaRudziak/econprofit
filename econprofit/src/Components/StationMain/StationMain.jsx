@@ -162,15 +162,9 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
     setByType(kwharr);
     setByTypecash(casharr);
     setCount(arrcount);
-    // 
-    //   console.log('yes')
-      
-    // }
   }, [sessions])
 
   useEffect (() => {
-    console.log(test)
-    console.log(byMonth)
     let obj = null;
     if (test && byMonth && data) {
     let zatrproizv = ((test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)
