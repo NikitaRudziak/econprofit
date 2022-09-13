@@ -74,7 +74,7 @@ export const SettingsContainer = (props) => {
   const onSubmit = () => {
     console.log(data)
     const ticket = {
-      name: null,
+      name: data.name,
  	    monthdate: month,
       sumkwh: data.sumkwh,
  	    kwhperday: data.kwhperday,

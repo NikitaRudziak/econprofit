@@ -30,10 +30,13 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   const [open, setOpen] = React.useState(false);
   const [byMonth, setByMonth] = useState();
   const [obj, setObj] = React.useState(false);
+  const [alp, setAlp] = React.useState([]);
+  const [alpto, setAlpto] = React.useState([]);
   const [value, setValue] = React.useState(new Date());
   const [data, setData] = React.useState({
     totalkwhbyMonth: null,
     totalcostbyMonth: null,
+    
   });
   const escFunction = useCallback((event) => {
     console.log(event)
@@ -84,6 +87,24 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         })
         .then(data => {
           setByMonth(data)
+          console.log(data)
+        })
+        // fetch(`${route}/getalp/${id}`)
+      fetch(`../${route}/getalp/${id}`)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          setAlp(data)
+          console.log(data)
+        })
+        // fetch(`${route}/getalpto/${id}`)
+      fetch(`../${route}/getalpto/${id}`)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          setAlpto(data)
           console.log(data)
         })
     setCenter2(Number(lat), Number(lng));
@@ -165,6 +186,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
   }, [sessions])
 
   useEffect (() => {
+    console.log(alp, alpto)
     let obj = null;
     if (test && byMonth && data) {
     let zatrproizv = ((test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort)
@@ -204,7 +226,8 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
         + (byMonth[byMonth.length-1].komandir * test.length / 600)
         + (byMonth[byMonth.length-1].other * test.length / 600)).toFixed(2),
       amort: (test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].amort).toFixed(2),
- 	    techobsl: (byMonth[byMonth.length-1].techobsl * test.length / 600).toFixed(2),
+ 	    techobsl: alp.length != 0 ? alp[0].round : 0 + alpto.length != 0 ? alpto[0].price : 0,
+      //  (byMonth[byMonth.length-1].techobsl * test.length / 600).toFixed(2),
  	    rent: (byMonth[byMonth.length-1].rent * test.length / 600).toFixed(2),
  	    insure: (test[0].kapzatr / byMonth[byMonth.length-1].plan * byMonth[byMonth.length-1].insure).toFixed(2),
  	    zp: (byMonth[byMonth.length-1].zp * test.length / 600).toFixed(2),
@@ -442,7 +465,7 @@ export const StationMain = ({lat, lng, setCenter2, setZoom2}) => {
             <div className={style.statPageCard}>
               <div className={style.statPageCardLeft}>
                 <div>Выручка без НДС на 1 кВт*ч оказанных услуг</div>
-                <div>{sessions ? (Number(data.totalcostbyMonth) / Number(data.totalkwhbyMonth)).toLocaleString('ru') : null} руб./кВт*ч</div>
+                <div>{sessions ? (Number(obj.costwnds) / Number(obj.sumkwh)).toLocaleString('ru') : null} руб./кВт*ч</div>
               </div>
               <div className={style.statPageCardRight}>
               <span className="material-icons greyground">monetization_on</span>

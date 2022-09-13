@@ -524,9 +524,9 @@ export const StatPageContainer = () => {
           rootProps={{ 'data-testid': '2' }}
         />
       </div>
-      <div className={style.tableRegion}>
+      {/* <div className={style.tableRegion}>
         <img className={style.table_png} src={img} alt="" />
-      </div>
+      </div> */}
     </div>
   )
 }

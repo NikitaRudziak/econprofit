@@ -117,7 +117,7 @@ export const GMap = ({latitude, longitude, zoom2, setZoom2}) => {
               count: item.count,
               perc: (parseFloat((Number(item2.sum) / (Number(item.cp_2022))) * 100).toFixed(2)) * 100 / 100
             }
-            console.log(obj)
+            // console.log(obj)
             arr.push(obj);
           }
         })
