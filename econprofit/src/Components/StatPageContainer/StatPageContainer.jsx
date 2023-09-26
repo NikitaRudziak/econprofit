@@ -140,18 +140,20 @@ export const StatPageContainer = () => {
       .then(response => {
         return response.json();
       })
-      .then(data => {
+      .then(response=> {
         let arr = [];
-        data['Content'].map(item => {
+        console.log(response)
+        response.map(item => {
           let obj = {
-            friendlyCode: Number(item['ChargePoint']['FriendlyCode'].substr(-12)),
-            chargingFrom: item['ChargingFrom'].replace('T', ' ').slice(0, -1),
-            chargingTo: item['ChargingTo'] ? item['ChargingTo'].replace('T', ' ').slice(0, -1) : null,
-            kWh: item['MeterActiveEnergyEnd'],
-            totalCost: item['TotalCost'] ? item['TotalCost'] : 0.0,
-            email: item['Identification']['User']['Email'],
-            connector: item['Connector']['Type']['Title']
+            friendlyCode: Number(item['deviceNumber']),
+            chargingFrom: item['startTime'].replace('T', ' ').slice(0, -1),
+            chargingTo: item['finishTime'] ? item['finishTime'].replace('T', ' ').slice(0, -1) : null,
+            kWh: item['energy'],
+            totalCost: item['billVat'] ? item['billVat'] : 0.0,
+            email: item['userLogin'],
+            connector: item['connectorName']
           }
+          console.log(obj)
           arr.push(obj);
         })
         setTest(arr);
@@ -162,6 +164,7 @@ export const StatPageContainer = () => {
   }
 
   const sendNewDay = () => {
+    console.log(test)
     test.map(item => {
       fetch(`${route}/newDay`, {
         method: 'POST',

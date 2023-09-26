@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "NewButton.module.scss"
+    ],
+    "names": [],
+    "file": "NewButton.module.css"
+}

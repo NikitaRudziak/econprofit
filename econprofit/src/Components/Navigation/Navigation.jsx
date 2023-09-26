@@ -64,6 +64,12 @@ export const Navigation = ({view}) => {
               <div className={style.menuName}>Настройки</div>
             </div>
           </Link>
+          <Link to='/maff'>
+            <div className={style.menuPoint}>
+              <span className="material-icons darkground">settings</span>
+              <div className={style.menuName}>Тест</div>
+            </div>
+          </Link>
         </div>
         { view == 'true' ? <div className={style.legend}>
           <div className={style.leg_title}>Соответствие плану на текущий момент</div>

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACD,IAAI,EAAE,OACV;CAAC;;AAOD,AACI,CADH,CACG,IAAI,CAAC;EACD,IAAI,EAAE,OAAO;CAChB",
+    "sources": [
+        "StatisticPage.module.scss"
+    ],
+    "names": [],
+    "file": "StatisticPage.module.css"
+}

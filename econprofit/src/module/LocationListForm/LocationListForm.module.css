@@ -1,0 +1,42 @@
+.test2 {
+  /*   height: 14px; */
+  background: #F4F4FD;
+  -webkit-box-shadow: inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7);
+          box-shadow: inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7);
+  border-radius: 12px;
+  color: #7A7A95;
+  border-style: none;
+  /*   font-family: 'Montserrat'; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 16px;
+  margin: 10px;
+  outline: none;
+}
+
+.inputwidth {
+  width: 68px;
+}
+
+.selectwidth {
+  width: 220px;
+}
+
+.selectwidth2 {
+  width: 100px;
+}
+
+.inputwidth2 {
+  width: 188px;
+}
+
+.tableData {
+  padding: 0px 10px 0px 10px;
+}
+
+fieldset {
+  border: none !important;
+}
+/*# sourceMappingURL=LocationListForm.module.css.map */
