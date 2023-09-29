@@ -105,7 +105,7 @@ import { makeStyles, withStyles } from '@mui/styles';
     const [stationNum, setStationNum] = React.useState(0);
     const [kwFrom, setKwFrom] = React.useState(0);
     const [kwTo, setKwTo] = React.useState(0);
-    const [indicatorList, setIndicatorList] = React.useState()
+    const [indicatorList, setIndicatorList] = React.useState([])
     const [indicator, setIndicator] = React.useState([]);
     const [order, setOrder] = React.useState([]);
     const [dateFrom, setDateFrom] = useState(new Date().getFullYear() + '-' + (new Date().getMonth()) + '-' + (new Date().getDate()))
@@ -262,25 +262,11 @@ import { makeStyles, withStyles } from '@mui/styles';
             direction="row"
           >
             <FormControl>
-            <InputLabel 
-            // inputProps={{
-            //     classes: {
-            //       root: classes.inputRoot,
-            //       select: classes.selected,
-            //       focus: classes.focused
-            //     }
-            //   }} 
-              sx={{
-              top: "6px",
-              left: "10px",
-              "&:focus": {
-                top: "3px",
-              },
-            }} id="test-select-label">Параметр</InputLabel>
             <Select
-              // multiple
               value={indicatorList}
               disableUnderline={true}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
               sx={{
                 width: "220px",
                 height: "49px",
@@ -293,15 +279,12 @@ import { makeStyles, withStyles } from '@mui/styles';
                   "inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7) !important",
                 }}
               onChange={(handleChangeIndicatorList)}
-              inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
+              renderValue={() => {
+                if (indicatorList.length === 0) {
+                  return <div style={{color: 'rgb(205,205,220)'}}>Параметр</div>;
                 }
+                return indicatorList;
               }}
-              // renderValue={indicatorList}
-              // renderValue={(selected) => selected.join(", ")}
             >
               {indicatorTypes.map((name) => (
                 <MenuItem
@@ -323,7 +306,7 @@ import { makeStyles, withStyles } from '@mui/styles';
             </Select>
             </FormControl>
             <FormControl>
-            <InputLabel 
+            {/* <InputLabel 
             inputProps={{
                 classes: {
                   root: classes.inputRoot,
@@ -333,13 +316,16 @@ import { makeStyles, withStyles } from '@mui/styles';
               }} sx={{
               top: "6px",
               left: "10px",
+              color: 'rgb(205,205,220)',
               "&:focus": {
                 top: "3px",
               },
-            }} id="test-select-label">Сортировать по</InputLabel>
+            }} id="test-select-label">Сортировать по</InputLabel> */}
             <Select
               value={order}
               disableUnderline={true}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
               sx={{
                 width: "220px",
                 height: "49px",
@@ -352,6 +338,12 @@ import { makeStyles, withStyles } from '@mui/styles';
                   "inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7) !important",
                 }}
               onChange={handleChangeOrderTypeList}
+              renderValue={() => {
+                if (order.length === 0) {
+                  return <div style={{color: 'rgb(205,205,220)'}}>Сортировать по</div>;
+                }
+                return order;
+              }}
               // inputProps={{
               //   classes: {
               //     root: classes.inputRoot,
@@ -383,6 +375,8 @@ import { makeStyles, withStyles } from '@mui/styles';
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
       <DatePicker
         views={['year', 'month', 'day']}
+        
+        // color='#7A7A95'
         // label="Year and Month"
         minDate={new Date('2021-01-01')}
         maxDate={new Date('2025-01-01')}

@@ -133,6 +133,7 @@ import { makeStyles, withStyles } from '@mui/styles';
       const {
         target: { value }
       } = event;
+      console.log(value)
       setVendorList(
         typeof value === "string" ? value.split(",") : value
       );
@@ -225,7 +226,7 @@ import { makeStyles, withStyles } from '@mui/styles';
               <option value="" disabled selected>Город</option>
             </select>
             <FormControl>
-            <InputLabel
+            {/* <InputLabel
               // focused="true"
               // inputProps={{
               //   classes: {
@@ -242,11 +243,13 @@ import { makeStyles, withStyles } from '@mui/styles';
                   color:"red"
                   // top: "3px",
               },
-            }} id="test-select-label">Дочернее</InputLabel>
+            }} id="test-select-label">Дочернее</InputLabel> */}
             <Select
               multiple
               value={companyList}
               disableUnderline={true}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
               sx={{
                 width: "220px",
                 height: "49px",
@@ -259,14 +262,19 @@ import { makeStyles, withStyles } from '@mui/styles';
                   "inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7) !important",
                 }}
               onChange={handleChangeCompanyTypes}
-              inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
+              // inputProps={{
+              //   classes: {
+              //     root: classes.inputRoot,
+              //     select: classes.selected,
+              //     focus: classes.focused
+              //   }
+              // }}
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return <div style={{color: 'rgb(205,205,220)'}}>Дочернее</div>;
                 }
+                return selected.join(", ");
               }}
-              renderValue={(selected) => selected.join(", ")}
             >
               {companies.map((name) => (
                 <MenuItem
@@ -290,26 +298,12 @@ import { makeStyles, withStyles } from '@mui/styles';
             </Select>
             </FormControl>
             <FormControl>
-            <InputLabel inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
-                }
-              }} 
-              sx={{
-                top: "10px",
-                left: "10px",
-                color: "rgb(205,205,220)",
-                ".Mui-focused": {
-                  color:"red"
-                  // top: "3px",
-              },
-            }} id="test-select-label">Тип локации</InputLabel>
             <Select
               multiple
               value={locationTypesList}
               disableUnderline={true}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
               sx={{
                 width: "220px",
                 height: "49px",
@@ -322,14 +316,12 @@ import { makeStyles, withStyles } from '@mui/styles';
                   "inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7) !important",
                 }}
               onChange={handleChangeLocationTypesList}
-              inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return <div style={{color: 'rgb(205,205,220)'}}>Тип локации</div>;
                 }
+                return selected.join(", ");
               }}
-              renderValue={(selected) => selected.join(", ")}
             >
               {locationTypes.map((name) => (
                 <MenuItem
@@ -351,26 +343,12 @@ import { makeStyles, withStyles } from '@mui/styles';
             </Select>
             </FormControl>
             <FormControl>
-            <InputLabel inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
-                }
-              }} 
-              sx={{
-                top: "10px",
-                left: "10px",
-                color: "rgb(205,205,220)",
-                ".Mui-focused": {
-                  color:"red"
-                  // top: "3px",
-              },
-            }} id="test-select-label">Производитель</InputLabel>
             <Select
               multiple
               value={vendorList}
               disableUnderline={true}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
               sx={{
                 width: "220px",
                 height: "49px",
@@ -383,14 +361,12 @@ import { makeStyles, withStyles } from '@mui/styles';
                   "inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7) !important",
                 }}
               onChange={handleChangeVendor}
-              inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return <div style={{color: 'rgb(205,205,220)'}}>Производитель</div>;
                 }
+                return selected.join(", ");
               }}
-              renderValue={(selected) => selected.join(", ")}
             >
               {vendors.map((name) => (
                 <MenuItem
@@ -399,6 +375,8 @@ import { makeStyles, withStyles } from '@mui/styles';
                   background: "rgba(255, 255, 255, 1)",
                   borderBottom: "1px solid rgba(122, 122, 149, 0.5) !important"
                 }}
+                key={name}
+                value={name}
                 >
                   <ListItemText sx={{
                       color: "rgba(122, 122, 149, 1)"
@@ -414,26 +392,12 @@ import { makeStyles, withStyles } from '@mui/styles';
           direction="row"
          >
           <FormControl>
-            <InputLabel inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
-                }
-              }} 
-              sx={{
-                top: "10px",
-                left: "10px",
-                color: "rgb(205,205,220)",
-                ".Mui-focused": {
-                  color:"red"
-                  // top: "3px",
-              },
-            }} id="test-select-label">Область</InputLabel>
             <Select
               multiple
               value={regionList}
               disableUnderline={true}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
               sx={{
                 width: "220px",
                 height: "49px",
@@ -446,14 +410,12 @@ import { makeStyles, withStyles } from '@mui/styles';
                   "inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7) !important",
                 }}
               onChange={handleChange}
-              inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return <div style={{color: 'rgb(205,205,220)'}}>Область</div>;
                 }
+                return selected.join(", ");
               }}
-              renderValue={(selected) => selected.join(", ")}
             >
               {regions.map((name) => (
                 <MenuItem
@@ -479,26 +441,12 @@ import { makeStyles, withStyles } from '@mui/styles';
             {/* {stationTypeList()} */}
           </select>
           <FormControl>
-            <InputLabel inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
-                }
-              }} 
-              sx={{
-                top: "10px",
-                left: "10px",
-                color: "rgb(205,205,220)",
-                ".Mui-focused": {
-                  color:"red"
-                  // top: "3px",
-              },
-            }} id="test-select-label">Ток</InputLabel>
             <Select
               multiple
               value={stationTypesList}
               disableUnderline={true}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
               sx={{
                 width: "100px",
                 height: "49px",
@@ -511,14 +459,12 @@ import { makeStyles, withStyles } from '@mui/styles';
                   "inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(192, 192, 219, 0.7) !important",
                 }}
               onChange={handleChangeStationTypes}
-              inputProps={{
-                classes: {
-                  root: classes.inputRoot,
-                  select: classes.selected,
-                  focus: classes.focused
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return <div style={{color: 'rgb(205,205,220)'}}>Ток</div>;
                 }
+                return selected.join(", ");
               }}
-              renderValue={(selected) => selected.join(", ")}
             >
               {stationTypes.map((name) => (
                 <MenuItem
